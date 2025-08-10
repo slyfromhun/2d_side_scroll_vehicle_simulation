@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cj3xufpxlyp8d"]
+
+[ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_03tae"]
+[ext_resource type="Material" uid="uid://benwx8bdwf76a" path="res://data/script/effects/air_trail.tres" id="2_03tae"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03tae"]
+atlas = ExtResource("1_03tae")
+region = Rect2(264, 14, 116, 99)
+
+[node name="Air_trail" type="GPUParticles2D"]
+amount = 10
+texture = SubResource("AtlasTexture_03tae")
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = ExtResource("2_03tae")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bok3rg01hfhpg"]
+
+[ext_resource type="PackedScene" uid="uid://use3074u4741" path="res://data/scene/world/world.tscn" id="1_ynbu6"]
+[ext_resource type="PackedScene" uid="uid://beb01at7jqln0" path="res://data/scene/world/road.tscn" id="2_yj2un"]
+[ext_resource type="PackedScene" uid="uid://cl7kx0f2x6fke" path="res://data/vehicles/01_american/scene/01_american.tscn" id="3_yj2un"]
+[ext_resource type="PackedScene" uid="uid://dnml2w5vdy1ap" path="res://data/scene/world/hud.tscn" id="4_ja0om"]
+
+[node name="Main" type="Node"]
+
+[node name="World" parent="." instance=ExtResource("1_ynbu6")]
+position = Vector2(0, 1080)
+
+[node name="Road" parent="World" instance=ExtResource("2_yj2un")]
+
+[node name="01_american" parent="World" instance=ExtResource("3_yj2un")]
+position = Vector2(46, -112)
+
+[node name="Camera2D" type="Camera2D" parent="World/01_american"]
+position_smoothing_speed = 36.0
+
+[node name="CanvasLayer" parent="." instance=ExtResource("4_ja0om")]

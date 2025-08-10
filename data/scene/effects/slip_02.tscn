@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl4h0nyyy076a"]
+
+[ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_77uhb"]
+[ext_resource type="Material" uid="uid://cq6xemlt7kp5l" path="res://data/script/effects/02_smoke.tres" id="2_bqq52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skhfm"]
+atlas = ExtResource("1_77uhb")
+region = Rect2(3, 6, 125, 116)
+
+[node name="slip_02" type="GPUParticles2D"]
+amount = 30
+texture = SubResource("AtlasTexture_skhfm")
+lifetime = 3.0
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+draw_order = 2
+process_material = ExtResource("2_bqq52")

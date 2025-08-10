@@ -1,0 +1,63 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=11 format=3 uid="uid://dujdues3p7ar0"]
+
+[sub_resource type="Curve" id="Curve_lpqpo"]
+_data = [Vector2(0, 0), 0.0, 10.0, 0, 1, Vector2(0.1, 1), 10.0, 0.0, 1, 1, Vector2(0.8, 1), 0.0, -5.0, 1, 1, Vector2(1, 0), -5.0, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_4833g"]
+curve = SubResource("Curve_lpqpo")
+
+[sub_resource type="Curve" id="Curve_4833g"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 4), 0.0, -4.0, 0, 1, Vector2(1, 0), -4.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b3qlq"]
+curve = SubResource("Curve_4833g")
+
+[sub_resource type="Curve" id="Curve_1fs58"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_1uj5k"]
+curve = SubResource("Curve_1fs58")
+
+[sub_resource type="Curve" id="Curve_0i7ub"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_q2usj"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.8), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_1uj5k"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_l74bn"]
+curve_x = SubResource("Curve_0i7ub")
+curve_y = SubResource("Curve_q2usj")
+curve_z = SubResource("Curve_1uj5k")
+
+[resource]
+particle_flag_disable_z = true
+angle_min = -13.0
+angle_max = -9.99999
+inherit_velocity_ratio = -0.03
+direction = Vector3(-1, -0.2, 0)
+spread = 10.0
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
+angular_velocity_min = 30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 260, 0)
+damping_min = 100.0
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_b3qlq")
+scale_curve = SubResource("CurveTexture_1uj5k")
+scale_over_velocity_curve = SubResource("CurveXYZTexture_l74bn")
+color = Color(1, 0.823529, 0.309804, 0.941176)
+alpha_curve = SubResource("CurveTexture_4833g")

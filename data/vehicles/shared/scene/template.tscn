@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://7xmk0pswnne0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_th5l8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fknvi"]
+rough = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7p4hw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u70tx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4y7mm"]
+
+[node name="01_american" type="RigidBody2D" groups=["chassis"]]
+
+[node name="ChassisColl" type="CollisionShape2D" parent="." groups=["chassis coll"]]
+shape = SubResource("RectangleShape2D_th5l8")
+
+[node name="ChassisSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+
+[node name="RS" type="PinJoint2D" parent="."]
+position = Vector2(-129, 44)
+node_a = NodePath("RW")
+node_b = NodePath("..")
+
+[node name="RW" type="RigidBody2D" parent="RS" groups=["wheels"]]
+physics_material_override = SubResource("PhysicsMaterial_fknvi")
+
+[node name="RWColl" type="CollisionShape2D" parent="RS/RW" groups=["wheels_coll"]]
+shape = SubResource("CircleShape2D_7p4hw")
+
+[node name="RWSprite" type="Sprite2D" parent="RS/RW"]
+texture_filter = 1
+
+[node name="FS" type="PinJoint2D" parent="."]
+position = Vector2(153, 44)
+node_a = NodePath("FW")
+node_b = NodePath("..")
+
+[node name="FW" type="RigidBody2D" parent="FS" groups=["wheels"]]
+physics_material_override = SubResource("PhysicsMaterial_u70tx")
+
+[node name="FWColl" type="CollisionShape2D" parent="FS/FW" groups=["wheels_coll"]]
+shape = SubResource("CircleShape2D_4y7mm")
+
+[node name="FWSprite" type="Sprite2D" parent="FS/FW"]
+texture_filter = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 254.0
+offset_top = -144.0
+offset_right = 294.0
+offset_bottom = -121.0
+text = "text1"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = -79.0
+offset_top = 79.0
+offset_right = -39.0
+offset_bottom = 102.0
+text = "text2"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ChassisStats" load_steps=2 format=3 uid="uid://o0s2qt1etywl"]
+
+[ext_resource type="Script" uid="uid://bgcjrkpsvy0ux" path="res://data/resources/chassis.gd" id="1_d63by"]
+
+[resource]
+script = ExtResource("1_d63by")
+mass = 1261.0
+drag_coefficiency = 0.48
+frontal_area = 2.14
+lenght = 463.0
+height = 118.0
+brake_front = 2800.0
+brake_rear = 1700.0
+handbrake_power = 2.0
+metadata/_custom_type_script = "uid://bgcjrkpsvy0ux"

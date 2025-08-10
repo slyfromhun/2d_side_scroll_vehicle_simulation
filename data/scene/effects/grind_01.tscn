@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ydy5vmqk240i"]
+
+[ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_4833g"]
+[ext_resource type="Material" uid="uid://ihwb5pof2u1i" path="res://data/script/effects/grind_01.tres" id="2_4833g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4833g"]
+atlas = ExtResource("1_4833g")
+region = Rect2(388, 388, 49, 11)
+
+[node name="grind_01" type="GPUParticles2D"]
+amount = 30
+texture = SubResource("AtlasTexture_4833g")
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = ExtResource("2_4833g")

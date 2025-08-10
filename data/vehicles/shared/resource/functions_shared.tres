@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Functions" load_steps=2 format=3 uid="uid://bvf4lnwhkl3o6"]
+
+[ext_resource type="Script" uid="uid://b5k87cfjgs56g" path="res://data/resources/functions.gd" id="1_upat2"]
+
+[resource]
+script = ExtResource("1_upat2")
+_traction_control_ = 0.0
+_anti_braking_ = 0.5
+_mps = true
+_kph = true
+_magnitude = true
+_wheel_magnitude_ = true
+_acceleration = true
+_rpm = true
+_torque_at_rpm = true
+_drive_torque = true
+_slip_ratio = true
+_process_drag = true
+_process_rolling_resistance = true
+_process_engine_brake_ = true
+_process_weight_transfer = true
+_input_gear_ratios_ = true
+_input_throttle_ = true
+_input_brake_ = true
+_input_handbrake_ = true
+metadata/_custom_type_script = "uid://b5k87cfjgs56g"

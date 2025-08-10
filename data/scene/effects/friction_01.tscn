@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce65v8ccmhkmk"]
+
+[ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_kiqdu"]
+[ext_resource type="Material" uid="uid://vrgqjyumv3h0" path="res://data/script/effects/friction_01.tres" id="2_kiqdu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiqdu"]
+atlas = ExtResource("1_kiqdu")
+region = Rect2(127, 2, 129, 120)
+
+[node name="friction_01" type="GPUParticles2D"]
+amount = 10
+texture = SubResource("AtlasTexture_kiqdu")
+fixed_fps = 60
+interpolate = false
+fract_delta = false
+process_material = ExtResource("2_kiqdu")

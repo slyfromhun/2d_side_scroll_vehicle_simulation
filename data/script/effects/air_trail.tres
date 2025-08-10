@@ -1,0 +1,37 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=7 format=3 uid="uid://benwx8bdwf76a"]
+
+[sub_resource type="Curve" id="Curve_chqbn"]
+_data = [Vector2(0, 0), 0.0, 10.0, 0, 1, Vector2(0.1, 1), 10.0, 0.0, 1, 1, Vector2(0.8, 1), 0.0, -5.0, 1, 1, Vector2(1, 0), -5.0, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_03tae"]
+curve = SubResource("Curve_chqbn")
+
+[sub_resource type="Curve" id="Curve_508sd"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 2.0, 0, 1, Vector2(1, 2), 2.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_irff0"]
+curve = SubResource("Curve_508sd")
+
+[sub_resource type="Curve" id="Curve_mkbr5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_fwixa"]
+curve = SubResource("Curve_mkbr5")
+
+[resource]
+particle_flag_disable_z = true
+inherit_velocity_ratio = -0.35
+direction = Vector3(-1, 0, 0)
+spread = 12.0
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+damping_min = 100.0
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_irff0")
+scale_curve = SubResource("CurveTexture_fwixa")
+alpha_curve = SubResource("CurveTexture_03tae")
