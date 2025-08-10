@@ -23,5 +23,5 @@ engine_brake_exponent = 1.5
 engine_brake_peak_rpm = 4900.0
 inertia = 0.3
 auto_clutch_rpm = 1300.0
-upgrade = 1.75
+upgrade = 1.0
 metadata/_custom_type_script = "uid://cmhkhd88lm23r"
