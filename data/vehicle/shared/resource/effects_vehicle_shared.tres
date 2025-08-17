@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="VehicleEffects" load_steps=6 format=3 uid="uid://c5dud4mvl0ftg"]
+
+[ext_resource type="Script" uid="uid://bi7dtox3aluo6" path="res://data/resource/effects_vehicle_functions.gd" id="1_45gdk"]
+
+[sub_resource type="Curve" id="Curve_45gdk"]
+_limits = [0.0, 1.0, 0.0, 666.0]
+_data = [Vector2(130, 0), 0.0, 0.00186567, 0, 1, Vector2(666, 1), 0.00186567, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ijv0e"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_ta3pd"]
+_data = [Vector2(0.04, 0), 0.0, 8.325, 0, 1, Vector2(0.12, 0.666), 8.325, 2.56923, 1, 1, Vector2(0.25, 1), 2.56923, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_82ibn"]
+_data = [Vector2(0.12, 0), 0.0, 5.12308, 0, 1, Vector2(0.25, 0.666), 5.12308, 0.0, 1, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_45gdk")
+_friction = false
+friction_emit_power = SubResource("Curve_ijv0e")
+speed_friction = [70, 666]
+_slip = true
+slip_emit_power = SubResource("Curve_82ibn")
+speed_slip = [0, 666]
+_grind = false
+grind_emit_power = SubResource("Curve_ta3pd")
+speed_grind = [10, 666]
+_dust = false
+dust_color_power = SubResource("Curve_45gdk")
+speed_dust = [130, 666]
+metadata/_custom_type_script = "uid://bi7dtox3aluo6"

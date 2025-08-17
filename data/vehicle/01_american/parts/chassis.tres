@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ChassisStats" load_steps=2 format=3 uid="uid://du0x58jv15p3x"]
+
+[ext_resource type="Script" uid="uid://bgcjrkpsvy0ux" path="res://data/resource/chassis.gd" id="1_sqf2s"]
+
+[resource]
+script = ExtResource("1_sqf2s")
+mass = 1268.0
+drag_coefficiency = 0.48
+aero_torque = 2.25
+frontal_area = 2.14
+lenght = 463.0
+height = 118.0
+brake_front = 2800.0
+brake_rear = 1700.0
+handbrake_power = 2.0
+metadata/_custom_type_script = "uid://bgcjrkpsvy0ux"

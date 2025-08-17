@@ -1,0 +1,107 @@
+[gd_scene load_steps=19 format=3 uid="uid://cl7kx0f2x6fke"]
+
+[ext_resource type="Texture2D" uid="uid://dwmjqiw2bkn3h" path="res://data/vehicle/01_american/art/01_american.bmp" id="1_4y7mm"]
+[ext_resource type="Script" uid="uid://dkul30pj6sl8i" path="res://data/vehicle/shared/script/vehicle_shared.gd" id="1_ruxkg"]
+[ext_resource type="Resource" uid="uid://bn53tdujp01dx" path="res://data/vehicle/shared/resource/curves.tres" id="2_a4sl0"]
+[ext_resource type="Resource" uid="uid://bhaaihb5f018q" path="res://data/vehicle/01_american/parts/tires/stock.tres" id="3_u6hlw"]
+[ext_resource type="Resource" uid="uid://dfhawsciiud61" path="res://data/vehicle/01_american/parts/engines/engine_115hp_I6.tres" id="3_u70tx"]
+[ext_resource type="Resource" uid="uid://dvwo4s8to4bhk" path="res://data/vehicle/01_american/parts/transmissions/stock.tres" id="4_fknvi"]
+[ext_resource type="Script" uid="uid://bgcjrkpsvy0ux" path="res://data/resource/chassis.gd" id="5_ahs51"]
+[ext_resource type="Resource" uid="uid://bvf4lnwhkl3o6" path="res://data/vehicle/shared/resource/functions_shared.tres" id="7_fknvi"]
+[ext_resource type="Resource" uid="uid://b71atvcweuv7o" path="res://data/vehicle/shared/resource/drive.tres" id="7_melsr"]
+[ext_resource type="PackedScene" uid="uid://2x51v6f5xt4l" path="res://data/vehicle/shared/scene/vehicle_effects.tscn" id="10_u70tx"]
+
+[sub_resource type="Resource" id="Resource_melsr"]
+script = ExtResource("5_ahs51")
+mass = 1261.0
+drag_coefficiency = 0.48
+lon_aero_torque = 1.5
+frontal_area = 2.14
+lenght = 463.0
+height = 118.0
+brake_front = 2800.0
+brake_rear = 1700.0
+handbrake_power = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_th5l8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fknvi"]
+atlas = ExtResource("1_4y7mm")
+region = Rect2(0, 0, 462, 118)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fknvi"]
+rough = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u70tx"]
+atlas = ExtResource("1_4y7mm")
+region = Rect2(34, 134, 66, 66)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7p4hw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u70tx"]
+rough = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4y7mm"]
+
+[node name="01_american" type="RigidBody2D" groups=["chassis"]]
+script = ExtResource("1_ruxkg")
+curve = ExtResource("2_a4sl0")
+engine = ExtResource("3_u70tx")
+transmission = ExtResource("4_fknvi")
+chassis = SubResource("Resource_melsr")
+tire = ExtResource("3_u6hlw")
+drive = ExtResource("7_melsr")
+calculate = ExtResource("7_fknvi")
+
+[node name="ChassisColl" type="CollisionShape2D" parent="." groups=["chassis_coll"]]
+shape = SubResource("RectangleShape2D_th5l8")
+
+[node name="ChassisSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_fknvi")
+
+[node name="RS" type="PinJoint2D" parent="."]
+position = Vector2(-129, 44)
+node_a = NodePath("RW")
+node_b = NodePath("..")
+
+[node name="RW" type="RigidBody2D" parent="RS" groups=["wheels"]]
+physics_material_override = SubResource("PhysicsMaterial_fknvi")
+
+[node name="RWSprite" type="Sprite2D" parent="RS/RW"]
+texture_filter = 1
+texture = SubResource("AtlasTexture_u70tx")
+
+[node name="RWColl" type="CollisionShape2D" parent="RS/RW" groups=["wheels_coll"]]
+shape = SubResource("CircleShape2D_7p4hw")
+
+[node name="FS" type="PinJoint2D" parent="."]
+position = Vector2(153, 44)
+node_a = NodePath("FW")
+node_b = NodePath("..")
+
+[node name="FW" type="RigidBody2D" parent="FS" groups=["wheels"]]
+physics_material_override = SubResource("PhysicsMaterial_u70tx")
+
+[node name="FWColl" type="CollisionShape2D" parent="FS/FW" groups=["wheels_coll"]]
+shape = SubResource("CircleShape2D_4y7mm")
+
+[node name="FWSprite" type="Sprite2D" parent="FS/FW"]
+texture_filter = 1
+texture = SubResource("AtlasTexture_u70tx")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 254.0
+offset_top = -144.0
+offset_right = 294.0
+offset_bottom = -121.0
+text = "text1"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = -79.0
+offset_top = 79.0
+offset_right = -39.0
+offset_bottom = 102.0
+text = "text2"
+
+[node name="Vehicle_Effects" parent="." instance=ExtResource("10_u70tx")]

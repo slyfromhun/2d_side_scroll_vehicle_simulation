@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dnml2w5vdy1ap"]
 
 [ext_resource type="Texture2D" uid="uid://bsdj48h45yoft" path="res://data/art/gui/hud_tacho_rim.png" id="1_sjlaq"]
-[ext_resource type="Script" uid="uid://dbdxqqrjamgge" path="res://data/script/gui/hud.gd" id="1_t60j7"]
+[ext_resource type="Script" uid="uid://utkne7l76mxe" path="res://data/script/gui/hud.gd" id="1_t60j7"]
 [ext_resource type="Texture2D" uid="uid://bwfnecusabrr5" path="res://data/art/gui/hud_tacho_numbers.png" id="2_ihue7"]
 [ext_resource type="Texture2D" uid="uid://ilv087yscifi" path="res://data/art/gui/hud_vehicleicon_tire.png" id="2_ixqfd"]
 [ext_resource type="Texture2D" uid="uid://bldn1bhe3fdc0" path="res://data/art/gui/hud_tacho.png" id="4_t60j7"]

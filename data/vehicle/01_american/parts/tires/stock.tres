@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TireStats" load_steps=2 format=3 uid="uid://bhaaihb5f018q"]
+
+[ext_resource type="Script" uid="uid://duwrygrdeyarq" path="res://data/resource/tire.gd" id="1_7p0ar"]
+
+[resource]
+script = ExtResource("1_7p0ar")
+radius = 33.0
+rollingResistance = 0.015
+lon_friction = 1.46
+metadata/_custom_type_script = "uid://duwrygrdeyarq"

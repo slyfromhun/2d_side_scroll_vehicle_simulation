@@ -41,6 +41,7 @@ space={
 2d/run_on_separate_thread=true
 common/max_physics_steps_per_frame=1
 2d/physics_engine="Rapier2D"
+2d/default_gravity=980.665
 2d/default_linear_damp=0.0
 2d/default_angular_damp=0.0
 2d/sleep_threshold_linear=5.0
