@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cl7kx0f2x6fke"]
+[gd_scene load_steps=18 format=3 uid="uid://cl7kx0f2x6fke"]
 
 [ext_resource type="Texture2D" uid="uid://dwmjqiw2bkn3h" path="res://data/vehicle/01_american/art/01_american.bmp" id="1_4y7mm"]
 [ext_resource type="Script" uid="uid://dkul30pj6sl8i" path="res://data/vehicle/shared/script/vehicle_shared.gd" id="1_ruxkg"]
@@ -6,22 +6,10 @@
 [ext_resource type="Resource" uid="uid://bhaaihb5f018q" path="res://data/vehicle/01_american/parts/tires/stock.tres" id="3_u6hlw"]
 [ext_resource type="Resource" uid="uid://dfhawsciiud61" path="res://data/vehicle/01_american/parts/engines/engine_115hp_I6.tres" id="3_u70tx"]
 [ext_resource type="Resource" uid="uid://dvwo4s8to4bhk" path="res://data/vehicle/01_american/parts/transmissions/stock.tres" id="4_fknvi"]
-[ext_resource type="Script" uid="uid://bgcjrkpsvy0ux" path="res://data/resource/chassis.gd" id="5_ahs51"]
+[ext_resource type="Resource" uid="uid://du0x58jv15p3x" path="res://data/vehicle/01_american/parts/chassis.tres" id="5_melsr"]
 [ext_resource type="Resource" uid="uid://bvf4lnwhkl3o6" path="res://data/vehicle/shared/resource/functions_shared.tres" id="7_fknvi"]
 [ext_resource type="Resource" uid="uid://b71atvcweuv7o" path="res://data/vehicle/shared/resource/drive.tres" id="7_melsr"]
 [ext_resource type="PackedScene" uid="uid://2x51v6f5xt4l" path="res://data/vehicle/shared/scene/vehicle_effects.tscn" id="10_u70tx"]
-
-[sub_resource type="Resource" id="Resource_melsr"]
-script = ExtResource("5_ahs51")
-mass = 1261.0
-drag_coefficiency = 0.48
-lon_aero_torque = 1.5
-frontal_area = 2.14
-lenght = 463.0
-height = 118.0
-brake_front = 2800.0
-brake_rear = 1700.0
-handbrake_power = 2.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_th5l8"]
 
@@ -48,7 +36,7 @@ script = ExtResource("1_ruxkg")
 curve = ExtResource("2_a4sl0")
 engine = ExtResource("3_u70tx")
 transmission = ExtResource("4_fknvi")
-chassis = SubResource("Resource_melsr")
+chassis = ExtResource("5_melsr")
 tire = ExtResource("3_u6hlw")
 drive = ExtResource("7_melsr")
 calculate = ExtResource("7_fknvi")

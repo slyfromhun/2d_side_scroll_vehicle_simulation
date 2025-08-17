@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_sqf2s")
-mass = 1268.0
+mass = 1261.0
 drag_coefficiency = 0.48
-aero_torque = 2.25
+lon_aero_torque = 1.5
 frontal_area = 2.14
 lenght = 463.0
 height = 118.0
