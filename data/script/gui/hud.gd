@@ -12,8 +12,8 @@ var redline: float
 
 func _ready() -> void:
 	chassis = get_tree().get_first_node_in_group("chassis")
-	rpm_limit_progress.value = (8000.0 - chassis.engine.redline_rpm)
-	redline = chassis.engine.redline_rpm
+	rpm_limit_progress.value = (8000.0 - chassis.engine.red_line_rpm)
+	redline = chassis.engine.red_line_rpm
 
 func _process(_delta: float) -> void:
 	var tween = get_tree().create_tween()
@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 
 
 func rpm_limiter():
-	if chassis.wheel_rpm > redline + chassis.engine.rpm_limit * chassis.engine.redline_power:
+	if chassis.wheel_rpm > redline + chassis.engine.rpm_limit * chassis.engine.red_line_power:
 		$Tacho/AnimationPlayer.stop()
 		rpm_progress.modulate = Color(1.0, 0.27, 0.27, 1.0)
 	elif chassis.wheel_rpm > redline:

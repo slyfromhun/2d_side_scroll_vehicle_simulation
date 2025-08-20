@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_7p0ar")
 radius = 33.0
-rollingResistance = 0.015
+rolling_resistance = 0.015
 lon_friction = 1.46
 metadata/_custom_type_script = "uid://duwrygrdeyarq"
