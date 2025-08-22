@@ -19,9 +19,11 @@ config/icon="res://icon.svg"
 
 folder_colors={
 "res://data/art/": "orange",
+"res://data/resource/": "green",
 "res://data/resources/": "green",
 "res://data/scene/": "blue",
 "res://data/script/": "red",
+"res://data/vehicle/": "purple",
 "res://data/vehicles/": "purple",
 "res://data/vehicles/01_american/art/": "purple",
 "res://data/vehicles/01_american/parts/": "purple",

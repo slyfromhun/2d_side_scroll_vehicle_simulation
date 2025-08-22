@@ -62,8 +62,8 @@ func _input(_event: InputEvent) -> void:
 	handbrake = calculate.input_handbrake(chassis.handbrake_power)
 
 func _process(_delta: float) -> void:
-	$Label.text = "Speed: %.fkph %.fmph %.fmps\nAccel: %f\nTire Angular Velocity: %.fkph\nRPM: %.f\nGear: %.f\nPower: %.fkW\nTorque: %.fNm\nSlip Ratio rear: %f\nFriction rear: %f\nDrag: %f\nRolling Resistance: %f\nEngine Brake: %f" % [kph, kph * 0.621371, mps, acceleration, calculate.angular_kph(WheelsRB[0], tire.radius), wheel_rpm, gear_i - 1, curve.power_curve.sample(wheel_rpm), curve.torque_curve.sample(wheel_rpm), slip_ratio_rear, WheelsRB[0].physics_material_override.friction, ChassisRB.constant_force.x, WheelsRB[0].constant_force.x, WheelsRB[0].constant_torque]
-	$Label2.text = "Wr: %f  Wf: %f\n Pos: %f\nthrottle: %f\nbrake: %f\nhandbrake: %f" % [WheelsRB[0].mass, WheelsRB[1].mass, ChassisRB.position.x * 0.01, throttle, brake, handbrake]
+	$Label.text = "Speed: %.fkph %.fmph %.fmps\nAccel: %f\nTire Angular Velocity: %.fkph\nRPM: %.f\nGear: %.f\nPower: %.fkW\nTorque: %.fNm\nSlip Ratio rear: %f\nFriction rear: %f\nDrag: %v\nRolling Resistance: %f\nEngine Brake: %f" % [kph, kph * 0.621371, mps, acceleration, calculate.angular_kph(WheelsRB[0], tire.radius), wheel_rpm, gear_i - 1, curve.power_curve.sample(wheel_rpm), curve.torque_curve.sample(wheel_rpm), slip_ratio_rear, WheelsRB[0].physics_material_override.friction, ChassisRB.constant_force, WheelsRB[0].constant_force.x * 0.25, WheelsRB[0].constant_torque]
+	$Label2.text = "Wr: %f\nWf: %f\n Pos: %f\nthrottle: %f\nbrake: %f\nhandbrake: %f" % [WheelsRB[0].mass, WheelsRB[1].mass, ChassisRB.position.x * 0.01, throttle, brake, handbrake]
 
 func _physics_process(delta: float) -> void:
 	kph = calculate.kph(ChassisRB)
@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 	wheel_rear_angular_mps = calculate.angular_mps(WheelsRB[0], tire.radius)
 	wheel_front_angular_mps = calculate.angular_mps(WheelsRB[1], tire.radius)
 	acceleration = calculate.acceleration(delta, mps)
-	magnitude = calculate.magnitude(kph)
+	magnitude = calculate.magnitude(ChassisRB)
 	wheel_magnitude_rear = calculate.wheel_magnitude(WheelsRB[0])
 	wheel_magnitude_front = calculate.wheel_magnitude(WheelsRB[1])
 	wheel_rpm = calculate.rpm(WheelsRB[0], transmission.gears, gear_i, transmission.final_drive, engine.idle_rpm, throttle, engine.auto_clutch_rpm)
@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	anti_braking_rear = calculate.anti_braking(slip_ratio_rear)
 	anti_braking_front = calculate.anti_braking(slip_ratio_front)
 
-	calculate.process_drag(ChassisRB, mps, chassis.drag_coefficiency, chassis.lon_aero_torque, chassis.frontal_area, drive.AIR_DENSITY, magnitude)
+	calculate.process_drag(ChassisRB, mps, chassis.drag_coefficiency, chassis.lon_aero_torque, chassis.lift, drive.AIR_DENSITY, magnitude)
 	calculate.process_rolling_resistance(WheelsRB, tire.rolling_resistance, wheel_rear_angular_mps, wheel_front_angular_mps,chassis.mass)
 	calculate.process_brakes(WheelsRB, engine.engine_brake_base, engine.engine_brake_peak, engine.engine_brake_exponent, wheel_rpm, engine.red_line_rpm, 
 			engine.rpm_limit,engine.engine_brake_peak_rpm, brake, handbrake, chassis.brake_front, chassis.brake_rear, wheel_magnitude_front, wheel_magnitude_rear, gear_i, 
@@ -102,7 +102,7 @@ func initalize():
 	WheelsColl = get_tree().get_nodes_in_group("wheels_coll")
 	ChassisColl = get_tree().get_first_node_in_group("chassis_coll")
 
-	### set curves
+	### Set Curves
 	curve.power_curve.max_domain = engine.aux_line_rpm
 	curve.power_curve.max_value = engine.peak_power * engine.upgrade
 	
@@ -114,44 +114,34 @@ func initalize():
 
 	## Power Curve
 	# Zero Power RPM
-	curve.power_curve.set_point_offset(0, engine.zero_power_rpm)
-	curve.power_curve.set_point_value(0, 0)
-	curve.power_curve.set_point_right_tangent(0, 0)
+	curve.power_curve.add_point(Vector2(engine.zero_power_rpm, 0),
+			0, ((0.0 - peakTorquePower) / (engine.zero_power_rpm - engine.peak_torque_rpm)))
 	# Peak Power RPM
-	curve.power_curve.set_point_offset(1, engine.peak_power_rpm)
-	curve.power_curve.set_point_value(1, engine.peak_power * engine.upgrade * transmission.efficiency)
-	curve.power_curve.set_point_left_tangent(1, 0)
-	curve.power_curve.set_point_right_tangent(1, 0)
+	curve.power_curve.add_point(Vector2(engine.peak_power_rpm, engine.peak_power * engine.upgrade * transmission.efficiency), 
+			0, 0)
 	# Red Line RPM
-	curve.power_curve.set_point_offset(2, engine.red_line_rpm)
-	curve.power_curve.set_point_value(2, (engine.peak_power * engine.red_line_power) * engine.upgrade * transmission.efficiency)
-	curve.power_curve.set_point_left_tangent(2, 0)
-	curve.power_curve.set_point_right_tangent(2, 0)
+	curve.power_curve.add_point(Vector2(engine.red_line_rpm, (engine.peak_power * engine.red_line_power) * engine.upgrade * transmission.efficiency),
+			0, 0)
 	# Aux Line RPM
-	curve.power_curve.set_point_offset(3, engine.aux_line_rpm)
-	curve.power_curve.set_point_value(3, engine.peak_power * engine.red_line_power * engine.aux_line_power * engine.upgrade * transmission.efficiency)
-	curve.power_curve.set_point_left_tangent(3, 0)
+	curve.power_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_power * engine.red_line_power * engine.aux_line_power * engine.upgrade * transmission.efficiency),
+			0, 0)
 
 
 	## Torque Curve
 	# Zero Power RPM
-	curve.torque_curve.set_point_offset(0, engine.zero_power_rpm)
-	curve.torque_curve.set_point_value(0, 0)
-	curve.torque_curve.set_point_right_tangent(0, 0)
+	curve.torque_curve.add_point(Vector2(engine.zero_power_rpm, 0),
+			0, ((0.0 - peakTorquePower) / (engine.zero_power_rpm - engine.peak_torque_rpm)))
 	# Peak Torque RPM
-	curve.torque_curve.set_point_offset(1, engine.peak_torque_rpm)
-	curve.torque_curve.set_point_value(1, engine.peak_torque * engine.upgrade * transmission.efficiency)
-	curve.torque_curve.set_point_left_tangent(1, 0)
-	curve.torque_curve.set_point_right_tangent(1, 0)
+	curve.torque_curve.add_point(Vector2(engine.peak_torque_rpm, engine.peak_torque * engine.upgrade * transmission.efficiency),
+			0, 0)
 	# Red Line RPM
-	curve.torque_curve.set_point_offset(2, engine.red_line_rpm)
-	curve.torque_curve.set_point_value(2, calculate.torque_at(engine.peak_power * engine.red_line_power, drive.MAGIC_CROSS_RPM, engine.red_line_rpm) * engine.upgrade * transmission.efficiency)
-	curve.torque_curve.set_point_left_tangent(2, 0)
-	curve.torque_curve.set_point_right_tangent(2, 0)
+	curve.torque_curve.add_point(Vector2(engine.red_line_rpm, calculate.torque_at(engine.peak_power * engine.red_line_power, drive.MAGIC_CROSS_RPM, engine.red_line_rpm) * engine.upgrade * transmission.efficiency),
+			0, 0)
 	# Aux Line RPM
-	curve.torque_curve.set_point_offset(3, engine.aux_line_rpm)
-	curve.torque_curve.set_point_value(3, engine.peak_torque * engine.red_line_power * engine.aux_line_power * engine.upgrade * transmission.efficiency)
-	curve.torque_curve.set_point_left_tangent(3, 0)
+	curve.torque_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_torque * engine.red_line_power * engine.aux_line_power * engine.upgrade * transmission.efficiency), 0, 0)
+
+	print(int(engine.peak_power * 1.34102209 * engine.upgrade), " hp @ ", int(engine.peak_power_rpm))
+	print(int(engine.peak_torque * engine.upgrade), " Nm @ ", int(engine.peak_torque_rpm))
 
 	# slope 1 ((0.0 - peakTorquePower) / (engine.zero_power_rpm - engine.peak_torque_rpm))
 	# slope 2 ((peakTorquePower - engine.peak_power) / (engine.peak_torque_rpm - engine.peak_power_rpm))
