@@ -19,22 +19,21 @@ extends Resource
 @export_range(400.0, 20000.0, 0.01, "suffix:RPM") var aux_line_rpm := 7150.0
 ## This is a multiplier. It multiplies the Peak Power RPM and makes it Aux Line Power. It's recommended this being equal or less than 1. Often you see it as a 0.
 @export_range(0.0, 1.0, 0.01, "suffix:x") var aux_line_power := 0.0
-## In rounds per minute (RPM). Thi is the true redline (redline_rpm + rpm_limit)
+## In rounds per minute (RPM). Thi is the true redline (redline_rpm + rpm_limit).
 @export_range(100.0, 10000.0, 0.01, "suffix:RPM") var rpm_limit := 300.0
 ## In rounds per minute (RPM). At what RPM the engine is idling.
 @export_range(400.0, 10000.0, 0.01, "suffix:RPM") var idle_rpm := 800.0
 ## In rounds per minute (RPM). This is where the engine curve starts.
 @export_range(0.0, 10000.0, 0.01, "suffix:RPM") var zero_power_rpm := 500.0
-## Engine Brake In Newton meters (Nm)
+## Engine Brake In Newton meters (Nm).
 @export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_base := 50.04
-## Engine Brake In Newton meters (Nm)
+## Engine Brake In Newton meters (Nm).
 @export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_peak := 104.92
-## Engine Brake Exponent
+## Engine Brake Exponent.
 @export_range(0.0, 2.0, 0.01, "suffix:x") var engine_brake_exponent := 1.5
 ## RPM point for Engine Brake Peak.
 @export_range(400.0, 10000.0, 0.01, "suffix:RPM") var engine_brake_peak_rpm := 5500.0
-#@export_range(0.0, 1.0, 0.01, "suffix:J") var inertia := 0.3
-## Target RPM when taking off from standstill
-@export_range(0.0, 10000.0, 1.0, "suffix:RPM") var auto_clutch_rpm := 1300.0
-## Power and Torque curve multiplier
+## Target RPM when taking off from standstill.
+@export_range(0.0, 10000.0, 1.0, "suffix:RPM") var auto_clutch_rpm := 1600.0
+## Power and Torque curve multiplier.
 @export_range(0.1, 100.0, 0.01, "suffix:x") var upgrade := 1.0

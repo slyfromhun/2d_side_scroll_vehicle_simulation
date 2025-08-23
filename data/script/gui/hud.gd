@@ -19,8 +19,8 @@ func _process(_delta: float) -> void:
 	var tween = get_tree().create_tween()
 	var tween2 = get_tree().create_tween()
 	
-	tween.tween_property(rpm_needle,"rotation_degrees",clampf((chassis.wheel_rpm / 8000.0) * 239, 0.0, 239.0), 0.14)
-	tween2.tween_property(rpm_progress,"value",chassis.wheel_rpm, 0.14)
+	tween.tween_property(rpm_needle,"rotation_degrees",clampf((chassis.wheel_rpm / 8000.0) * 239, 0.0, 239.0), 0.16)
+	tween2.tween_property(rpm_progress,"value",chassis.wheel_rpm, 0.16)
 
 	rpm_limiter()
 
