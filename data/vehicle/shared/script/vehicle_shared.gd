@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 	wheel_front_mps = calculate.mps(WheelsRB[1])
 	wheel_rear_angular_mps = calculate.angular_mps(WheelsRB[0], tire.radius)
 	wheel_front_angular_mps = calculate.angular_mps(WheelsRB[1], tire.radius)
-	acceleration = calculate.acceleration(delta, mps)
+	acceleration = calculate.acceleration(delta, mps, magnitude)
 	magnitude = calculate.magnitude(ChassisRB)
 	wheel_magnitude_rear = calculate.wheel_magnitude(WheelsRB[0])
 	wheel_magnitude_front = calculate.wheel_magnitude(WheelsRB[1])

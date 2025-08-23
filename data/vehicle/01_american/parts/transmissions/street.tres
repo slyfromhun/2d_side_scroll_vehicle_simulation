@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TransmissionStats" load_steps=2 format=3 uid="uid://85kobe224fop"]
+
+[ext_resource type="Script" uid="uid://cje1apb6q3joc" path="res://data/resource/transmission.gd" id="1_3pkhy"]
+
+[resource]
+script = ExtResource("1_3pkhy")
+gears = [-2.32, 0, 2.32, 1.69, 1.29, 1.1]
+final_drive = 2.75
+efficiency = 1.0
+metadata/_custom_type_script = "uid://cje1apb6q3joc"

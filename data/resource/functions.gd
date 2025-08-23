@@ -68,12 +68,12 @@ func wheel_magnitude(wheel:RigidBody2D) -> float:
 	else:
 		return 0.0
 
-func acceleration(physics_process_delta:float, speed_mps:float) -> float:
+func acceleration(physics_process_delta:float, speed_mps:float, magnitude_) -> float:
 	if _acceleration:
 		var current_velocity = speed_mps
 		var a = (current_velocity - previous_velocity) / physics_process_delta
 		previous_velocity = current_velocity
-		return a
+		return a * magnitude_
 	else:
 		return 0.0
 
@@ -81,7 +81,7 @@ func rpm(wheel:RigidBody2D, gears:Array, gear_i:int, final_drive:float, idle_rpm
 	if _rpm:
 		var rpm_wheel = ((wheel.angular_velocity * gears[gear_i] * final_drive) * 60) / (2 * PI)
 		var min_rpm = clampf(lerpf(idle_rpm, 0.0, rpm_wheel / idle_rpm), 0.0, idle_rpm)
-		var clutch_release = clampf(lerpf(clutch_target_rpm - idle_rpm, 0.0, (rpm_wheel - min_rpm) / (idle_rpm + (clutch_target_rpm - idle_rpm))), 0.0, clutch_target_rpm - idle_rpm) * throttle
+		var clutch_release = clampf(lerpf(clutch_target_rpm - idle_rpm, 0.0, (rpm_wheel - min_rpm) / (idle_rpm + clutch_target_rpm)), 0.0, clutch_target_rpm - idle_rpm) * throttle
 		if gear_i == 1:
 			return idle_rpm
 		else:
@@ -175,10 +175,14 @@ func process_weight_transfer(wheels:Array[Node], acceleration_: float, cL:float,
 	if _process_weight_transfer:
 		var wf = (((cL) * gravity) - ((hL) * 1.0 * acceleration_)) # Wf = (c/L)*9.8 - (h/L)*1*a
 		var wr = (((bL) * gravity) + ((hL) * 1.0 * acceleration_)) # Wr = (b/L)*9.8 + (h/L)*1*a,
-		if wf < 0.0: wheels[1].mass = 1.0
-		else: wheels[1].mass = wf * 2
-		if wr < 0.0: wheels[0].mass = 1.0
-		else: wheels[0].mass = wr * 2
+		if wf < 0.0:
+			wheels[1].mass = 1.0
+		else:
+			wheels[1].mass = wf * 2
+		if wr < 0.0:
+			wheels[0].mass = 1.0
+		else:
+			wheels[0].mass = wr * 2
 	else:
 		for wheel in wheels:
 			wheel.mass = 1
