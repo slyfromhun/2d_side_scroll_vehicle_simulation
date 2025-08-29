@@ -52,6 +52,9 @@ var bL: float
 var hL: float
 var cL: float
 
+var top_gear_speed: float
+var top_power_speed: float
+
 func _ready() -> void:
 	initalize()
 
@@ -85,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	anti_braking_rear = calculate.anti_braking(slip_ratio_rear)
 	anti_braking_front = calculate.anti_braking(slip_ratio_front)
 
-	calculate.process_drag(ChassisRB, mps, chassis.drag_coefficiency, chassis.lon_aero_torque, chassis.lift, drive.AIR_DENSITY, magnitude)
+	calculate.process_drag(ChassisRB, mps, chassis.drag_coefficiency, chassis.lon_aero_torque, chassis.lift, drive.AIR_DENSITY_DRAG, magnitude)
 	calculate.process_rolling_resistance(WheelsRB, tire.rolling_resistance, wheel_rear_angular_mps, wheel_front_angular_mps,chassis.mass)
 	calculate.process_brakes(WheelsRB, engine.engine_brake_base, engine.engine_brake_peak, engine.engine_brake_exponent, wheel_rpm, engine.red_line_rpm, 
 			engine.rpm_limit,engine.engine_brake_peak_rpm, brake, handbrake, chassis.brake_front, chassis.brake_rear, wheel_magnitude_front, wheel_magnitude_rear, gear_i, 
@@ -113,6 +116,7 @@ func initalize():
 	peakPowerTorque = engine.peak_power * drive.MAGIC_CROSS_RPM / engine.peak_power_rpm
 
 	## Power Curve
+	curve.power_curve.clear_points()
 	# Zero Power RPM
 	curve.power_curve.add_point(Vector2(engine.zero_power_rpm, 0),
 			0, ((0.0 - peakTorquePower) / (engine.zero_power_rpm - engine.peak_torque_rpm)))
@@ -121,13 +125,14 @@ func initalize():
 			0, 0)
 	# Red Line RPM
 	curve.power_curve.add_point(Vector2(engine.red_line_rpm, (engine.peak_power * engine.red_line_power) * engine.upgrade * transmission.efficiency),
-			0, 0)
+			0, 0, Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
 	# Aux Line RPM
 	curve.power_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_power * engine.red_line_power * engine.aux_line_power * engine.upgrade * transmission.efficiency),
 			0, 0)
 
 
 	## Torque Curve
+	curve.torque_curve.clear_points()
 	# Zero Power RPM
 	curve.torque_curve.add_point(Vector2(engine.zero_power_rpm, 0),
 			0, ((0.0 - peakTorquePower) / (engine.zero_power_rpm - engine.peak_torque_rpm)))
@@ -136,25 +141,33 @@ func initalize():
 			0, 0)
 	# Red Line RPM
 	curve.torque_curve.add_point(Vector2(engine.red_line_rpm, calculate.torque_at(engine.peak_power * engine.red_line_power, drive.MAGIC_CROSS_RPM, engine.red_line_rpm) * engine.upgrade * transmission.efficiency),
-			0, 0)
+			0, 0, Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
 	# Aux Line RPM
 	curve.torque_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_torque * engine.red_line_power * engine.aux_line_power * engine.upgrade * transmission.efficiency),
 			0, 0)
 
+	top_gear_speed = ((engine.red_line_rpm + engine.rpm_limit) * ((tire.radius * 2) * 0.01) * PI) / (transmission.final_drive * transmission.gears[-1])
+	top_gear_speed = (top_gear_speed * 0.06) * (1 - tire.radius * 0.001) # to negate the slip ratio
+
+	top_power_speed = pow((2 * (engine.peak_power * engine.upgrade) / (chassis.drag_coefficiency * drive.AIR_DENSITY * chassis.frontal_area)), 1.0 / 3.0) * 10.0 * 3.6
+
 	print(int(engine.peak_power * 1.34102209 * engine.upgrade), " hp @ ", int(engine.peak_power_rpm))
 	print(int(engine.peak_torque * engine.upgrade), " Nm @ ", int(engine.peak_torque_rpm))
+
+	print("Gearing-limited Top Speed: ", int(top_gear_speed),"kph")
+	print("Theoretical Power-limited Top Speed: ", int(top_power_speed),"kph")
 
 	# slope 1 ((0.0 - peakTorquePower) / (engine.zero_power_rpm - engine.peak_torque_rpm))
 	# slope 2 ((peakTorquePower - engine.peak_power) / (engine.peak_torque_rpm - engine.peak_power_rpm))
 	# slope 3 ((engine.peak_power - (engine.peak_power * engine.red_line_power)) / (engine.peak_power_rpm - engine.red_line_rpm))
 	# slope 4 ((engine.peak_power * engine.red_line_power - engine.aux_line_power) / (engine.red_line_rpm - engine.aux_line_rpm))
 
-	print(curve.torque_curve.get_point_right_tangent(0))
-	print(curve.torque_curve.get_point_left_tangent(1))
-	print(curve.torque_curve.get_point_right_tangent(1))
-	print(curve.torque_curve.get_point_left_tangent(2))
-	print(curve.torque_curve.get_point_right_tangent(2))
-	print(curve.torque_curve.get_point_left_tangent(3))
+	#print(curve.torque_curve.get_point_right_tangent(0))
+	#print(curve.torque_curve.get_point_left_tangent(1))
+	#print(curve.torque_curve.get_point_right_tangent(1))
+	#print(curve.torque_curve.get_point_left_tangent(2))
+	#print(curve.torque_curve.get_point_right_tangent(2))
+	#print(curve.torque_curve.get_point_left_tangent(3))
 
 	#print(peakTorquePower)
 	#print(peakPowerTorque)

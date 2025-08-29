@@ -57,3 +57,4 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/default_filters/anisotropic_filtering_level=0
 textures/decals/filter=0
 textures/light_projectors/filter=0
+environment/defaults/default_clear_color=Color(0.196078, 0.2, 0.223529, 1)
