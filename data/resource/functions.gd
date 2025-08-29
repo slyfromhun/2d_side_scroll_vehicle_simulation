@@ -158,7 +158,7 @@ func process_brakes(wheels:Array[Node],brake_base:float, brake_peak:float, brake
 			wheels[0].constant_torque = Fbrake * 250.0
 		else:
 			if is_zero_approx(throttle):
-				wheels[0].constant_torque = Fbrake * 100.0 * abs(gears[gear_i])
+				wheels[0].constant_torque = Fbrake * abs(gears[gear_i]) * 100.0
 			else:
 				wheels[0].constant_torque = Fbrake * abs(gears[gear_i])
 		# braking
