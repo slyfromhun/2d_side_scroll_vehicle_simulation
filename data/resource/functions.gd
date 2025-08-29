@@ -155,17 +155,17 @@ func process_brakes(wheels:Array[Node],brake_base:float, brake_peak:float, brake
 		if gear_i == 1:
 			wheels[0].constant_torque = 0
 		elif wheel_rpm > redline_rpm + rpm_limit:
-			wheels[0].constant_torque = Fbrake * 325.0
+			wheels[0].constant_torque = Fbrake * 250.0
 		else:
 			if is_zero_approx(throttle):
-				wheels[0].constant_torque = Fbrake * abs(gears[gear_i]) * 100.0
+				wheels[0].constant_torque = Fbrake * 100.0 * abs(gears[gear_i])
 			else:
 				wheels[0].constant_torque = Fbrake * abs(gears[gear_i])
 		# braking
 		if handbrake:
-			wheels[0].constant_torque = (rear_brake * handbrake * -wheel_magnitude_rear) * 100 * 2 + (Fbrake * abs(gears[gear_i]) * 25)
+			wheels[0].constant_torque = (rear_brake * handbrake * -wheel_magnitude_rear) * 100 * 2 + (Fbrake * abs(gears[gear_i]))
 		elif brake:
-			wheels[0].constant_torque = (rear_brake * brake * -wheel_magnitude_rear * anti_braking_rear) * 100 * 2 + (Fbrake * abs(gears[gear_i]) * 25)
+			wheels[0].constant_torque = (rear_brake * brake * -wheel_magnitude_rear * anti_braking_rear) * 100 * 2 + (Fbrake * abs(gears[gear_i]))
 		wheels[1].constant_torque = (front_brake * brake * -wheel_magnitude_front * anti_braking_front) * 100 * 2
 	else:
 		for wheel in wheels:
