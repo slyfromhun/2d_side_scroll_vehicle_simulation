@@ -65,7 +65,7 @@ func _input(_event: InputEvent) -> void:
 	handbrake = calculate.input_handbrake(chassis.handbrake_power)
 
 func _process(_delta: float) -> void:
-	$Label.text = "Speed: %.fkph %.fmph %.fmps\nAccel: %f\nTire Angular Velocity: %.fkph\nRPM: %.f\nGear: %.f\nPower: %.fkW\nTorque: %.fNm\nSlip Ratio rear: %f\nFriction rear: %f\nDrag: %v\nRolling Resistance: %f\nEngine Brake: %f" % [kph, kph * 0.621371, mps, acceleration, calculate.angular_kph(WheelsRB[0], tire.radius), wheel_rpm, gear_i - 1, curve.power_curve.sample(wheel_rpm), curve.torque_curve.sample(wheel_rpm), slip_ratio_rear, WheelsRB[0].physics_material_override.friction, ChassisRB.constant_force, WheelsRB[0].constant_force.x * 0.25, WheelsRB[0].constant_torque]
+	$Label.text = "Speed: %.fkph %.fmph %.fmps\nAccel: %f\nTire Angular Velocity: %.fkph\nRPM: %.f\nGear: %.f\nPower: %.fkW\nTorque: %.fNm\nSlip Ratio rear: %f\nFriction rear: %f\nDrag: %v\nRolling Resistance: %f\nEngine Brake: %f" % [kph, kph * 0.621371, mps, acceleration, calculate.angular_kph(WheelsRB[0], tire.radius) * (1 - abs(slip_ratio_rear)), wheel_rpm, gear_i - 1, curve.power_curve.sample(wheel_rpm), curve.torque_curve.sample(wheel_rpm), slip_ratio_rear, WheelsRB[0].physics_material_override.friction, ChassisRB.constant_force, WheelsRB[0].constant_force.x * 0.25, WheelsRB[0].constant_torque]
 	$Label2.text = "Wr: %f\nWf: %f\n Pos: %f\nthrottle: %f\nbrake: %f\nhandbrake: %f" % [WheelsRB[0].mass, WheelsRB[1].mass, ChassisRB.position.x * 0.01, throttle, brake, handbrake]
 
 func _physics_process(delta: float) -> void:
@@ -125,7 +125,7 @@ func initalize():
 			0, 0)
 	# Red Line RPM
 	curve.power_curve.add_point(Vector2(engine.red_line_rpm, (engine.peak_power * engine.red_line_power) * engine.upgrade * transmission.efficiency),
-			0, 0, Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
+			((engine.peak_power - (engine.peak_power * engine.red_line_power)) / (engine.peak_power_rpm - engine.red_line_rpm)), 0, Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
 	# Aux Line RPM
 	curve.power_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_power * engine.red_line_power * engine.aux_line_power * engine.upgrade * transmission.efficiency),
 			0, 0)
@@ -135,20 +135,19 @@ func initalize():
 	curve.torque_curve.clear_points()
 	# Zero Power RPM
 	curve.torque_curve.add_point(Vector2(engine.zero_power_rpm, 0),
-			0, ((0.0 - peakTorquePower) / (engine.zero_power_rpm - engine.peak_torque_rpm)))
+			0, ((peakTorquePower - engine.peak_power) / (engine.peak_torque_rpm - engine.peak_power_rpm)))
 	# Peak Torque RPM
 	curve.torque_curve.add_point(Vector2(engine.peak_torque_rpm, engine.peak_torque * engine.upgrade * transmission.efficiency),
 			0, 0)
 	# Red Line RPM
 	curve.torque_curve.add_point(Vector2(engine.red_line_rpm, calculate.torque_at(engine.peak_power * engine.red_line_power, drive.MAGIC_CROSS_RPM, engine.red_line_rpm) * engine.upgrade * transmission.efficiency),
-			0, 0, Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
+			((engine.peak_power * engine.red_line_power - engine.aux_line_power) / (engine.red_line_rpm - engine.aux_line_rpm)), 0, Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
 	# Aux Line RPM
 	curve.torque_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_torque * engine.red_line_power * engine.aux_line_power * engine.upgrade * transmission.efficiency),
 			0, 0)
 
 	top_gear_speed = ((engine.red_line_rpm + engine.rpm_limit) * ((tire.radius * 2) * 0.01) * PI) / (transmission.final_drive * transmission.gears[-1])
 	top_gear_speed = (top_gear_speed * 0.06) * (1 - tire.radius * 0.001) # to negate the slip ratio
-
 	top_power_speed = pow((2 * (engine.peak_power * engine.upgrade) / (chassis.drag_coefficiency * drive.AIR_DENSITY * chassis.frontal_area)), 1.0 / 3.0) * 10.0 * 3.6
 
 	print(int(engine.peak_power * 1.34102209 * engine.upgrade), " hp @ ", int(engine.peak_power_rpm))
@@ -157,20 +156,18 @@ func initalize():
 	print("Gearing-limited Top Speed: ", int(top_gear_speed),"kph")
 	print("Theoretical Power-limited Top Speed: ", int(top_power_speed),"kph")
 
+	print("Power Curve slope 1: ",curve.power_curve.get_point_right_tangent(0))
+	print("Torque Curve slope 2: ",curve.torque_curve.get_point_right_tangent(0))
+	print("Power Curve slope 3: ",curve.power_curve.get_point_left_tangent(2))
+	print("Torque Curve slope 4: ",curve.torque_curve.get_point_left_tangent(2))
+
+	#print(peakTorquePower)
+	#print(peakPowerTorque)
+
 	# slope 1 ((0.0 - peakTorquePower) / (engine.zero_power_rpm - engine.peak_torque_rpm))
 	# slope 2 ((peakTorquePower - engine.peak_power) / (engine.peak_torque_rpm - engine.peak_power_rpm))
 	# slope 3 ((engine.peak_power - (engine.peak_power * engine.red_line_power)) / (engine.peak_power_rpm - engine.red_line_rpm))
 	# slope 4 ((engine.peak_power * engine.red_line_power - engine.aux_line_power) / (engine.red_line_rpm - engine.aux_line_rpm))
-
-	#print(curve.torque_curve.get_point_right_tangent(0))
-	#print(curve.torque_curve.get_point_left_tangent(1))
-	#print(curve.torque_curve.get_point_right_tangent(1))
-	#print(curve.torque_curve.get_point_left_tangent(2))
-	#print(curve.torque_curve.get_point_right_tangent(2))
-	#print(curve.torque_curve.get_point_left_tangent(3))
-
-	#print(peakTorquePower)
-	#print(peakPowerTorque)
 
 	### set collision dimensions and friction
 	ChassisColl.shape.size = Vector2(chassis.lenght, chassis.height)

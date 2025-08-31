@@ -4,6 +4,8 @@
 
 [sub_resource type="Curve" id="Curve_6toyo"]
 _limits = [0.0, 86.0, 0.0, 10000.0]
+_data = [Vector2(500, 0), 0.0, 0.034, 0, 0, Vector2(3800, 86), 0.0, 0.0, 0, 0, Vector2(5500, 80.84), -0.003, -0.0489939, 0, 1, Vector2(7150, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Curve" id="Curve_i5yax"]
 _limits = [-1.0, 1.0, -1.0, 1.0]
@@ -12,6 +14,8 @@ point_count = 4
 
 [sub_resource type="Curve" id="Curve_1hlyg"]
 _limits = [0.0, 258.0, 0.0, 10000.0]
+_data = [Vector2(500, 0), 0.0, 0.11, 0, 0, Vector2(2200, 258), 0.0, 0.0, 0, 0, Vector2(5500, 140), -0.04, -0.0848485, 0, 1, Vector2(7150, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 metadata/_snap_count = 2
 
 [resource]
