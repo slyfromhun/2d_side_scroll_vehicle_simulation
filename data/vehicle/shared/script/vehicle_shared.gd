@@ -125,7 +125,8 @@ func initalize():
 			0, 0)
 	# Red Line RPM
 	curve.power_curve.add_point(Vector2(engine.red_line_rpm, (engine.peak_power * engine.red_line_power) * engine.upgrade),
-			(((engine.peak_power * engine.upgrade) - ((engine.peak_power * engine.upgrade) * engine.red_line_power)) / (engine.peak_power_rpm - engine.red_line_rpm)), 0, Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
+			(((engine.peak_power * engine.upgrade) - ((engine.peak_power * engine.upgrade) * engine.red_line_power)) / (engine.peak_power_rpm - engine.red_line_rpm)), 0,
+			Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
 	# Aux Line RPM
 	curve.power_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_power * engine.red_line_power * engine.aux_line_power * engine.upgrade),
 			0, 0)
@@ -141,7 +142,8 @@ func initalize():
 			0, 0)
 	# Red Line RPM
 	curve.torque_curve.add_point(Vector2(engine.red_line_rpm, calculate.torque_at(engine.peak_power * engine.red_line_power, drive.MAGIC_CROSS_RPM, engine.red_line_rpm) * engine.upgrade),
-			(((engine.peak_power * engine.upgrade) * engine.red_line_power - engine.aux_line_power) / (engine.red_line_rpm - engine.aux_line_rpm)), 0, Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
+			(((engine.peak_power * engine.upgrade) * engine.red_line_power - engine.aux_line_power) / (engine.red_line_rpm - engine.aux_line_rpm)), 0,
+			Curve.TANGENT_FREE, Curve.TANGENT_LINEAR)
 	# Aux Line RPM
 	curve.torque_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_torque * engine.red_line_power * engine.aux_line_power * engine.upgrade),
 			0, 0)
