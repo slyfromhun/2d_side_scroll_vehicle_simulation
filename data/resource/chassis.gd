@@ -2,7 +2,7 @@ class_name ChassisStats
 extends Resource
 
 ## This determines how much the chassis weights in kilograms (Kg).
-@export_range(0.0, 10000.0, 0.01, "suffix:Kg") var mass := 1261.0
+@export_range(0.0, 10000.0, 0.01, "suffix:Kg") var mass := 1268.0
 ## Drag coefficient, the bigger the number, the higher the drag gets when the vehicle moves.
 @export_range(0.0, 1.0, 0.01, "suffix:Cd") var drag_coefficiency := 0.48
 ## Multiplier for the drag on the longitudinal (X) axis.
