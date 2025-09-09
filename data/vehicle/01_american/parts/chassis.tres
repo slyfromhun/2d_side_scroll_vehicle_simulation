@@ -11,7 +11,4 @@ frontal_area = 2.14
 lift = -0.03
 lenght = 463.0
 height = 118.0
-brake_front = 2800.0
-brake_rear = 1700.0
-handbrake_power = 2.0
 metadata/_custom_type_script = "uid://bgcjrkpsvy0ux"

@@ -26,9 +26,9 @@ extends Resource
 ## In rounds per minute (RPM). This is where the engine curve starts.
 @export_range(0.0, 10000.0, 0.01, "suffix:RPM") var zero_power_rpm := 500.0
 ## Engine Brake In Newton meters (Nm).
-@export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_base := 50.04
+@export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_base := 60.0
 ## Engine Brake In Newton meters (Nm).
-@export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_peak := 104.92
+@export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_peak := 140.0
 ## Engine Brake Exponent.
 @export_range(0.0, 2.0, 0.01, "suffix:x") var engine_brake_exponent := 1.5
 ## RPM point for Engine Brake Peak.
