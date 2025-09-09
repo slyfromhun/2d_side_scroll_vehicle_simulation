@@ -8,8 +8,8 @@ point_count = 4
 curve = SubResource("Curve_hbw41")
 
 [sub_resource type="Curve" id="Curve_5qfyg"]
-_limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 2), 0.0, -2.0, 0, 1, Vector2(1, 0), -2.0, 0.0, 1, 0]
+_limits = [0.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -20.0, 0, 1, Vector2(1, 0), -20.0, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_swp4m"]
@@ -30,9 +30,9 @@ angle_max = 1.07288e-05
 inherit_velocity_ratio = 1.0
 direction = Vector3(-1, 0, 0)
 spread = 10.0
-initial_velocity_min = 300.0
-initial_velocity_max = 300.0
-angular_velocity_min = -90.0
+initial_velocity_min = 100.0
+initial_velocity_max = 600.0
+angular_velocity_min = -160.0
 angular_velocity_max = -1.60933e-05
 gravity = Vector3(0, 0, 0)
 damping_min = 100.0

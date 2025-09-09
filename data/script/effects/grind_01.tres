@@ -8,8 +8,8 @@ point_count = 4
 curve = SubResource("Curve_lpqpo")
 
 [sub_resource type="Curve" id="Curve_4833g"]
-_limits = [0.0, 100.0, 0.0, 1.0]
-_data = [Vector2(0, 4), 0.0, -4.0, 0, 1, Vector2(1, 0), -4.0, 0.0, 1, 0]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, -2.0, 0, 1, Vector2(1, 0), -2.0, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_b3qlq"]
@@ -46,7 +46,7 @@ curve_z = SubResource("Curve_l74bn")
 particle_flag_disable_z = true
 angle_min = -18.0
 angle_max = -9.99999
-inherit_velocity_ratio = -0.2
+inherit_velocity_ratio = -0.35
 direction = Vector3(-1, -0.35, 0)
 spread = 12.0
 initial_velocity_min = 200.0

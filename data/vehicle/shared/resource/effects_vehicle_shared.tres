@@ -16,7 +16,7 @@ _data = [Vector2(0.04, 0), 0.0, 66.6, 0, 1, Vector2(0.05, 0.666), 66.6, 6.68, 1,
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_82ibn"]
-_data = [Vector2(0.12, 0), 0.0, 5.12308, 0, 1, Vector2(0.25, 0.666), 5.12308, 0.0, 1, 0]
+_data = [Vector2(0.1, 0), 0.0, 11.1, 0, 1, Vector2(0.16, 0.666), 11.1, 0.0, 1, 0]
 point_count = 2
 
 [resource]
