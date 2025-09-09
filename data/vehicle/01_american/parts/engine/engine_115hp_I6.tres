@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="EngineStats" load_steps=2 format=3 uid="uid://dfhawsciiud61"]
 
-[ext_resource type="Script" uid="uid://c3wbql47qdvqr" path="res://data/resource/engine.gd" id="1_352sl"]
+[ext_resource type="Script" uid="uid://c3wbql47qdvqr" path="res://data/resource/engine.gd" id="1_6fkxl"]
 
 [resource]
-script = ExtResource("1_352sl")
+script = ExtResource("1_6fkxl")
 name = "200 I6"
 manufacturer = "Rocket"
 peak_power_rpm = 3800.0
@@ -17,8 +17,8 @@ aux_line_power = 0.0
 rpm_limit = 300.0
 idle_rpm = 800.0
 zero_power_rpm = 500.0
-engine_brake_base = 50.04
-engine_brake_peak = 104.92
+engine_brake_base = 60.0
+engine_brake_peak = 140.0
 engine_brake_exponent = 1.5
 engine_brake_peak_rpm = 5500.0
 auto_clutch_rpm = 1600.0
