@@ -18,10 +18,12 @@ extends Resource
 @export var _process_rolling_resistance = true
 @export var _process_friction = true
 @export var _process_engine_brake_ = true
+@export var _process_brake_ = true
 @export var _process_weight_transfer = true
 @export var _input_gear_ratios_ = true
 @export var _input_throttle_ = true
 @export var _input_brake_ = true
+@export var _input_clutch_ = true
 @export var _input_handbrake_ = true
 
 var previous_velocity: float
@@ -73,7 +75,7 @@ func acceleration(physics_process_delta:float, speed_mps:float, magnitude_) -> f
 		var current_velocity = speed_mps
 		var a = (current_velocity - previous_velocity) / physics_process_delta
 		previous_velocity = current_velocity
-		return a * magnitude_
+		return a * int(magnitude_)
 	else:
 		return 0.0
 
@@ -123,53 +125,57 @@ func anti_braking(slip_ratio_rear:float) -> float:
 	else:
 		return 1.0
 
-func process_drag(chassis:RigidBody2D, speed_mps:float, drag_coef:float, aero_torque:float, lift:float, air_density:float, magnitude_:float):
+func process_drag(speed_mps:float, drag_coef:float, aero_torque:float, lift:float, air_density:float, magnitude_:float):
 	if _process_drag:
-		var Fdrag = -(drag_coef * pow(speed_mps / aero_torque, 2) * air_density / 2.0) * magnitude_
-		chassis.constant_force = Vector2(Fdrag, abs(Fdrag) * lift)
+		var lon_drag = -(drag_coef * pow(speed_mps / aero_torque, 2) * air_density / 2.0) * magnitude_
+		var lift_force = (lift * air_density * pow(speed_mps, 2)) / 2.0
+		return Vector2(lon_drag, lift_force)
 	else:
-		chassis.constant_force = Vector2.ZERO
+		return Vector2.ZERO
 
-func process_rolling_resistance(wheels:Array[Node], rr_coef:float, rear_mps:float, front_mps:float, chassis_weight:float):
+func process_rolling_resistance(wheels:Array[Node], rr_coef:float, wheel_mps:Array, chassis_weight:float):
 	if _process_rolling_resistance:
-		wheels[0].constant_force.x = (-(rr_coef * chassis_weight) * rear_mps) * 2
-		wheels[1].constant_force.x = (-(rr_coef * chassis_weight) * front_mps) * 2
+		for i in wheels.size():
+			wheels[i].constant_force.x = (-(rr_coef * chassis_weight) * wheel_mps[i]) * 2
 	else:
 		for wheel in wheels:
 			wheel.constant_force.x = 0
 
-func process_friction(slip_ratio_curve:Curve, slip_ratio_rear:float, slip_ratio_front, wheels:Array[Node], friction_coef:float):
+func process_friction(slip_ratio_curve:Curve, slip_ratios:Array, wheels:Array[Node], friction_coef:float):
 	if _process_friction:
-		wheels[0].physics_material_override.friction = friction_coef * slip_ratio_curve.sample(slip_ratio_rear)
-		wheels[1].physics_material_override.friction = friction_coef * slip_ratio_curve.sample(slip_ratio_front)
+		for i in wheels.size():
+			wheels[i].physics_material_override.friction = friction_coef * slip_ratio_curve.sample(slip_ratios[i])
 	else:
 		for wheel in wheels:
 			wheel.physics_material_override.friction = friction_coef
 
-func process_brakes(wheels:Array[Node],brake_base:float, brake_peak:float, brake_exponent:float, wheel_rpm:float, redline_rpm:float, rpm_limit:float,
-		brake_peak_rpm:float ,brake:float, handbrake:float, front_brake:float, rear_brake:float, wheel_magnitude_front:float, wheel_magnitude_rear:float, gear_i:float, 
-		gears:Array, throttle:float, anti_braking_rear:float, anti_braking_front: float):
+func process_engine_brake(brake_base:float, brake_peak:float, wheel_rpm:float, brake_peak_rpm:float, brake_exponent, wheel_magnitude_:float, redline_rpm:float, rpm_limit:float,
+		gears:Array, final_drive:float, gear_i:int, tire_radius:float, throttle):
 	if _process_engine_brake_:
-		var Fbrake = -pow(lerpf(brake_base, brake_peak, wheel_rpm / brake_peak_rpm), brake_exponent) * wheel_magnitude_rear
-		# Engine braking
-		if gear_i == 1:
-			wheels[0].constant_torque = 0
-		elif wheel_rpm > redline_rpm + rpm_limit:
-			wheels[0].constant_torque = Fbrake * 250.0
+		# Engine Brake
+		var Fbrake = -pow(lerpf(brake_base, brake_peak, wheel_rpm / brake_peak_rpm), brake_exponent) * wheel_magnitude_
+		if wheel_rpm > redline_rpm + rpm_limit:
+			return Fbrake * abs(gears[2]) * final_drive * (tire_radius * 0.01)
 		else:
 			if is_zero_approx(throttle):
-				wheels[0].constant_torque = Fbrake * abs(gears[gear_i]) * 100.0
+				return Fbrake * abs(gears[gear_i]) * final_drive * (tire_radius * 0.01)
 			else:
-				wheels[0].constant_torque = Fbrake * abs(gears[gear_i])
-		# braking
-		if handbrake:
-			wheels[0].constant_torque = (rear_brake * handbrake * -wheel_magnitude_rear) * 100 * 2 + (Fbrake * abs(gears[gear_i]))
-		elif brake:
-			wheels[0].constant_torque = (rear_brake * brake * -wheel_magnitude_rear * anti_braking_rear) * 100 * 2 + (Fbrake * abs(gears[gear_i]))
-		wheels[1].constant_torque = (front_brake * brake * -wheel_magnitude_front * anti_braking_front) * 100 * 2
+				return 0.0
 	else:
-		for wheel in wheels:
-			wheel.constant_torque = 0
+		return 0.0
+
+func process_brake(brake_power:Array, handbrake:float, brake:float, brake_balance:float, wheel_magnitudes:Array):
+	if _process_brake_:
+		var total_brake_torque = brake_power[0] + brake_power[1]
+		var actual_brake_balance = brake_power[1] / total_brake_torque * (1 - (0.5 - brake_balance) * 2)
+		var actual_brake_torque_front = actual_brake_balance * total_brake_torque
+		var actual_brake_torque_rear = (1 - actual_brake_balance) * total_brake_torque
+		if handbrake:
+			return [2 * total_brake_torque * handbrake * -wheel_magnitudes[0], 2 * actual_brake_torque_front * brake * -wheel_magnitudes[1]]
+		else:
+			return [2 * actual_brake_torque_rear * brake * -wheel_magnitudes[0], 2 * actual_brake_torque_front * brake * -wheel_magnitudes[1]]
+	else:
+		return 0.0
 
 func process_weight_transfer(wheels:Array[Node], acceleration_: float, cL:float, hL:float, bL:float, gravity: float):
 	if _process_weight_transfer:
@@ -207,6 +213,12 @@ func input_brake() -> float:
 		if Input.is_action_pressed("ui_left"):
 			return 1.0
 	return 0.0
+
+func input_clutch() -> float:
+	if _input_clutch_:
+		if Input.is_action_pressed("Clutch"):
+			return 0.0
+	return 1.0
 
 func input_handbrake(handbrake_power:float) -> float:
 	if _input_handbrake_:
