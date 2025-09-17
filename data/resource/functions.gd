@@ -8,7 +8,7 @@ extends Resource
 @export var _angular_mps = true
 @export var _angular_kph = true
 @export var _magnitude = true
-@export var _wheel_magnitude_ = true
+@export var _wheel_magnitude = true
 @export var _acceleration = true
 @export var _rpm = true
 @export var _torque_at_rpm = true
@@ -17,14 +17,14 @@ extends Resource
 @export var _process_drag = true
 @export var _process_rolling_resistance = true
 @export var _process_friction = true
-@export var _process_engine_brake_ = true
-@export var _process_brake_ = true
+@export var _process_engine_brake = true
+@export var _process_brake = true
 @export var _process_weight_transfer = true
-@export var _input_gear_ratios_ = true
-@export var _input_throttle_ = true
-@export var _input_brake_ = true
-@export var _input_clutch_ = true
-@export var _input_handbrake_ = true
+@export var _input_gear_ratios = true
+@export var _input_throttle = true
+@export var _input_brake = true
+@export var _input_clutch = true
+@export var _input_handbrake = true
 
 var previous_velocity: float
 
@@ -65,7 +65,7 @@ func magnitude(rigidbody:RigidBody2D) -> float:
 		return 0.0
 
 func wheel_magnitude(wheel:RigidBody2D) -> float:
-	if _wheel_magnitude_:
+	if _wheel_magnitude:
 		return clampf(wheel.angular_velocity, -1, 1)
 	else:
 		return 0.0
@@ -75,19 +75,19 @@ func acceleration(physics_process_delta:float, speed_mps:float, magnitude_) -> f
 		var current_velocity = speed_mps
 		var a = (current_velocity - previous_velocity) / physics_process_delta
 		previous_velocity = current_velocity
-		return a * int(magnitude_)
+		return a * magnitude_
 	else:
 		return 0.0
 
 func rpm(wheel:RigidBody2D, gears:Array, gear_i:int, final_drive:float, idle_rpm:float, throttle:float, clutch_target_rpm:float) -> float:
 	if _rpm:
-		var rpm_wheel = ((wheel.angular_velocity * gears[gear_i] * final_drive) * 60) / (2 * PI)
+		var rpm_wheel = abs(((wheel.angular_velocity * gears[gear_i] * final_drive) * 60) / (2 * PI))
 		var min_rpm = clampf(lerpf(idle_rpm, 0.0, rpm_wheel / idle_rpm), 0.0, idle_rpm)
 		var clutch_release = clampf(lerpf(clutch_target_rpm - idle_rpm, 0.0, (rpm_wheel - min_rpm) / (idle_rpm + clutch_target_rpm)), 0.0, clutch_target_rpm - idle_rpm) * throttle
 		if gear_i == 1:
 			return idle_rpm
 		else:
-			return abs(rpm_wheel) + min_rpm + clutch_release
+			return rpm_wheel + min_rpm + clutch_release
 	else:
 		return 0.0
 
@@ -125,10 +125,10 @@ func anti_braking(slip_ratio_rear:float) -> float:
 	else:
 		return 1.0
 
-func process_drag(speed_mps:float, drag_coef:float, aero_torque:float, lift:float, air_density:float, magnitude_:float):
+func process_drag(speed_mps:float, frontal_area:float, drag_coef:float, aero_torque:float, lift:float, air_density:float, magnitude_:float):
 	if _process_drag:
-		var lon_drag = -(drag_coef * pow(speed_mps / aero_torque, 2) * air_density / 2.0) * magnitude_
-		var lift_force = (lift * air_density * pow(speed_mps, 2)) / 2.0
+		var lon_drag = -(drag_coef * pow(speed_mps / aero_torque, 2) * (air_density * frontal_area) / 2.0) * magnitude_
+		var lift_force = (lift * (air_density * frontal_area) * pow(speed_mps, 2)) / 2.0
 		return Vector2(lon_drag, lift_force)
 	else:
 		return Vector2.ZERO
@@ -151,11 +151,10 @@ func process_friction(slip_ratio_curve:Curve, slip_ratios:Array, wheels:Array[No
 
 func process_engine_brake(brake_base:float, brake_peak:float, wheel_rpm:float, brake_peak_rpm:float, brake_exponent, wheel_magnitude_:float, redline_rpm:float, rpm_limit:float,
 		gears:Array, final_drive:float, gear_i:int, tire_radius:float, throttle):
-	if _process_engine_brake_:
-		# Engine Brake
+	if _process_engine_brake:
 		var Fbrake = -pow(lerpf(brake_base, brake_peak, wheel_rpm / brake_peak_rpm), brake_exponent) * wheel_magnitude_
 		if wheel_rpm > redline_rpm + rpm_limit:
-			return Fbrake * abs(gears[2]) * final_drive * (tire_radius * 0.01)
+			return Fbrake * abs(gears[2]) * final_drive * (tire_radius * 0.01) * brake_exponent
 		else:
 			if is_zero_approx(throttle):
 				return Fbrake * abs(gears[gear_i]) * final_drive * (tire_radius * 0.01)
@@ -164,16 +163,12 @@ func process_engine_brake(brake_base:float, brake_peak:float, wheel_rpm:float, b
 	else:
 		return 0.0
 
-func process_brake(brake_power:Array, handbrake:float, brake:float, brake_balance:float, wheel_magnitudes:Array):
-	if _process_brake_:
-		var total_brake_torque = brake_power[0] + brake_power[1]
-		var actual_brake_balance = brake_power[1] / total_brake_torque * (1 - (0.5 - brake_balance) * 2)
-		var actual_brake_torque_front = actual_brake_balance * total_brake_torque
-		var actual_brake_torque_rear = (1 - actual_brake_balance) * total_brake_torque
+func process_brake(brake_power:Array, handbrake:float, brake:float, wheel_magnitudes:Array):
+	if _process_brake:
 		if handbrake:
-			return [2 * total_brake_torque * handbrake * -wheel_magnitudes[0], 2 * actual_brake_torque_front * brake * -wheel_magnitudes[1]]
+			return [2 * brake_power[0] * handbrake * -wheel_magnitudes[0], 2 * brake_power[1] * brake * -wheel_magnitudes[1]]
 		else:
-			return [2 * actual_brake_torque_rear * brake * -wheel_magnitudes[0], 2 * actual_brake_torque_front * brake * -wheel_magnitudes[1]]
+			return [2 * brake_power[0] * brake * -wheel_magnitudes[0], 2 * brake_power[1] * brake * -wheel_magnitudes[1]]
 	else:
 		return 0.0
 
@@ -194,7 +189,7 @@ func process_weight_transfer(wheels:Array[Node], acceleration_: float, cL:float,
 			wheel.mass = 1
 
 func input_gear_ratios(gear_i:int, gears:Array) -> int:
-	if _input_gear_ratios_:
+	if _input_gear_ratios:
 		if Input.is_action_just_pressed("ui_up") and gear_i < gears.size() - 1:
 				gear_i += 1
 		if Input.is_action_just_pressed("ui_down") and gear_i > 0:
@@ -203,25 +198,25 @@ func input_gear_ratios(gear_i:int, gears:Array) -> int:
 	return 0
 
 func input_throttle() -> float:
-	if _input_throttle_:
+	if _input_throttle:
 		if Input.is_action_pressed("ui_right"):
 			return 1.0
 	return 0.0
 
 func input_brake() -> float:
-	if _input_brake_:
+	if _input_brake:
 		if Input.is_action_pressed("ui_left"):
 			return 1.0
 	return 0.0
 
 func input_clutch() -> float:
-	if _input_clutch_:
+	if _input_clutch:
 		if Input.is_action_pressed("Clutch"):
 			return 0.0
 	return 1.0
 
 func input_handbrake(handbrake_power:float) -> float:
-	if _input_handbrake_:
+	if _input_handbrake:
 		if Input.is_action_pressed("space"):
 			return handbrake_power
 	return 0.0
