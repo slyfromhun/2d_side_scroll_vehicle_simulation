@@ -6,7 +6,7 @@
 script = ExtResource("1_sqf2s")
 mass = 1268.0
 drag_coefficiency = 0.48
-lon_aero_torque = 1.5
+lon_aero_torque = 1.0
 frontal_area = 2.14
 lift = -0.03
 lenght = 463.0

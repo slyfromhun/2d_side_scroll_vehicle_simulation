@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_x1phs")
 brake_front = 2800.0
-brake_rear = 1700.0
-brake_balance = 0.7
+brake_rear = 1200.0
+brake_balance = 0.5
 handbrake_power = 2.0
 metadata/_custom_type_script = "uid://ded3g5c2dvrsg"
