@@ -28,7 +28,7 @@ extends Resource
 ## Engine Brake In Newton meters (Nm).
 @export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_base := 60.0
 ## Engine Brake In Newton meters (Nm).
-@export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_peak := 140.0
+@export_range(0.0, 1000.0, 0.01, "suffix:Nm") var engine_brake_peak := 130.0
 ## Engine Brake Exponent.
 @export_range(0.0, 2.0, 0.01, "suffix:x") var engine_brake_exponent := 1.5
 ## RPM point for Engine Brake Peak.
