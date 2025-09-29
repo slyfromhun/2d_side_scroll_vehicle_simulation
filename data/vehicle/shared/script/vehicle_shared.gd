@@ -31,6 +31,7 @@ var rr_force: Vector2
 var kph: float
 var mps: float
 var acceleration: float
+var wheel_weight := [0.0, 0.0]
 var magnitude: float
 var wheels_mps := [0.0, 0.0]
 var wheels_angular_kph := [0.0, 0.0]
@@ -56,11 +57,13 @@ var top_power_speed: float
 
 var drive_force: float
 var engine_brake_force: float
-var brake_force: Array
+var brake_force := [0.0, 0.0]
 
 var total_brake_torque: float
 var actual_brake_balance: float
 var actual_brake_torques := [0.0, 0.0]
+
+var load_sensitivities := [0.0, 0.0]
 
 func _ready() -> void:
 	initalize()
@@ -73,8 +76,8 @@ func _input(_event: InputEvent) -> void:
 	input_handbrake = calculate.input_handbrake(brake.handbrake_power)
 
 func _process(_delta: float) -> void:
-	$Label.text = "Power Distribution: %s\nSpeed: %.1fkph %.1fmph %.1fmps\nAccel: %.3f\nTire Angular Velocity: %.1fkph\nRPM: %.1f\nGear: %.f\nPower: %.1fkW\nTorque: %.1fNm\nDrive Force: %.1fNm\nEngine Brake Force: %.1fNm\nBrake Force: %sNm\nSlip Ratio: %.3f\nFriction: %.3f\nDrag: %vN\nRolling Resistance: %sN\n" % [transmission.power_distribution, kph, kph * 0.621371, mps, acceleration, calculate.angular_kph(WheelsRB[transmission.power_distribution], tire.radius), wheel_rpm, input_gear_i - 1, curve.power_curve.sample(wheel_rpm), curve.torque_curve.sample(wheel_rpm), drive_force, engine_brake_force, brake_force, slip_ratios[transmission.power_distribution], WheelsRB[transmission.power_distribution].physics_material_override.friction, drag_force, [int(WheelsRB[0].constant_force.x * 0.25), int(WheelsRB[1].constant_force.x * 0.25)]]
-	$Label2.text = "Wr: %.3f\nWf: %.3f\nPos: %.3f\nthrottle: %.1f\nbrake: %.1f\nhandbrake: %.f" % [WheelsRB[0].mass, WheelsRB[1].mass, ChassisRB.position.x * 0.01, input_throttle, input_brake, input_handbrake]
+	$Label.text = "Power Distribution: %s\nSpeed: %.1fkph %.1fmph %.1fmps\nAccel: %.3f\nTire Angular Velocity: %.1fkph\nRPM: %.1f\nGear: %.f\nPower: %.1fkW\nTorque: %.1fNm\nDrive Force: %.1fNm\nEngine Brake Force: %.1fNm\nBrake Force: %sNm\nSlip Ratio: %.3f\nLoad Sensitivity: %.3f\nFriction: %.3f\nDrag: %vN\nRolling Resistance: %sN\n" % [transmission.power_distribution, kph, kph * 0.621371, mps, acceleration, calculate.angular_kph(WheelsRB[transmission.power_distribution], tire.radius), wheel_rpm, input_gear_i - 1, curve.power_curve.sample(wheel_rpm), curve.torque_curve.sample(wheel_rpm), drive_force, engine_brake_force, brake_force, slip_ratios[transmission.power_distribution], load_sensitivities[transmission.power_distribution], WheelsRB[transmission.power_distribution].physics_material_override.friction, drag_force, [int(WheelsRB[0].constant_force.x * 0.25), int(WheelsRB[1].constant_force.x * 0.25)]]
+	$Label2.text = "Weight Transfer: %.1f, %.1f\nPos: %.3f\nthrottle: %.1f\nbrake: %.1f\nhandbrake: %.f" % [wheel_weight[0], wheel_weight[1],ChassisRB.position.x * 0.01, input_throttle, input_brake, input_handbrake]
 
 func _physics_process(delta: float) -> void:
 	# Chassis
@@ -82,19 +85,23 @@ func _physics_process(delta: float) -> void:
 	mps = calculate.mps(ChassisRB)
 	magnitude = calculate.magnitude(ChassisRB)
 	acceleration = calculate.acceleration(delta, mps, magnitude)
+	wheel_weight = calculate.process_weight_transfer(acceleration, cL, hL, bL, drive.GRAVITY)
 
 	# Wheels
 	for i in WheelsRB.size():
+		WheelsRB[i].mass = wheel_weight[i]
 		wheels_angular_kph[i] = calculate.angular_kph(WheelsRB[i], tire.radius)
 		wheels_mps[i] = calculate.mps(WheelsRB[i])
 		wheels_angular_mps[i] = calculate.angular_mps(WheelsRB[i], tire.radius)
 		wheels_angular_magnitude[i] = calculate.wheel_magnitude(WheelsRB[i])
 		slip_ratios[i] = calculate.slip_ratio(wheels_mps[i], WheelsRB[i], tire.radius)
 		anti_brakings[i] = calculate.anti_braking(slip_ratios[i])
+		load_sensitivities[i] = calculate.load_sensitivity(tire.radius, tire.lon_load_sensitivity, drive_force, brake_force[i], engine_brake_force, wheel_weight[i] * drive.GRAVITY)
 	traction_control = calculate.traction_control(slip_ratios[transmission.power_distribution])
 	wheel_rpm = calculate.rpm(WheelsRB[transmission.power_distribution], gearbox.gears, input_gear_i, gearbox.final_drive, engine.idle_rpm, input_throttle, engine.auto_clutch_rpm)
 	torque_at = calculate.torque_at_rpm(curve.power_curve, curve.torque_curve, wheel_rpm)
 
+	# Forces
 	engine_brake_force = calculate.process_engine_brake(engine.engine_brake_base, engine.engine_brake_peak, wheel_rpm, engine.engine_brake_peak_rpm, engine.engine_brake_exponent,
 			wheels_angular_magnitude[transmission.power_distribution], engine.red_line_rpm, engine.rpm_limit, gearbox.gears, gearbox.final_drive, input_gear_i, tire.radius, input_throttle)
 	brake_force = calculate.process_brake(actual_brake_torques, input_handbrake, input_brake, wheels_angular_magnitude)
@@ -102,8 +109,7 @@ func _physics_process(delta: float) -> void:
 
 	ChassisRB.apply_central_force(drag_force)
 	calculate.process_rolling_resistance(WheelsRB, tire.rolling_resistance, wheels_angular_mps, chassis.mass)
-	calculate.process_weight_transfer(WheelsRB, acceleration, cL, hL, bL, drive.GRAVITY)
-	calculate.process_friction(curve.slip_ratio_curve, slip_ratios, WheelsRB, tire.lon_friction)
+	calculate.process_friction(curve.slip_ratio_curve, slip_ratios, load_sensitivities, WheelsRB)
 
 	if wheel_rpm < engine.red_line_rpm + engine.rpm_limit:
 		drive_force = calculate.drive_torque(torque_at, gearbox.gears, input_gear_i, gearbox.final_drive, tire.radius, input_throttle, traction_control)
@@ -129,6 +135,9 @@ func initalize():
 	
 	curve.torque_curve.max_domain = engine.aux_line_rpm
 	curve.torque_curve.max_value = engine.peak_torque * engine.upgrade
+
+	curve.slip_ratio_curve.max_value = tire.lon_friction[0]
+	curve.slip_ratio_curve.min_value = -tire.lon_friction[0]
 	
 	peakTorquePower = engine.peak_torque * engine.peak_torque_rpm / drive.MAGIC_CROSS_RPM
 	peakPowerTorque = engine.peak_power * drive.MAGIC_CROSS_RPM / engine.peak_power_rpm
@@ -165,6 +174,17 @@ func initalize():
 	curve.torque_curve.add_point(Vector2(engine.aux_line_rpm, engine.peak_torque * engine.red_line_power * engine.aux_line_power * engine.upgrade),
 			0, 0)
 
+	## Slip Ratio Curve
+	curve.slip_ratio_curve.clear_points()
+	# - Slip Friction
+	curve.slip_ratio_curve.add_point(Vector2(-0.5, -tire.lon_friction[1]))
+	# - Static Friction
+	curve.slip_ratio_curve.add_point(Vector2(-0.08, -tire.lon_friction[0]))
+	# + Static Friction
+	curve.slip_ratio_curve.add_point(Vector2(0.08, tire.lon_friction[0]))
+	# + Slip Friction
+	curve.slip_ratio_curve.add_point(Vector2(0.5, tire.lon_friction[1]))
+	
 
 	### Set collision dimensions
 	ChassisColl.shape.size = Vector2(chassis.lenght, chassis.height)

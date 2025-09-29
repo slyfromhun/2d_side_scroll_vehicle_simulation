@@ -8,8 +8,8 @@ _data = [Vector2(500, 0), 0.0, 0.034, 0, 0, Vector2(3800, 86), 0.0, 0.0, 0, 0, V
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_i5yax"]
-_limits = [-1.0, 1.0, -1.0, 1.0]
-_data = [Vector2(-1, -0.54), 0.0, 0.0, 0, 0, Vector2(-0.1, -1), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.54), 0.0, 0.0, 0, 0]
+_limits = [-2.0, 2.0, -1.0, 1.0]
+_data = [Vector2(-0.5, -1.38), 0.0, 0.0, 0, 0, Vector2(-0.08, -1.46), 0.0, 0.0, 0, 0, Vector2(0.08, 1.46), 0.0, 0.0, 0, 0, Vector2(0.5, 1.38), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_1hlyg"]
