@@ -9,7 +9,7 @@ extends Resource
 @export var _slip := true
 @export var slip_emit_power: Curve
 @export var speed_slip := [4, 666]
-@export var range_slip := 5
+@export var range_slip := 10
 @export_group("Grind")
 @export var _grind := true
 @export var grind_emit_power: Curve
@@ -52,7 +52,7 @@ func grind(speed_kph:float, speed_mps:float, grindScenes:Array[GPUParticles2D], 
 	if _grind:
 		if int(wheel_magnitude) == 0: wheel_magnitude = 1
 		if (speed_grind[0] < speed_kph and speed_kph < speed_grind[1]) or (speed_mps > range_grind):
-			grind_emit_power.set_point_offset(0, clampf(lerpf(0.04, 0.0, speed_kph / 20.0), 0.0, 0.04))
+			#grind_emit_power.set_point_offset(0, clampf(lerpf(0.04, 0.0, speed_kph / 20.0), 0.0, 0.04))
 			for scene in grindScenes:
 				scene.process_material.direction.x = int(-wheel_magnitude)
 				scene.amount_ratio = grind_emit_power.sample(abs(slip_ratio))

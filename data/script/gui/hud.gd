@@ -5,24 +5,29 @@ extends CanvasLayer
 @export var rpm_needle: Control
 
 var chassis: RigidBody2D
+var camera: Camera2D
 var rpm: float
 var rpm_limit: float
 var redline: float
+var hudzoom: Vector2
 
 
 func _ready() -> void:
 	chassis = get_tree().get_first_node_in_group("chassis")
+	camera =  get_tree().get_first_node_in_group("camera")
 	rpm_limit_progress.value = (8000.0 - chassis.engine.red_line_rpm)
 	redline = chassis.engine.red_line_rpm
 
 func _process(_delta: float) -> void:
-	var tween = get_tree().create_tween()
-	var tween2 = get_tree().create_tween()
+	hudzoom = camera.zoom
 	
+	var tween := create_tween()
+	var tween2 := create_tween()
 	tween.tween_property(rpm_needle,"rotation_degrees",clampf((chassis.wheel_rpm / 8000.0) * 239, 0.0, 239.0), 0.066)
 	tween2.tween_property(rpm_progress,"value",chassis.wheel_rpm, 0.066)
 
 	rpm_limiter()
+	hudshake()
 
 
 func rpm_limiter():
@@ -33,3 +38,7 @@ func rpm_limiter():
 		$Tacho/AnimationPlayer.play("rpm_limiter")
 	else:
 		$Tacho/AnimationPlayer.stop()
+
+func hudshake():
+	var tween := create_tween()
+	tween.tween_property($Tacho, "scale", hudzoom, 0.041)

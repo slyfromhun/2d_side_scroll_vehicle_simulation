@@ -14,7 +14,7 @@ extends Resource
 ## In rounds per minute (RPM). This should always be more than the Peak Power Rpm. 
 @export_range(400.0, 10000.0, 0.01, "suffix:RPM") var red_line_rpm := 5500.0
 ## This is a multiplier. It multiplies the Peak Power and makes it Red Line Power. It's recommended this being equal or less than 1. 
-@export_range(0.0, 1.0, 0.01, "suffix:x") var red_line_power := 0.93
+@export_range(0.0, 1.0, 0.01, "suffix:x") var red_line_power := 0.94
 ## In rounds per minute (RPM). This should always be more than the RPM Limit.
 @export_range(400.0, 20000.0, 0.01, "suffix:RPM") var aux_line_rpm := 7150.0
 ## This is a multiplier. It multiplies the Peak Power RPM and makes it Aux Line Power. It's recommended this being equal or less than 1. Often you see it as a 0.

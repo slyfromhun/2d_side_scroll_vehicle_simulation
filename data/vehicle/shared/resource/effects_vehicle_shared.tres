@@ -12,11 +12,11 @@ _data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="Curve" id="Curve_ta3pd"]
-_data = [Vector2(0.04, 0), 0.0, 66.6, 0, 1, Vector2(0.05, 0.666), 66.6, 6.68, 1, 1, Vector2(0.1, 1), 6.68, 2.56923, 1, 1]
+_data = [Vector2(0.01, 0), 16.65, 15.0, 1, 1, Vector2(0.05, 0.6), 15.0, 0.421053, 1, 1, Vector2(1, 1), 0.421053, 2.56923, 1, 1]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_82ibn"]
-_data = [Vector2(0.1, 0), 0.0, 11.1, 0, 1, Vector2(0.16, 0.666), 11.1, 0.0, 1, 0]
+_data = [Vector2(0.13, 0), 0.0, 22.2, 0, 1, Vector2(0.16, 0.666), 22.2, 0.0, 1, 0]
 point_count = 2
 
 [resource]
@@ -27,7 +27,7 @@ speed_friction = [70, 666]
 _slip = true
 slip_emit_power = SubResource("Curve_82ibn")
 speed_slip = [4, 666]
-range_slip = 5
+range_slip = 10
 _grind = false
 grind_emit_power = SubResource("Curve_ta3pd")
 speed_grind = [4, 666]

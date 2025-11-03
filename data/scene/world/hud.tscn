@@ -55,10 +55,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -376.0
-offset_top = 201.0
-offset_right = -376.0
-offset_bottom = 201.0
+offset_left = -426.0
+offset_top = 260.0
+offset_right = -426.0
+offset_bottom = 260.0
 grow_vertical = 0
 
 [node name="hud_tacho_rim" type="Sprite2D" parent="Tacho/Control"]
@@ -74,29 +74,30 @@ texture = ExtResource("2_ihue7")
 modulate = Color(1, 0.27451, 0.27451, 1)
 texture_repeat = 1
 layout_mode = 0
-offset_left = -528.0
-offset_top = 49.0
-offset_right = 672.0
-offset_bottom = 1249.0
+offset_left = -577.5
+offset_top = 108.5
+offset_right = 622.5
+offset_bottom = 1308.5
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(2, 2)
 min_value = -43.0
 max_value = 8000.0
-value = 100.0
+value = 2500.0
 fill_mode = 5
-radial_initial_angle = 120.9
+radial_initial_angle = 120.8
 radial_fill_degrees = 238.0
 texture_progress = ExtResource("4_t60j7")
 
 [node name="RPM_Progress" type="TextureProgressBar" parent="Tacho"]
 layout_mode = 0
-offset_left = -503.0
-offset_top = 74.0
-offset_right = 497.0
-offset_bottom = 1074.0
+offset_left = -552.5
+offset_top = 133.5
+offset_right = 447.5
+offset_bottom = 1133.5
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(2, 2)
 max_value = 8000.0
+value = 800.0
 fill_mode = 4
 radial_initial_angle = 241.0
 radial_fill_degrees = 238.0
@@ -105,10 +106,10 @@ texture_progress = ExtResource("1_sjlaq")
 [node name="Control2" type="Control" parent="Tacho"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -376.0
-offset_top = 201.0
-offset_right = -376.0
-offset_bottom = 201.0
+offset_left = -426.0
+offset_top = 260.0
+offset_right = -426.0
+offset_bottom = 260.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Tacho/Control2"]
 modulate = Color(1, 0.27451, 0.27451, 1)
