@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv44byjbmuty7"]
+
+[ext_resource type="Texture2D" uid="uid://c87cx7xugub5r" path="res://data/art/textures/road.bmp" id="1_nbjj1"]
+[ext_resource type="Texture2D" uid="uid://d1jshhyag2oky" path="res://data/art/textures/road_side.bmp" id="2_im0pl"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="Road" type="ParallaxLayer" parent="."]
+position = Vector2(960, 0)
+
+[node name="Main_Road" type="Parallax2D" parent="Road"]
+scroll_scale = Vector2(1, 0)
+scroll_offset = Vector2(0, 69)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Road/Main_Road"]
+texture_filter = 1
+position = Vector2(0, -17)
+texture = ExtResource("1_nbjj1")
+
+[node name="Road_Side" type="Parallax2D" parent="Road"]
+scroll_scale = Vector2(1, 0)
+scroll_offset = Vector2(0, 197)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Road/Road_Side"]
+texture_filter = 1
+position = Vector2(0, -17)
+texture = ExtResource("2_im0pl")
