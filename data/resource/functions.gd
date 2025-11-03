@@ -106,7 +106,7 @@ func drive_torque(torque_at_rpm_:float, gears:Array, gear_i:int, final_drive:flo
 
 func slip_ratio(speed_mps:float, wheel:RigidBody2D, wheel_radius:float) -> float:
 	if _slip_ratio:
-		return clampf(((abs(wheel.angular_velocity) * (wheel_radius * 0.01)) / speed_mps) - 1, -1.0, 1.0)
+		return clampf(((abs(wheel.angular_velocity) * (wheel_radius * 0.01)) / speed_mps) - 1, -3.14, 3.14)
 	else:
 		return 0.0
 
@@ -143,21 +143,17 @@ func process_drag(speed_mps:float, frontal_area:float, drag_coef:float, aero_tor
 	else:
 		return Vector2.ZERO
 
-func process_rolling_resistance(wheels:Array[Node], rr_coef:float, wheel_mps:Array, chassis_weight:float):
+func process_rolling_resistance(rr_coef:float, wheel_angular_mps:float, chassis_weight:float) -> float:
 	if _process_rolling_resistance:
-		for i in wheels.size():
-			wheels[i].constant_force.x = (-(rr_coef * chassis_weight) * wheel_mps[i]) * 2
+		return -(rr_coef * chassis_weight) * wheel_angular_mps
 	else:
-		for wheel in wheels:
-			wheel.constant_force.x = 0
+		return 0.0
 
-func process_friction(slip_ratio_curve:Curve, slip_ratios:Array, _load_sensitivity:Array, wheels:Array[Node]):
+func process_friction(slip_ratio_curve:Curve, slip_ratio_:float, _load_sensitivity:float):
 	if _process_friction:
-		for i in wheels.size():
-			wheels[i].physics_material_override.friction = slip_ratio_curve.sample(slip_ratios[i]) * _load_sensitivity[i]
+		return slip_ratio_curve.sample(slip_ratio_) * _load_sensitivity
 	else:
-		for wheel in wheels:
-			wheel.physics_material_override.friction = 1.0
+		return 1.0
 
 func process_engine_brake(brake_base:float, brake_peak:float, wheel_rpm:float, brake_peak_rpm:float, brake_exponent, wheel_magnitude_:float, redline_rpm:float, rpm_limit:float,
 		gears:Array, final_drive:float, gear_i:int, tire_radius:float, throttle) -> float:
@@ -173,7 +169,7 @@ func process_engine_brake(brake_base:float, brake_peak:float, wheel_rpm:float, b
 	else:
 		return 0.0
 
-func process_brake(brake_power:Array, handbrake:float, brake:float, wheel_magnitudes:Array) -> Array:
+func process_brake(brake_power:Array, handbrake:float, brake:float, wheel_magnitudes:Array) -> Array[float]:
 	if _process_brake:
 		if handbrake:
 			return [2 * brake_power[0] * handbrake * -wheel_magnitudes[0], 2 * brake_power[1] * brake * -wheel_magnitudes[1]]
@@ -182,13 +178,17 @@ func process_brake(brake_power:Array, handbrake:float, brake:float, wheel_magnit
 	else:
 		return [0, 0]
 
-func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, gravity:float) -> Array:
+func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, gravity:float) -> Array[float]:
 	if _process_weight_transfer:
 		var wf = (((cL) * gravity) - ((hL) * 1.0 * acceleration_)) # Wf = (c/L)*9.8 - (h/L)*1*a
 		var wr = (((bL) * gravity) + ((hL) * 1.0 * acceleration_)) # Wr = (b/L)*9.8 + (h/L)*1*a,
+		if wf < 0.0:
+			wf = 1.0
+		if wr < 0.0:
+			wr = 1.0
 		return [wr * 2, wf * 2]
 	else:
-		return [1, 1]
+		return [1.0, 1.0]
 
 func input_gear_ratios(gear_i:int, gears:Array) -> int:
 	if _input_gear_ratios:
