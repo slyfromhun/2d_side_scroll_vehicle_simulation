@@ -6,6 +6,8 @@
 script = ExtResource("1_7p0ar")
 radius = 30.5
 rolling_resistance = 0.013
-lon_friction = [1.46, 1.38]
+lon_friction = [1.46, 1.06]
+peak_friction_grip = 10.0
+slide_friciton_grip = 100.0
 lon_load_sensitivity = [-0.1, 10300]
 metadata/_custom_type_script = "uid://duwrygrdeyarq"
