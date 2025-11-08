@@ -145,7 +145,7 @@ func process_drag(speed_mps:float, frontal_area:float, drag_coef:float, aero_tor
 
 func process_rolling_resistance(rr_coef:float, wheel_angular_mps:float, chassis_weight:float) -> float:
 	if _process_rolling_resistance:
-		return -(rr_coef * chassis_weight) * wheel_angular_mps
+		return -((rr_coef * chassis_weight) * wheel_angular_mps)
 	else:
 		return 0.0
 
@@ -178,7 +178,7 @@ func process_brake(brake_power:Array, handbrake:float, brake:float, wheel_magnit
 	else:
 		return [0, 0]
 
-func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, gravity:float) -> Array[float]:
+func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, gravity:float, inertia:float) -> Array[float]:
 	if _process_weight_transfer:
 		var wf = (((cL) * gravity) - ((hL) * 1.0 * acceleration_)) # Wf = (c/L)*9.8 - (h/L)*1*a
 		var wr = (((bL) * gravity) + ((hL) * 1.0 * acceleration_)) # Wr = (b/L)*9.8 + (h/L)*1*a,
@@ -186,7 +186,7 @@ func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, 
 			wf = 1.0
 		if wr < 0.0:
 			wr = 1.0
-		return [wr * 2, wf * 2]
+		return [wr * inertia, wf * inertia]
 	else:
 		return [1.0, 1.0]
 
