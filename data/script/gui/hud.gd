@@ -10,6 +10,7 @@ var rpm: float
 var rpm_limit: float
 var redline: float
 var hudzoom: Vector2
+var dyno_end = false
 
 
 func _ready() -> void:
@@ -28,6 +29,7 @@ func _process(_delta: float) -> void:
 
 	rpm_limiter()
 	hudshake()
+	line()
 
 
 func rpm_limiter():
@@ -42,3 +44,13 @@ func rpm_limiter():
 func hudshake():
 	var tween := create_tween()
 	tween.tween_property($Tacho, "scale", hudzoom, 0.041)
+
+
+func line():
+	if dyno_end != true:
+		if chassis.wheel_rpm > chassis.engine.rpm_limit + redline:
+			dyno_end = true
+		else:
+			$Power.add_point(Vector2(chassis.wheel_rpm * 0.05, -chassis.curve.power_curve.sample(chassis.wheel_rpm)), 0)
+			$Torque.add_point(Vector2(chassis.wheel_rpm * 0.05, -chassis.curve.torque_curve.sample(chassis.wheel_rpm)), 0)
+		

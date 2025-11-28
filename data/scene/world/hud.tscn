@@ -122,3 +122,13 @@ texture = ExtResource("2_ixqfd")
 libraries = {
 &"": SubResource("AnimationLibrary_0syjl")
 }
+
+[node name="Power" type="Line2D" parent="."]
+position = Vector2(42, 413)
+width = 3.0
+default_color = Color(0.41365, 0.755584, 0.983421, 1)
+
+[node name="Torque" type="Line2D" parent="."]
+position = Vector2(42, 413)
+width = 3.0
+default_color = Color(0.892458, 0.924981, 0.069358, 1)
