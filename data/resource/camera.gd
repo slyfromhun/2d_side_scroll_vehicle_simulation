@@ -7,8 +7,8 @@ extends Resource
 @export var offset_max := 4.0
 @export var zoom_max := 0.016
 
-func camshake(offset:float, kph:float, top_gear_speed:float, shake_curve:Curve) -> float:
-	return randf_range(-offset, offset) * shake_curve.sample(kph / top_gear_speed)
+func camshake(offset:float, kph:float, top_power_speed:float, shake_curve:Curve) -> float:
+	return randf_range(-offset, offset) * shake_curve.sample(kph / top_power_speed)
 
 func camzoom(zoom:float, wheel_rpm:float, red_line_rpm:float, zoom_curve:Curve) -> Vector2:
 	var camZoom = 1 + randf_range(-zoom, zoom) * zoom_curve.sample(wheel_rpm / (red_line_rpm))
