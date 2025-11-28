@@ -1,8 +1,8 @@
 class_name Functions
 extends Resource
 
-@export_range(0.0, 1.0, 0.01) var _traction_control_ = 0.5
-@export_range(0.0, 1.0, 0.01) var _anti_braking_ = 0.5
+@export_range(0.0, 1.0, 0.01) var _traction_control_ = 0.33
+@export_range(0.0, 1.0, 0.01) var _anti_braking_ = 0.1
 @export var _mps = true
 @export var _kph = true
 @export var _angular_mps = true
@@ -110,18 +110,18 @@ func slip_ratio(speed_mps:float, wheel:RigidBody2D, wheel_radius:float) -> float
 	else:
 		return 0.0
 
-func traction_control(slip_ratio_rear:float) -> float:
+func traction_control(slip_ratio_:float) -> float:
 	if _traction_control_:
-		if abs(slip_ratio_rear) > 0.1:
-			return (lerpf(1, 0, clampf(abs(slip_ratio_rear) + _traction_control_, 0.0, 1.0)))
+		if abs(slip_ratio_) > 0.1:
+			return (lerpf(1, 0, clampf(abs(slip_ratio_) + _traction_control_, 0.0, 1.0)))
 		return 1.0
 	else:
 		return 1.0
 
-func anti_braking(slip_ratio_rear:float) -> float:
+func anti_braking(slip_ratio__:float) -> float:
 	if _anti_braking_:
-		if abs(slip_ratio_rear) > 0.1:
-			return (lerpf(1, 0, clampf(abs(slip_ratio_rear) + _anti_braking_, 0.0, 1.0)))
+		if abs(slip_ratio__) > 0.1:
+			return (lerpf(1, 0, clampf(abs(slip_ratio__) + _anti_braking_, 0.0, 1.0)))
 		return 1.0
 	else:
 		return 1.0
@@ -143,11 +143,11 @@ func process_drag(speed_mps:float, frontal_area:float, drag_coef:float, aero_tor
 	else:
 		return Vector2.ZERO
 
-func process_rolling_resistance(rr_coef:float, wheel_angular_mps:float, chassis_weight:float) -> float:
+func process_rolling_resistance(rr_coef:float, wheel_angular_mps:float, chassis_weight:float, magnitude_:float) -> Vector2:
 	if _process_rolling_resistance:
-		return -((rr_coef * chassis_weight) * wheel_angular_mps)
+		return Vector2(-((rr_coef * chassis_weight) * (wheel_angular_mps * magnitude_)), 0)
 	else:
-		return 0.0
+		return Vector2.ZERO
 
 func process_friction(slip_ratio_curve:Curve, slip_ratio_:float, _load_sensitivity:float):
 	if _process_friction:
