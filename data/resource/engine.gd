@@ -1,8 +1,6 @@
 class_name EngineStats
 extends Resource
 
-@export var name := "200 I6"
-@export var manufacturer := "Rocket"
 ## In rounds per minute (RPM). This should always be higher than Peak Torque RPM.
 @export_range(400.0, 10000.0, 0.01, "suffix:RPM") var peak_power_rpm := 3800.0
 ## In kilo Watts (kW). This value should always be less than Peak Torque.

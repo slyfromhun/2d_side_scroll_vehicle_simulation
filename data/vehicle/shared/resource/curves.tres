@@ -1,6 +1,11 @@
-[gd_resource type="Resource" script_class="Curves" load_steps=5 format=3 uid="uid://bn53tdujp01dx"]
+[gd_resource type="Resource" script_class="Curves" load_steps=6 format=3 uid="uid://bn53tdujp01dx"]
 
 [ext_resource type="Script" uid="uid://slefkw3c7w7t" path="res://data/resource/curve.gd" id="1_1hlyg"]
+
+[sub_resource type="Curve" id="Curve_rd7f3"]
+_limits = [-1.0, 1.0, 500.0, 7150.0]
+_data = [Vector2(500, -0.5), 0.0, 0.0, 0, 0, Vector2(5000, 1), 0.0, 0.0, 0, 0, Vector2(7150, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_6toyo"]
 _limits = [0.0, 86.0, 0.0, 10000.0]
@@ -14,7 +19,7 @@ point_count = 4
 
 [sub_resource type="Curve" id="Curve_1hlyg"]
 _limits = [0.0, 258.0, 0.0, 10000.0]
-_data = [Vector2(500, 0), 0.0, 0.11, 0, 0, Vector2(2200, 258), 0.0, 0.0, 0, 0, Vector2(5500, 140), -0.048, -0.0848485, 0, 1, Vector2(7150, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(500, 0), 0.0, 0.16, 0, 0, Vector2(2200, 258), 0.0, 0.0, 0, 0, Vector2(5500, 140), -0.048, -0.0848485, 0, 1, Vector2(7150, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 metadata/_snap_count = 2
 
@@ -22,5 +27,6 @@ metadata/_snap_count = 2
 script = ExtResource("1_1hlyg")
 power_curve = SubResource("Curve_6toyo")
 torque_curve = SubResource("Curve_1hlyg")
+induction_curve = SubResource("Curve_rd7f3")
 slip_ratio_curve = SubResource("Curve_i5yax")
 metadata/_custom_type_script = "uid://slefkw3c7w7t"

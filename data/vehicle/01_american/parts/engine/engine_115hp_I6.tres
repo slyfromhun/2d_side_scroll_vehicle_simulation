@@ -4,8 +4,6 @@
 
 [resource]
 script = ExtResource("1_6fkxl")
-name = "200 I6"
-manufacturer = "Rocket"
 peak_power_rpm = 3800.0
 peak_power = 86.0
 peak_torque_rpm = 2200.0
