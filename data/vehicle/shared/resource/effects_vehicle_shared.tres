@@ -16,8 +16,8 @@ _data = [Vector2(0.01, 0), 16.65, 15.0, 1, 1, Vector2(0.05, 0.6), 15.0, 0.421053
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_82ibn"]
-_data = [Vector2(0.13, 0), 0.0, 22.2, 0, 1, Vector2(0.16, 0.666), 22.2, 0.0, 1, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.065, 0), 0.0, 240.0, 1, 1, Vector2(0.066, 0.24), 240.0, 0.599572, 1, 1, Vector2(1, 0.8), 0.599572, 0.0, 1, 0]
+point_count = 4
 
 [resource]
 script = ExtResource("1_45gdk")
@@ -26,7 +26,7 @@ friction_emit_power = SubResource("Curve_ijv0e")
 speed_friction = [70, 666]
 _slip = true
 slip_emit_power = SubResource("Curve_82ibn")
-speed_slip = [4, 666]
+speed_slip = [10, 666]
 range_slip = 10
 _grind = false
 grind_emit_power = SubResource("Curve_ta3pd")

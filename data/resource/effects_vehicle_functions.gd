@@ -8,7 +8,7 @@ extends Resource
 @export_group("Slip")
 @export var _slip := true
 @export var slip_emit_power: Curve
-@export var speed_slip := [4, 666]
+@export var speed_slip := [10, 666]
 @export var range_slip := 10
 @export_group("Grind")
 @export var _grind := true
@@ -36,7 +36,7 @@ func friction(speed_kph:float, frictionScenes:Array[GPUParticles2D], wheel_magni
 
 func slip(speed_kph:float, speed_mps:float, slipScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _slip:
-		if int(wheel_magnitude) == 0: wheel_magnitude = 1
+		#if int(wheel_magnitude) == 0: wheel_magnitude = 1
 		if (speed_slip[0] < speed_kph and speed_kph < speed_slip[1]) or (speed_mps > range_slip):
 			for scene in slipScenes:
 				scene.process_material.direction.x = int(-wheel_magnitude)
