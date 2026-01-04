@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BrakeStats" load_steps=2 format=3 uid="uid://cpygsc4r02drl"]
+
+[ext_resource type="Script" uid="uid://ded3g5c2dvrsg" path="res://data/resource/brake.gd" id="1_jcc18"]
+
+[resource]
+script = ExtResource("1_jcc18")
+brake_front = 1774.0
+brake_rear = 760.0
+brake_balance = 0.5
+handbrake_power = 2.0
+metadata/_custom_type_script = "uid://ded3g5c2dvrsg"

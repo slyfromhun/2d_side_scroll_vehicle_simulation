@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ChassisStats" load_steps=2 format=3 uid="uid://dag0otxp1vkpi"]
+
+[ext_resource type="Script" uid="uid://bgcjrkpsvy0ux" path="res://data/resource/chassis.gd" id="1_3jh4k"]
+
+[resource]
+script = ExtResource("1_3jh4k")
+mass = 710.0
+drag_coefficiency = 0.48
+lon_aero_torque = 1.0
+frontal_area = 1.97
+lift = -0.02
+lenght = 357.5
+height = 138.5
+metadata/_custom_type_script = "uid://bgcjrkpsvy0ux"
