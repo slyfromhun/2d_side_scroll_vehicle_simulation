@@ -8,13 +8,13 @@ extends Resource
 @export_group("Slip")
 @export var _slip := true
 @export var slip_emit_power: Curve
-@export var speed_slip := [10, 666]
-@export var range_slip := 10
+@export var speed_slip := [0, 666]
+@export var range_slip := 2
 @export_group("Grind")
 @export var _grind := true
 @export var grind_emit_power: Curve
-@export var speed_grind := [4, 666]
-@export var range_grind := 5
+@export var speed_grind := [0, 666]
+@export var range_grind := 10
 @export_group("Dust")
 @export var _dust := true
 @export var dust_color_power: Curve
@@ -37,7 +37,7 @@ func friction(speed_kph:float, frictionScenes:Array[GPUParticles2D], wheel_magni
 func slip(speed_kph:float, speed_mps:float, slipScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _slip:
 		#if int(wheel_magnitude) == 0: wheel_magnitude = 1
-		if (speed_slip[0] < speed_kph and speed_kph < speed_slip[1]) or (speed_mps > range_slip):
+		if (speed_slip[0] < speed_kph and speed_kph < speed_slip[1]) and (speed_mps > range_slip or speed_kph > range_slip):
 			for scene in slipScenes:
 				scene.process_material.direction.x = int(-wheel_magnitude)
 				scene.amount_ratio = slip_emit_power.sample(abs(slip_ratio))
@@ -51,7 +51,7 @@ func slip(speed_kph:float, speed_mps:float, slipScenes:Array[GPUParticles2D], wh
 func grind(speed_kph:float, speed_mps:float, grindScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _grind:
 		if int(wheel_magnitude) == 0: wheel_magnitude = 1
-		if (speed_grind[0] < speed_kph and speed_kph < speed_grind[1]) or (speed_mps > range_grind):
+		if (speed_grind[0] < speed_kph and speed_kph < speed_grind[1]) and (speed_mps > range_grind or speed_kph > range_grind):
 			#grind_emit_power.set_point_offset(0, clampf(lerpf(0.04, 0.0, speed_kph / 20.0), 0.0, 0.04))
 			for scene in grindScenes:
 				scene.process_material.direction.x = int(-wheel_magnitude)

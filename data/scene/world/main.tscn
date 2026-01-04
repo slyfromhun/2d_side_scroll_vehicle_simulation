@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cv44byjbmuty7" path="res://data/scene/world/background.tscn" id="1_sqk7a"]
 [ext_resource type="PackedScene" uid="uid://use3074u4741" path="res://data/scene/world/world.tscn" id="1_ynbu6"]
 [ext_resource type="PackedScene" uid="uid://beb01at7jqln0" path="res://data/scene/world/road.tscn" id="2_yj2un"]
-[ext_resource type="PackedScene" uid="uid://cl7kx0f2x6fke" path="res://data/vehicle/01_american/scene/01_american.tscn" id="3_yj2un"]
+[ext_resource type="PackedScene" uid="uid://b7wijra7rxua5" path="res://data/vehicle/02_european/scene/02_european.tscn" id="3_sqk7a"]
 [ext_resource type="PackedScene" uid="uid://dnml2w5vdy1ap" path="res://data/scene/world/hud.tscn" id="4_ja0om"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ja0om"]
@@ -15,8 +15,8 @@ size = Vector2(194, 88)
 
 [node name="World" parent="." instance=ExtResource("1_ynbu6")]
 
-[node name="01_american" parent="World" instance=ExtResource("3_yj2un")]
-position = Vector2(38, -153)
+[node name="02_european" parent="World" instance=ExtResource("3_sqk7a")]
+position = Vector2(349, -103)
 
 [node name="Road" parent="World" instance=ExtResource("2_yj2un")]
 
@@ -25,6 +25,5 @@ position = Vector2(38, -153)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/StaticBody2D"]
 position = Vector2(44, -49)
 shape = SubResource("RectangleShape2D_ja0om")
-disabled = true
 
 [node name="CanvasLayer" parent="." instance=ExtResource("4_ja0om")]

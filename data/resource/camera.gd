@@ -17,6 +17,5 @@ func camzoom(zoom:float, wheel_rpm:float, red_line_rpm:float, zoom_curve:Curve) 
 func camoffset(accel:float) -> float:
 	return 36.0 * -accel
 
-
 func camfollow(accel:float) -> float:
-	return 36.0 - accel * 3.6
+	return clampf(36.0 - accel * 3.6, 4.0, 36.0)

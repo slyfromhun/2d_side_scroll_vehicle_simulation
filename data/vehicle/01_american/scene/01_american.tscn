@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dwmjqiw2bkn3h" path="res://data/vehicle/01_american/art/01_american.bmp" id="1_4y7mm"]
 [ext_resource type="Script" uid="uid://dkul30pj6sl8i" path="res://data/vehicle/shared/script/vehicle_shared.gd" id="1_ruxkg"]
 [ext_resource type="Resource" uid="uid://bn53tdujp01dx" path="res://data/vehicle/shared/resource/curves.tres" id="2_a4sl0"]
+[ext_resource type="Resource" uid="uid://dfhawsciiud61" path="res://data/vehicle/01_american/parts/engine/engine_115hp_I6.tres" id="3_l2xw1"]
 [ext_resource type="Resource" uid="uid://bhaaihb5f018q" path="res://data/vehicle/01_american/parts/tire/stock.tres" id="3_u6hlw"]
-[ext_resource type="Resource" uid="uid://dfhawsciiud61" path="res://data/vehicle/01_american/parts/engine/engine_115hp_I6.tres" id="3_u70tx"]
 [ext_resource type="Resource" uid="uid://dvwo4s8to4bhk" path="res://data/vehicle/01_american/parts/transmission/stock.tres" id="4_fknvi"]
 [ext_resource type="Resource" uid="uid://dqmgi1t38pgs4" path="res://data/vehicle/01_american/parts/gearbox/std.tres" id="4_ubmwj"]
 [ext_resource type="Resource" uid="uid://du0x58jv15p3x" path="res://data/vehicle/01_american/parts/chassis.tres" id="5_melsr"]
@@ -38,7 +38,7 @@ rough = true
 [node name="01_american" type="RigidBody2D" groups=["chassis"]]
 script = ExtResource("1_ruxkg")
 curve = ExtResource("2_a4sl0")
-engine = ExtResource("3_u70tx")
+engine = ExtResource("3_l2xw1")
 gearbox = ExtResource("4_ubmwj")
 transmission = ExtResource("4_fknvi")
 chassis = ExtResource("5_melsr")

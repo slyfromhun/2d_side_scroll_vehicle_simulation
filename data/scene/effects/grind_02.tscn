@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqqscwynik6ea"]
 
 [ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_buhev"]
-[ext_resource type="Material" uid="uid://dujdues3p7ar0" path="res://data/script/effects/grind_02.tres" id="2_hhluk"]
+[ext_resource type="Material" uid="uid://dujdues3p7ar0" path="res://data/script/effects/grind_02_rear.tres" id="2_hhluk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_buhev"]
 atlas = ExtResource("1_buhev")
