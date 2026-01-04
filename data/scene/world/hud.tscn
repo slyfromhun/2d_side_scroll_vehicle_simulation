@@ -17,7 +17,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RPM_Progress:modulate")
+tracks/0/path = NodePath("RPM_Gauge/RPM_Progress:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -33,11 +33,17 @@ _data = {
 &"rpm_limiter": SubResource("Animation_t60j7")
 }
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("rpm_progress", "rpm_limit_progress", "rpm_needle")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("tacho", "rpm_progress", "rpm_redline_progress", "rpm_limit_progress", "rpm_needle", "rpm_limit_anim", "odo_meter", "gear", "speed")]
 script = ExtResource("1_t60j7")
-rpm_progress = NodePath("Tacho/RPM_Progress")
-rpm_limit_progress = NodePath("Tacho/RPM_Limit_Progress")
-rpm_needle = NodePath("Tacho/Control2")
+tacho = NodePath("Tacho")
+rpm_progress = NodePath("Tacho/RPM_Gauge/RPM_Progress")
+rpm_redline_progress = NodePath("Tacho/RPM_Gauge/RPM_Redline_Progress")
+rpm_limit_progress = NodePath("Tacho/RPM_Gauge/RPM_Limit_Progress")
+rpm_needle = NodePath("Tacho/Needle")
+rpm_limit_anim = NodePath("Tacho/RPM_Limit_Anim")
+odo_meter = NodePath("Tacho/Numbers/Odo_Meter")
+gear = NodePath("Tacho/Numbers/Gear")
+speed = NodePath("Tacho/Numbers/Speed")
 
 [node name="Tacho" type="Control" parent="."]
 layout_mode = 3
@@ -50,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="Control" type="Control" parent="Tacho"]
+[node name="Sprites" type="Control" parent="Tacho"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -61,17 +67,26 @@ offset_right = -426.0
 offset_bottom = 260.0
 grow_vertical = 0
 
-[node name="hud_tacho_rim" type="Sprite2D" parent="Tacho/Control"]
+[node name="hud_tacho_rim" type="Sprite2D" parent="Tacho/Sprites"]
 modulate = Color(0.705882, 0.705882, 0.705882, 1)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_sjlaq")
 
-[node name="hud_tacho_numbers" type="Sprite2D" parent="Tacho/Control"]
+[node name="hud_tacho_numbers" type="Sprite2D" parent="Tacho/Sprites"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_ihue7")
 
-[node name="RPM_Limit_Progress" type="TextureProgressBar" parent="Tacho"]
+[node name="RPM_Gauge" type="Control" parent="Tacho"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RPM_Limit_Progress" type="TextureProgressBar" parent="Tacho/RPM_Gauge"]
 modulate = Color(1, 0.27451, 0.27451, 1)
+z_index = 1
 texture_repeat = 1
 layout_mode = 0
 offset_left = -577.5
@@ -88,7 +103,25 @@ radial_initial_angle = 120.8
 radial_fill_degrees = 238.0
 texture_progress = ExtResource("4_t60j7")
 
-[node name="RPM_Progress" type="TextureProgressBar" parent="Tacho"]
+[node name="RPM_Redline_Progress" type="TextureProgressBar" parent="Tacho/RPM_Gauge"]
+modulate = Color(1, 0.65, 0.65, 1)
+texture_repeat = 1
+layout_mode = 0
+offset_left = -577.5
+offset_top = 108.5
+offset_right = 622.5
+offset_bottom = 1308.5
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(2, 2)
+min_value = -43.0
+max_value = 8000.0
+value = 4500.0
+fill_mode = 5
+radial_initial_angle = 120.8
+radial_fill_degrees = 238.0
+texture_progress = ExtResource("4_t60j7")
+
+[node name="RPM_Progress" type="TextureProgressBar" parent="Tacho/RPM_Gauge"]
 layout_mode = 0
 offset_left = -552.5
 offset_top = 133.5
@@ -103,7 +136,7 @@ radial_initial_angle = 241.0
 radial_fill_degrees = 238.0
 texture_progress = ExtResource("1_sjlaq")
 
-[node name="Control2" type="Control" parent="Tacho"]
+[node name="Needle" type="Control" parent="Tacho"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -426.0
@@ -111,14 +144,57 @@ offset_top = 260.0
 offset_right = -426.0
 offset_bottom = 260.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Tacho/Control2"]
+[node name="Sprite2D" type="Sprite2D" parent="Tacho/Needle"]
 modulate = Color(1, 0.27451, 0.27451, 1)
 position = Vector2(-96.7781, 53.7172)
 rotation = -2.0944
 scale = Vector2(0.5, 1.4312)
 texture = ExtResource("2_ixqfd")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tacho"]
+[node name="Numbers" type="Control" parent="Tacho"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Odo_Meter" type="RichTextLabel" parent="Tacho/Numbers"]
+layout_mode = 0
+offset_left = -534.0
+offset_top = 290.0
+offset_right = -317.0
+offset_bottom = 350.0
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "000000[color=orange]0[/color]"
+horizontal_alignment = 1
+
+[node name="Gear" type="RichTextLabel" parent="Tacho/Numbers"]
+layout_mode = 1
+offset_left = -502.0
+offset_top = 178.0
+offset_right = -421.0
+offset_bottom = 294.0
+theme_override_font_sizes/normal_font_size = 80
+text = "N"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed" type="RichTextLabel" parent="Tacho/Numbers"]
+layout_mode = 0
+offset_left = -416.0
+offset_top = 178.0
+offset_right = -313.0
+offset_bottom = 292.0
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "555
+[i]km/h[/i]"
+vertical_alignment = 1
+
+[node name="RPM_Limit_Anim" type="AnimationPlayer" parent="Tacho"]
 libraries = {
 &"": SubResource("AnimationLibrary_0syjl")
 }

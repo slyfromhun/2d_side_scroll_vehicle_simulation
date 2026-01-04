@@ -31,6 +31,8 @@ folder_colors={
 "res://data/scene/": "blue",
 "res://data/script/": "red",
 "res://data/vehicle/": "purple",
+"res://data/vehicle/01_american/": "red",
+"res://data/vehicle/02_european/": "blue",
 "res://data/vehicles/": "purple",
 "res://data/vehicles/01_american/art/": "purple",
 "res://data/vehicles/01_american/parts/": "purple",
