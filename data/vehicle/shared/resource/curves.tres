@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Curves" load_steps=5 format=3 uid="uid://bn53tdujp01dx"]
 
-[ext_resource type="Script" uid="uid://slefkw3c7w7t" path="res://data/resource/curve.gd" id="1_1hlyg"]
+[ext_resource type="Script" uid="uid://slefkw3c7w7t" path="res://data/resource/vehicle/curve.gd" id="1_1hlyg"]
 
 [sub_resource type="Curve" id="Curve_6toyo"]
 _limits = [0.0, 86.0, 0.0, 10000.0]

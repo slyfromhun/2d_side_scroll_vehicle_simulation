@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjqrontxadwbg"]
+
+[ext_resource type="Texture2D" uid="uid://ilv087yscifi" path="res://data/art/gui/hud_vehicleicon_tire.png" id="1_e8cys"]
+
+[node name="Scrap" type="Sprite2D"]
+texture = ExtResource("1_e8cys")

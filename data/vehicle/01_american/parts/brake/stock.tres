@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BrakeStats" load_steps=2 format=3 uid="uid://cimp3lonfjtk6"]
 
-[ext_resource type="Script" uid="uid://ded3g5c2dvrsg" path="res://data/resource/brake.gd" id="1_x1phs"]
+[ext_resource type="Script" uid="uid://ded3g5c2dvrsg" path="res://data/resource/vehicle/brake.gd" id="1_x1phs"]
 
 [resource]
 script = ExtResource("1_x1phs")

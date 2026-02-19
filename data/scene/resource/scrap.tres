@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ScrapStats" load_steps=2 format=3 uid="uid://dvrcd7euha5cq"]
+
+[ext_resource type="Script" uid="uid://bwgqqkiwutddb" path="res://data/resource/scene/scrap.gd" id="1_4343p"]
+
+[resource]
+script = ExtResource("1_4343p")
+trigger_distance = [2000.0, 4000.0]
+trigger_distance_after = [250.0, 500.0]
+count = [1, 5]
+spacing = [2.0, 8.0]
+metadata/_custom_type_script = "uid://bwgqqkiwutddb"

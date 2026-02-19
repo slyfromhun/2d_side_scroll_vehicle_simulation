@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EngineStats" load_steps=2 format=3 uid="uid://dfhawsciiud61"]
 
-[ext_resource type="Script" uid="uid://c3wbql47qdvqr" path="res://data/resource/engine.gd" id="1_6fkxl"]
+[ext_resource type="Script" uid="uid://c3wbql47qdvqr" path="res://data/resource/vehicle/engine.gd" id="1_6fkxl"]
 
 [resource]
 script = ExtResource("1_6fkxl")
@@ -20,5 +20,5 @@ engine_brake_peak = 130.0
 engine_brake_exponent = 1.5
 engine_brake_peak_rpm = 5500.0
 auto_clutch_rpm = 1600.0
-upgrade = 1.0
+upgrade = 1.55
 metadata/_custom_type_script = "uid://c3wbql47qdvqr"

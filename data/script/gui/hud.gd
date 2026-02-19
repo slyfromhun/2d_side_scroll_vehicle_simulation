@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-
 @export_group("Tacho")
 @export var tacho: Control
 @export var rpm_progress: TextureProgressBar
@@ -40,7 +39,7 @@ func _process(_delta: float) -> void:
 	tween.tween_property(rpm_needle,"rotation_degrees",clampf((chassis.wheel_rpm / 8000.0) * 239, 0.0, 239.0), 0.066)
 	tween2.tween_property(rpm_progress,"value",chassis.wheel_rpm, 0.066)
 
-	odo_meter_hud(chassis.global_position.x * 0.0001)
+	odo_meter_hud(chassis.distance_overall * 0.0001)
 	gear_hud(chassis.input_gear_i)
 	speed_hud(chassis.kph)
 
@@ -70,8 +69,8 @@ func torque_curve():
 			$Power.add_point(Vector2(chassis.wheel_rpm * 0.05, -chassis.curve.power_curve.sample(chassis.wheel_rpm) * 1.34102209), 0)
 			$Torque.add_point(Vector2(chassis.wheel_rpm * 0.05, -chassis.curve.torque_curve.sample(chassis.wheel_rpm)), 0)
 		
-func odo_meter_hud(position):
-	odo_meter.text = "%07d" % position
+func odo_meter_hud(distance_travelled):
+	odo_meter.text = "%07d" % distance_travelled
 	var last_char = "[color=orange]%s[/color]" % odo_meter.text[-1]
 	odo_meter.text[-1] = ""
 	odo_meter.text += last_char

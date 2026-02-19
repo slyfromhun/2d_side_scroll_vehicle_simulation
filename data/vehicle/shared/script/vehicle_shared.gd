@@ -44,6 +44,8 @@ var engine_brake_force: float
 var total_brake_torque: float
 var actual_brake_balance: float
 var rotational_inertia: float
+var distance: float
+var distance_overall: float
 
 var wheel_weight: Array[float]
 var brake_force: Array[float]
@@ -60,7 +62,6 @@ var rolling_resistances: Array[float]
 var frictions: Array[float]
 
 var drag_force: Vector2
-var rr_force: Vector2
 
 func _ready() -> void:
 	initalize()
@@ -74,7 +75,7 @@ func _input(_event:InputEvent) -> void:
 
 func _process(_delta:float) -> void:
 	$Label.text = "Power Distribution: %s\nSpeed: %.1fkph %.1fmph %.1fmps\nAccel: %.3f\nTire Angular Velocity: %.1fkph\nRPM: %.1f\nGear: %.f\nPower: %.1fkW\nTorque: %.1fNm\nDrive Force: %.1fNm\nEngine Brake Force: %.1fNm\nBrake Force: %sNm\nSlip Ratio: %.3f\nLoad Sensitivity: %.3f\nFriction: %.3f\nDrag: %vN\nRolling Resistance: %sN\n" % [transmission.power_distribution, kph, kph * 0.621371, mps, acceleration, calculate.angular_kph(WheelsRB[transmission.power_distribution], tire.radius), wheel_rpm, input_gear_i - 1, curve.power_curve.sample(wheel_rpm), curve.torque_curve.sample(wheel_rpm), drive_force, engine_brake_force, [int(brake_force[0] * anti_brakings[0]), int(brake_force[1] * anti_brakings[1])], slip_ratios[transmission.power_distribution], load_sensitivities[transmission.power_distribution], WheelsRB[transmission.power_distribution].physics_material_override.friction, drag_force, [int(rolling_resistances[0]), int(rolling_resistances[1])]]
-	$Label2.text = "Weight Transfer: %.1f, %.1f\nPos: %.3f\nthrottle: %.1f\nbrake: %.1f\nhandbrake: %.f" % [wheel_weight[0], wheel_weight[1],ChassisRB.position.x * 0.01, input_throttle * traction_control, input_brake, input_handbrake]
+	$Label2.text = "Weight Transfer: %.1f kg, %.1f kg\nGlobal Pos: %.3f\nPos: %.3f\nDistance: %.3f m\nthrottle: %.1f\nbrake: %.1f\nhandbrake: %.f" % [wheel_weight[0], wheel_weight[1], ChassisRB.global_position.x, ChassisRB.position.x, distance_overall * 0.01, input_throttle * traction_control, input_brake, input_handbrake]
 
 func _physics_process(delta:float) -> void:
 	# Chassis
@@ -82,6 +83,8 @@ func _physics_process(delta:float) -> void:
 	mps = calculate.mps(ChassisRB)
 	magnitude = calculate.magnitude(ChassisRB)
 	acceleration = calculate.acceleration(delta, mps, magnitude)
+	distance = calculate.distance_travelled(ChassisRB)
+	distance_overall += distance
 
 	# Wheels
 	wheel_weight = calculate.process_weight_transfer(acceleration, cL, hL, bL, drive.GRAVITY, rotational_inertia)
@@ -214,11 +217,11 @@ func initalize():
 	c = abs(WheelsRB[0].global_position.x - ChassisColl.global_position.x) * 0.01
 	b = abs(WheelsRB[1].global_position.x - ChassisColl.global_position.x) * 0.01
 	L = c + b
-	CGh = abs(ChassisColl.global_position.y - WheelsRB[0].global_position.y - tire.radius) * 0.01
+	CGh = abs(ChassisColl.position.y - WheelsRB[0].position.y - tire.radius) * 0.01
 	bL = b / L
 	hL = CGh / L
 	cL = c / L
-	rotational_inertia = 0.5 * tire.mass * (tire.radius * 0.01)**2
+	rotational_inertia = 0.5 * tire.mass * pow(tire.radius * 0.01, 2)
 
 	### Set brake torques
 	total_brake_torque = brake.brake_rear + brake.brake_front

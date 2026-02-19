@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CameraStats" load_steps=4 format=3 uid="uid://0j8aidvimwqn"]
 
-[ext_resource type="Script" uid="uid://btsi0vwy71mhe" path="res://data/resource/camera.gd" id="1_07hj6"]
+[ext_resource type="Script" uid="uid://btsi0vwy71mhe" path="res://data/resource/scene/camera.gd" id="1_07hj6"]
 
 [sub_resource type="Curve" id="Curve_07hj6"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]

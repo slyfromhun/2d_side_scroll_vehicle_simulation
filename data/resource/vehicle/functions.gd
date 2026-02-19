@@ -28,6 +28,7 @@ extends Resource
 @export var _input_handbrake = true
 
 var previous_velocity: float
+var previous_position: float
 
 func torque_at(power:float, MAGIC_CROSS_RPM:float, RPM:float) -> float:
 	return power * MAGIC_CROSS_RPM / RPM
@@ -58,6 +59,12 @@ func angular_kph(rigidbody:RigidBody2D, wheel_radius: float) -> float:
 		return (rigidbody.angular_velocity * (wheel_radius * 0.01)) * 3.6
 	else:
 		return 0.0
+
+func distance_travelled(node:RigidBody2D):
+	var current_position = node.position.x
+	var distance = current_position - previous_position
+	previous_position = current_position
+	return abs(distance)
 
 func magnitude(rigidbody:RigidBody2D) -> float:
 	if _magnitude:
@@ -156,11 +163,11 @@ func process_friction(slip_ratio_curve:Curve, slip_ratio_:float, _load_sensitivi
 		return 1.0
 
 func process_engine_brake(brake_base:float, brake_peak:float, wheel_rpm:float, idle_rpm:float, brake_peak_rpm:float, brake_exponent, wheel_magnitude_:float, redline_rpm:float, rpm_limit:float,
-		gears:Array, final_drive:float, gear_i:int, tire_radius:float, rotational_inertia__, throttle) -> float:
+		gears:Array, final_drive:float, gear_i:int, tire_radius:float, inertia_, throttle) -> float:
 	if _process_engine_brake:
 		var Fbrake = -pow(lerpf(brake_base, brake_peak, wheel_rpm / brake_peak_rpm), brake_exponent) * wheel_magnitude_
 		if wheel_rpm > redline_rpm + rpm_limit:
-			return Fbrake * abs(gears[2]) * final_drive * (tire_radius * 0.01) * rotational_inertia__
+			return Fbrake * abs(gears[2]) * final_drive * (tire_radius * 0.01) * inertia_
 		elif wheel_rpm == idle_rpm:
 			return 0.0
 		else:

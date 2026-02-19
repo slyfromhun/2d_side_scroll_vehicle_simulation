@@ -1,13 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://2x51v6f5xt4l"]
+[gd_scene load_steps=11 format=3 uid="uid://2x51v6f5xt4l"]
 
 [ext_resource type="Script" uid="uid://fdageghco2xc" path="res://data/vehicle/shared/script/vehicle_effects_shared.gd" id="1_4ylsh"]
 [ext_resource type="Resource" uid="uid://c5dud4mvl0ftg" path="res://data/vehicle/shared/resource/effects_vehicle_shared.tres" id="2_rkaml"]
 [ext_resource type="PackedScene" uid="uid://c02hc0qyx1i2q" path="res://data/scene/effects/slip_01.tscn" id="3_6ond1"]
 [ext_resource type="PackedScene" uid="uid://dl4h0nyyy076a" path="res://data/scene/effects/slip_02.tscn" id="4_a6j42"]
+[ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="5_5uuaf"]
 [ext_resource type="PackedScene" uid="uid://ydy5vmqk240i" path="res://data/scene/effects/grind_01.tscn" id="5_a6j42"]
 [ext_resource type="PackedScene" uid="uid://dqqscwynik6ea" path="res://data/scene/effects/grind_02.tscn" id="6_eaoa6"]
 [ext_resource type="PackedScene" uid="uid://ce65v8ccmhkmk" path="res://data/scene/effects/friction_01.tscn" id="7_dn3q0"]
 [ext_resource type="PackedScene" uid="uid://cj3xufpxlyp8d" path="res://data/scene/effects/air_trail.tscn" id="8_qrrp0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skhfm"]
+atlas = ExtResource("5_5uuaf")
+region = Rect2(3, 6, 125, 116)
 
 [node name="Vehicle_Effects" type="Node2D" node_paths=PackedStringArray("frictionScenes_wheel1", "frictionScenes_wheel2", "slipScenes_wheel1", "slipScenes_wheel2", "grindScenes_wheel1", "grindScenes_wheel2", "chassisScenes")]
 script = ExtResource("1_4ylsh")
@@ -25,6 +30,7 @@ amount_ratio = 0.0
 
 [node name="slip_02" parent="." instance=ExtResource("4_a6j42")]
 amount_ratio = 0.0
+texture = SubResource("AtlasTexture_skhfm")
 
 [node name="slip_01_2" parent="." instance=ExtResource("3_6ond1")]
 amount_ratio = 0.0
