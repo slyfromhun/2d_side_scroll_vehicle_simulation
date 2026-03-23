@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqqscwynik6ea"]
+[gd_scene format=3 uid="uid://dqqscwynik6ea"]
 
 [ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_buhev"]
 [ext_resource type="Material" uid="uid://dujdues3p7ar0" path="res://data/resource/effects/grind_02.tres" id="2_hhluk"]
@@ -7,7 +7,7 @@
 atlas = ExtResource("1_buhev")
 region = Rect2(388, 388, 49, 11)
 
-[node name="grind_02" type="GPUParticles2D"]
+[node name="grind_02" type="GPUParticles2D" unique_id=44914279]
 amount = 60
 texture = SubResource("AtlasTexture_buhev")
 lifetime = 0.5

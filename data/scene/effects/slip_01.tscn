@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c02hc0qyx1i2q"]
+[gd_scene format=3 uid="uid://c02hc0qyx1i2q"]
 
 [ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_skhfm"]
 [ext_resource type="Material" uid="uid://4087o4a3625w" path="res://data/resource/effects/01_smoke.tres" id="2_dbie5"]
@@ -7,7 +7,7 @@
 atlas = ExtResource("1_skhfm")
 region = Rect2(3, 6, 125, 116)
 
-[node name="slip_01" type="GPUParticles2D"]
+[node name="slip_01" type="GPUParticles2D" unique_id=165060860]
 texture_filter = 1
 amount = 10
 texture = SubResource("AtlasTexture_skhfm")
