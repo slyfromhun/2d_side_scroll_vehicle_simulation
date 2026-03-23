@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://2x51v6f5xt4l"]
+[gd_scene format=3 uid="uid://2x51v6f5xt4l"]
 
 [ext_resource type="Script" uid="uid://fdageghco2xc" path="res://data/vehicle/shared/script/vehicle_effects_shared.gd" id="1_4ylsh"]
 [ext_resource type="Resource" uid="uid://c5dud4mvl0ftg" path="res://data/vehicle/shared/resource/effects_vehicle_shared.tres" id="2_rkaml"]
@@ -14,7 +14,7 @@
 atlas = ExtResource("5_5uuaf")
 region = Rect2(3, 6, 125, 116)
 
-[node name="Vehicle_Effects" type="Node2D" node_paths=PackedStringArray("frictionScenes_wheel1", "frictionScenes_wheel2", "slipScenes_wheel1", "slipScenes_wheel2", "grindScenes_wheel1", "grindScenes_wheel2", "chassisScenes")]
+[node name="Vehicle_Effects" type="Node2D" unique_id=1720576284 node_paths=PackedStringArray("frictionScenes_wheel1", "frictionScenes_wheel2", "slipScenes_wheel1", "slipScenes_wheel2", "grindScenes_wheel1", "grindScenes_wheel2", "chassisScenes")]
 script = ExtResource("1_4ylsh")
 effect = ExtResource("2_rkaml")
 frictionScenes_wheel1 = [NodePath("friction_01")]
@@ -25,36 +25,36 @@ grindScenes_wheel1 = [NodePath("grind_01"), NodePath("grind_02")]
 grindScenes_wheel2 = [NodePath("grind_01_2"), NodePath("grind_02_2")]
 chassisScenes = [NodePath("Air_trail")]
 
-[node name="slip_01" parent="." instance=ExtResource("3_6ond1")]
+[node name="slip_01" parent="." unique_id=529970442 instance=ExtResource("3_6ond1")]
 amount_ratio = 0.0
 
-[node name="slip_02" parent="." instance=ExtResource("4_a6j42")]
+[node name="slip_02" parent="." unique_id=589758575 instance=ExtResource("4_a6j42")]
 amount_ratio = 0.0
 texture = SubResource("AtlasTexture_skhfm")
 
-[node name="slip_01_2" parent="." instance=ExtResource("3_6ond1")]
+[node name="slip_01_2" parent="." unique_id=892326894 instance=ExtResource("3_6ond1")]
 amount_ratio = 0.0
 
-[node name="slip_02_2" parent="." instance=ExtResource("4_a6j42")]
+[node name="slip_02_2" parent="." unique_id=781779383 instance=ExtResource("4_a6j42")]
 amount_ratio = 0.0
 
-[node name="grind_01" parent="." instance=ExtResource("5_a6j42")]
+[node name="grind_01" parent="." unique_id=1287989769 instance=ExtResource("5_a6j42")]
 amount_ratio = 0.0
 
-[node name="grind_02" parent="." instance=ExtResource("6_eaoa6")]
+[node name="grind_02" parent="." unique_id=1886525104 instance=ExtResource("6_eaoa6")]
 amount_ratio = 0.0
 
-[node name="grind_01_2" parent="." instance=ExtResource("5_a6j42")]
+[node name="grind_01_2" parent="." unique_id=2017386118 instance=ExtResource("5_a6j42")]
 amount_ratio = 0.0
 
-[node name="grind_02_2" parent="." instance=ExtResource("6_eaoa6")]
+[node name="grind_02_2" parent="." unique_id=559989023 instance=ExtResource("6_eaoa6")]
 amount_ratio = 0.0
 
-[node name="friction_01" parent="." instance=ExtResource("7_dn3q0")]
+[node name="friction_01" parent="." unique_id=764382909 instance=ExtResource("7_dn3q0")]
 amount_ratio = 0.0
 
-[node name="friction_01_2" parent="." instance=ExtResource("7_dn3q0")]
+[node name="friction_01_2" parent="." unique_id=240548568 instance=ExtResource("7_dn3q0")]
 amount_ratio = 0.0
 
-[node name="Air_trail" parent="." instance=ExtResource("8_qrrp0")]
+[node name="Air_trail" parent="." unique_id=828257401 instance=ExtResource("8_qrrp0")]
 amount_ratio = 0.0

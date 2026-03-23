@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TransmissionStats" format=3 uid="uid://cqks2ok135ay6"]
+
+[ext_resource type="Script" uid="uid://cje1apb6q3joc" path="res://data/resource/vehicle/transmission.gd" id="1_7geey"]
+
+[resource]
+script = ExtResource("1_7geey")
+power_distribution = 1
+metadata/_custom_type_script = "uid://cje1apb6q3joc"

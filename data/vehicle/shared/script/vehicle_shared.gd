@@ -16,6 +16,8 @@ var WheelsRB: Array[Node]
 var WheelsColl: Array[Node]
 var ChassisColl: CollisionShape2D
 
+var size: int
+
 var peakTorquePower: float
 var peakPowerTorque: float
 var input_gear_i := 1
@@ -47,20 +49,19 @@ var rotational_inertia: float
 var distance: float
 var distance_overall: float
 
-var wheel_weight: Array[float]
-var brake_force: Array[float]
-var wheels_mps: Array[float]
-var wheels_angular_kph: Array[float]
-var wheels_magnitude: Array[float]
-var wheels_angular_mps: Array[float]
-var wheels_angular_magnitude: Array[float]
-var slip_ratios: Array[float]
-var anti_brakings: Array[float]
-var actual_brake_torques: Array[float]
-var load_sensitivities: Array[float]
-var rolling_resistances: Array[float]
-var frictions: Array[float]
-
+var wheel_weight: Vector2
+var brake_force: Vector2
+var wheels_mps: Vector2
+var wheels_angular_kph: Vector2
+var wheels_magnitude: Vector2
+var wheels_angular_mps: Vector2
+var wheels_angular_magnitude: Vector2
+var slip_ratios: Vector2
+var anti_brakings: Vector2
+var actual_brake_torques: Vector2
+var load_sensitivities: Vector2
+var rolling_resistances: Vector2
+var frictions: Vector2
 var drag_force: Vector2
 
 func _ready() -> void:
@@ -88,7 +89,7 @@ func _physics_process(delta:float) -> void:
 
 	# Wheels
 	wheel_weight = calculate.process_weight_transfer(acceleration, cL, hL, bL, drive.GRAVITY, rotational_inertia)
-	for i in WheelsRB.size():
+	for i in size:
 		WheelsRB[i].mass = wheel_weight[i]
 		wheels_angular_kph[i] = calculate.angular_kph(WheelsRB[i], tire.radius)
 		wheels_mps[i] = calculate.mps(WheelsRB[i])
@@ -131,21 +132,7 @@ func initalize():
 	WheelsRB = get_tree().get_nodes_in_group("wheels")
 	WheelsColl = get_tree().get_nodes_in_group("wheels_coll")
 	ChassisColl = get_tree().get_first_node_in_group("chassis_coll")
-	var size = WheelsRB.size()
-
-	wheels_mps.resize(size)
-	wheels_angular_kph.resize(size)
-	wheels_magnitude.resize(size)
-	wheels_angular_mps.resize(size)
-	wheels_angular_magnitude.resize(size)
-	wheel_weight.resize(size)
-	slip_ratios.resize(size)
-	anti_brakings.resize(size)
-	brake_force.resize(size)
-	actual_brake_torques.resize(size)
-	load_sensitivities.resize(size)
-	rolling_resistances.resize(size)
-	frictions.resize(size)
+	size = WheelsRB.size()
 
 	### Set Curves
 	peakTorquePower = calculate.power_at(engine.peak_torque, drive.MAGIC_CROSS_RPM, engine.peak_torque_rpm)
@@ -208,7 +195,7 @@ func initalize():
 	# + Slip Friction
 	curve.slip_ratio_curve.add_point(Vector2(tire.slide_friciton_grip * 0.01 * curve.slip_ratio_curve.max_domain, tire.lon_friction[1]))
 
-	### Set collision dimensions
+	### Set collision dimensions and tire positions
 	ChassisColl.shape.size = Vector2(chassis.lenght, chassis.height)
 	for coll in WheelsColl:
 		coll.shape.radius = tire.radius
@@ -235,7 +222,7 @@ func initalize():
 	top_power_speed = pow((2 * ((engine.peak_power) * engine.upgrade) / (chassis.drag_coefficiency * (drive.AIR_DENSITY * chassis.frontal_area))), 1.0 / 3.0) * 10.0 * 3.6
 
 	### Overall mass
-	chassis.mass += (size * 2) * tire.mass
+	chassis.mass += 4 * tire.mass
 
 	### Debug
 	print("%.f hp @ %.f" % [engine.peak_power * 1.34102209 * engine.upgrade, engine.peak_power_rpm])

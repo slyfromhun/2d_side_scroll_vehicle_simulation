@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://cutxl1td5b17v"]
+
+[ext_resource type="Script" uid="uid://dkul30pj6sl8i" path="res://data/vehicle/shared/script/vehicle_shared.gd" id="1_t0etr"]
+[ext_resource type="Resource" uid="uid://bn53tdujp01dx" path="res://data/vehicle/shared/resource/curves.tres" id="2_umvrm"]
+[ext_resource type="Resource" uid="uid://byjltugk4tbed" path="res://data/vehicle/03_asian/parts/engine/engine_138hp_I4.tres" id="3_gc823"]
+[ext_resource type="PackedScene" uid="uid://2x51v6f5xt4l" path="res://data/vehicle/shared/scene/vehicle_effects.tscn" id="3_lqmna"]
+[ext_resource type="Resource" uid="uid://creul6q5ttprm" path="res://data/vehicle/03_asian/parts/gearbox/std.tres" id="4_5d0t2"]
+[ext_resource type="Script" uid="uid://bw454gtirrumu" path="res://data/vehicle/shared/script/vehicle_camera_shared.gd" id="4_7ve4l"]
+[ext_resource type="Resource" uid="uid://0j8aidvimwqn" path="res://data/vehicle/shared/resource/camera.tres" id="5_camhp"]
+[ext_resource type="Resource" uid="uid://cqks2ok135ay6" path="res://data/vehicle/03_asian/parts/transmission/stock.tres" id="5_slxm5"]
+[ext_resource type="Resource" uid="uid://dyjk7qgiyxnj2" path="res://data/vehicle/03_asian/parts/chassis.tres" id="6_mxvmg"]
+[ext_resource type="Resource" uid="uid://b7yvduredvsxv" path="res://data/vehicle/03_asian/parts/brake/stock.tres" id="7_86dd1"]
+[ext_resource type="Resource" uid="uid://bafoj112ap5fe" path="res://data/vehicle/03_asian/parts/tire/stock.tres" id="8_vxfvo"]
+[ext_resource type="Resource" uid="uid://b71atvcweuv7o" path="res://data/vehicle/shared/resource/drive.tres" id="9_fni15"]
+[ext_resource type="Resource" uid="uid://bvf4lnwhkl3o6" path="res://data/vehicle/shared/resource/functions_shared.tres" id="10_8jrw5"]
+[ext_resource type="Texture2D" uid="uid://cqw1vrfat1e5j" path="res://data/vehicle/03_asian/art/03_asian.bmp" id="11_slxm5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_th5l8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxvmg"]
+atlas = ExtResource("11_slxm5")
+region = Rect2(0, 0, 451, 130)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fknvi"]
+rough = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slxm5"]
+atlas = ExtResource("11_slxm5")
+region = Rect2(39, 139, 62, 61)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7p4hw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u70tx"]
+rough = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4y7mm"]
+
+[node name="03_asian" type="RigidBody2D" unique_id=1891220871 groups=["chassis"]]
+script = ExtResource("1_t0etr")
+curve = ExtResource("2_umvrm")
+engine = ExtResource("3_gc823")
+gearbox = ExtResource("4_5d0t2")
+transmission = ExtResource("5_slxm5")
+chassis = ExtResource("6_mxvmg")
+brake = ExtResource("7_86dd1")
+tire = ExtResource("8_vxfvo")
+drive = ExtResource("9_fni15")
+calculate = ExtResource("10_8jrw5")
+
+[node name="ChassisColl" type="CollisionShape2D" parent="." unique_id=371541798 groups=["chassis_coll"]]
+shape = SubResource("RectangleShape2D_th5l8")
+
+[node name="ChassisSprite" type="Sprite2D" parent="." unique_id=1146668073]
+texture_filter = 1
+texture = SubResource("AtlasTexture_mxvmg")
+
+[node name="RS" type="PinJoint2D" parent="." unique_id=1030985873]
+position = Vector2(-127, 50)
+node_a = NodePath("RW")
+node_b = NodePath("..")
+
+[node name="RW" type="RigidBody2D" parent="RS" unique_id=1625573949 groups=["wheels"]]
+physics_material_override = SubResource("PhysicsMaterial_fknvi")
+
+[node name="RWSprite" type="Sprite2D" parent="RS/RW" unique_id=858275291]
+texture_filter = 1
+texture = SubResource("AtlasTexture_slxm5")
+
+[node name="RWColl" type="CollisionShape2D" parent="RS/RW" unique_id=1015716339 groups=["wheels_coll"]]
+shape = SubResource("CircleShape2D_7p4hw")
+
+[node name="FS" type="PinJoint2D" parent="." unique_id=1674726502]
+position = Vector2(141, 50)
+node_a = NodePath("FW")
+node_b = NodePath("..")
+
+[node name="FW" type="RigidBody2D" parent="FS" unique_id=913025479 groups=["wheels"]]
+physics_material_override = SubResource("PhysicsMaterial_u70tx")
+
+[node name="FWSprite" type="Sprite2D" parent="FS/FW" unique_id=1752117287]
+texture_filter = 1
+texture = SubResource("AtlasTexture_slxm5")
+
+[node name="FWColl" type="CollisionShape2D" parent="FS/FW" unique_id=1511953169 groups=["wheels_coll"]]
+shape = SubResource("CircleShape2D_4y7mm")
+
+[node name="Label" type="Label" parent="." unique_id=1849609119]
+offset_left = 254.0
+offset_top = -498.0
+offset_right = 294.0
+offset_bottom = -475.0
+text = "text1"
+
+[node name="Label2" type="Label" parent="." unique_id=798131262]
+offset_left = -79.0
+offset_top = -267.0
+offset_right = -39.0
+offset_bottom = -244.0
+text = "text2"
+
+[node name="Vehicle_Effects" parent="." unique_id=105341968 instance=ExtResource("3_lqmna")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1863719303 groups=["camera"]]
+position = Vector2(0, -143)
+position_smoothing_enabled = true
+position_smoothing_speed = 36.0
+script = ExtResource("4_7ve4l")
+camera = ExtResource("5_camhp")

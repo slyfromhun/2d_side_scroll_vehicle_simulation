@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EngineStats" load_steps=2 format=3 uid="uid://sgjtaqgsiydm"]
+[gd_resource type="Resource" script_class="EngineStats" format=3 uid="uid://sgjtaqgsiydm"]
 
 [ext_resource type="Script" uid="uid://c3wbql47qdvqr" path="res://data/resource/vehicle/engine.gd" id="1_xb62v"]
 
@@ -11,14 +11,11 @@ peak_torque = 59.0
 red_line_rpm = 6500.0
 red_line_power = 0.98
 aux_line_rpm = 8400.0
-aux_line_power = 0.0
 rpm_limit = 400.0
 idle_rpm = 900.0
 zero_power_rpm = 600.0
 engine_brake_base = 50.0
 engine_brake_peak = 78.0
-engine_brake_exponent = 1.5
 engine_brake_peak_rpm = 6400.0
 auto_clutch_rpm = 2800.0
-upgrade = 3.28
 metadata/_custom_type_script = "uid://c3wbql47qdvqr"

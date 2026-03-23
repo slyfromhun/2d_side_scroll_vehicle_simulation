@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 	generate(ChassisRB, scrapScene, scrap.trigger_distance, scrap.trigger_distance_after, scrap.count, scrap.spacing)
 
 
-func generate(chassis:RigidBody2D, node:PackedScene, trigger_distance:Array, trigger_distance_after:Array, count:Array, spacing:Array):
+func generate(chassis:RigidBody2D, node:PackedScene, trigger_distance:Vector2, trigger_distance_after:Vector2, count:Vector2i, spacing:Vector2):
 	trigger_distance_sum += chassis.distance * 0.01
 	if trigger_distance_sum > rand_trigger_distance:
 		rand_count = randi_range(count[0], count[1])

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CameraStats" load_steps=4 format=3 uid="uid://0j8aidvimwqn"]
+[gd_resource type="Resource" script_class="CameraStats" format=3 uid="uid://0j8aidvimwqn"]
 
 [ext_resource type="Script" uid="uid://btsi0vwy71mhe" path="res://data/resource/scene/camera.gd" id="1_07hj6"]
 
@@ -14,7 +14,4 @@ point_count = 3
 script = ExtResource("1_07hj6")
 camera_shake = SubResource("Curve_07hj6")
 camera_zoom = SubResource("Curve_lvxjq")
-camera_follow = 36.0
-offset_max = 4.0
-zoom_max = 0.016
 metadata/_custom_type_script = "uid://btsi0vwy71mhe"

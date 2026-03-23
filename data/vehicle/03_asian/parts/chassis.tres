@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ChassisStats" format=3 uid="uid://dyjk7qgiyxnj2"]
+
+[ext_resource type="Script" uid="uid://bgcjrkpsvy0ux" path="res://data/resource/vehicle/chassis.gd" id="1_rfisj"]
+
+[resource]
+script = ExtResource("1_rfisj")
+mass = 1100.0
+drag_coefficiency = 0.32
+frontal_area = 1.9
+lift = -0.020000000000000018
+lenght = 451.0
+height = 130.0
+metadata/_custom_type_script = "uid://bgcjrkpsvy0ux"

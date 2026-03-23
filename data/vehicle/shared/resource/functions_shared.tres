@@ -1,32 +1,8 @@
-[gd_resource type="Resource" script_class="Functions" load_steps=2 format=3 uid="uid://bvf4lnwhkl3o6"]
+[gd_resource type="Resource" script_class="Functions" format=3 uid="uid://bvf4lnwhkl3o6"]
 
 [ext_resource type="Script" uid="uid://c2l8l1tysmmmc" path="res://data/resource/vehicle/functions.gd" id="1_ycus8"]
 
 [resource]
 script = ExtResource("1_ycus8")
-_traction_control_ = 0.0
 _anti_braking_ = 0.0
-_mps = true
-_kph = true
-_angular_mps = true
-_angular_kph = true
-_magnitude = true
-_wheel_magnitude = true
-_acceleration = true
-_rpm = true
-_torque_at_rpm = true
-_drive_torque = true
-_slip_ratio = true
-_lon_load_sensitivity = true
-_process_drag = true
-_process_rolling_resistance = true
-_process_friction = true
-_process_engine_brake = true
-_process_brake = true
-_process_weight_transfer = true
-_input_gear_ratios = true
-_input_throttle = true
-_input_brake = true
-_input_clutch = true
-_input_handbrake = true
 metadata/_custom_type_script = "uid://c2l8l1tysmmmc"

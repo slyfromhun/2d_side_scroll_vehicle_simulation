@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GearboxStats" format=3 uid="uid://creul6q5ttprm"]
+
+[ext_resource type="Script" uid="uid://dg1by735f2t41" path="res://data/resource/vehicle/gearbox.gd" id="1_83ea0"]
+
+[resource]
+script = ExtResource("1_83ea0")
+gears = [-3.0, 0, 3.307, 1.809, 1.23, 0.903, 0.757]
+final_drive = 4.266
+metadata/_custom_type_script = "uid://dg1by735f2t41"

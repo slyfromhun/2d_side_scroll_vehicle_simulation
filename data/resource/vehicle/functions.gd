@@ -133,7 +133,7 @@ func anti_braking(slip_ratio__:float) -> float:
 	else:
 		return 1.0
 
-func load_sensitivity(tire_radius:float, lon_load_sensitivity:Array, drive_force:float, engine_brake_force:float, brake_force:float, wheel_weight:float) -> float:
+func load_sensitivity(tire_radius:float, lon_load_sensitivity:Vector2, drive_force:float, engine_brake_force:float, brake_force:float, wheel_weight:float) -> float:
 	if _lon_load_sensitivity:
 		var meter = tire_radius * 0.01 
 		var _load_sensitivity = pow(lon_load_sensitivity[1], lon_load_sensitivity[0])
@@ -178,16 +178,16 @@ func process_engine_brake(brake_base:float, brake_peak:float, wheel_rpm:float, i
 	else:
 		return 0.0
 
-func process_brake(brake_power:Array, handbrake:float, brake:float, wheel_magnitudes:Array, rotational_inertia_:float) -> Array[float]:
+func process_brake(brake_power:Vector2, handbrake:float, brake:float, wheel_magnitudes:Vector2, rotational_inertia_:float) -> Vector2:
 	if _process_brake:
 		if handbrake:
-			return [2 * rotational_inertia_ * brake_power[0] * handbrake * -wheel_magnitudes[0], 2 * brake_power[1] * brake * -wheel_magnitudes[1]]
+			return Vector2(2 * rotational_inertia_ * brake_power[0] * handbrake * -wheel_magnitudes[0], 2 * brake_power[1] * brake * -wheel_magnitudes[1])
 		else:
-			return [2 * brake_power[0] * brake * -wheel_magnitudes[0], 2 * brake_power[1] * brake * -wheel_magnitudes[1]]
+			return Vector2(2 * brake_power[0] * brake * -wheel_magnitudes[0], 2 * brake_power[1] * brake * -wheel_magnitudes[1])
 	else:
-		return [0, 0]
+		return Vector2.ZERO
 
-func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, gravity:float, inertia:float) -> Array[float]:
+func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, gravity:float, inertia:float) -> Vector2:
 	if _process_weight_transfer:
 		var wf = (((cL) * gravity) - ((hL) * 1.0 * acceleration_)) # Wf = (c/L)*9.8 - (h/L)*1*a
 		var wr = (((bL) * gravity) + ((hL) * 1.0 * acceleration_)) # Wr = (b/L)*9.8 + (h/L)*1*a,
@@ -195,9 +195,9 @@ func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, 
 			wf = 1.0
 		if wr < 1.0:
 			wr = 1.0
-		return [wr * inertia, wf * inertia]
+		return Vector2(wr * inertia, wf * inertia)
 	else:
-		return [1.0, 1.0]
+		return Vector2(1, 1)
 
 func input_gear_ratios(gear_i:int, gears:Array) -> int:
 	if _input_gear_ratios:

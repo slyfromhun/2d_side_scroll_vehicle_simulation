@@ -12,6 +12,6 @@ extends Resource
 ## Friciton Slide Low Peak Grip
 @export_range(0.01, 100.0, 0.01, "suffix:%") var slide_friciton_grip := 100.0
 ## Static and Slip longitudinal friction.
-@export var lon_friction := [1.46, 1.06]
+@export var lon_friction := Vector2(1.46, 1.06)
 ## Friction multiplier curve depending on tire load.
-@export var lon_load_sensitivity := [-0.1, 10300]
+@export var lon_load_sensitivity := Vector2(-0.1, 10300)

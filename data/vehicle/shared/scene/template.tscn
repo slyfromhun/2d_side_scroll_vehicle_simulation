@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://7xmk0pswnne0"]
+[gd_scene format=3 uid="uid://7xmk0pswnne0"]
 
 [ext_resource type="Script" uid="uid://dkul30pj6sl8i" path="res://data/vehicle/shared/script/vehicle_shared.gd" id="1_mpyrp"]
 [ext_resource type="Resource" uid="uid://bn53tdujp01dx" path="res://data/vehicle/shared/resource/curves.tres" id="2_q65s1"]
@@ -18,61 +18,61 @@ rough = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4y7mm"]
 
-[node name="template" type="RigidBody2D" groups=["chassis"]]
+[node name="template" type="RigidBody2D" unique_id=1045319100 groups=["chassis"]]
 script = ExtResource("1_mpyrp")
 curve = ExtResource("2_q65s1")
 
-[node name="ChassisColl" type="CollisionShape2D" parent="." groups=["chassis_coll"]]
+[node name="ChassisColl" type="CollisionShape2D" parent="." unique_id=859985206 groups=["chassis_coll"]]
 shape = SubResource("RectangleShape2D_th5l8")
 
-[node name="ChassisSprite" type="Sprite2D" parent="."]
+[node name="ChassisSprite" type="Sprite2D" parent="." unique_id=1841591288]
 texture_filter = 1
 
-[node name="RS" type="PinJoint2D" parent="."]
+[node name="RS" type="PinJoint2D" parent="." unique_id=1843409498]
 position = Vector2(-129, 44)
 node_a = NodePath("RW")
 node_b = NodePath("..")
 
-[node name="RW" type="RigidBody2D" parent="RS" groups=["wheels"]]
+[node name="RW" type="RigidBody2D" parent="RS" unique_id=1251836648 groups=["wheels"]]
 physics_material_override = SubResource("PhysicsMaterial_fknvi")
 
-[node name="RWSprite" type="Sprite2D" parent="RS/RW"]
+[node name="RWSprite" type="Sprite2D" parent="RS/RW" unique_id=540341105]
 texture_filter = 1
 
-[node name="RWColl" type="CollisionShape2D" parent="RS/RW" groups=["wheels_coll"]]
+[node name="RWColl" type="CollisionShape2D" parent="RS/RW" unique_id=2114494626 groups=["wheels_coll"]]
 shape = SubResource("CircleShape2D_7p4hw")
 
-[node name="FS" type="PinJoint2D" parent="."]
+[node name="FS" type="PinJoint2D" parent="." unique_id=699536223]
 position = Vector2(153, 44)
 node_a = NodePath("FW")
 node_b = NodePath("..")
 
-[node name="FW" type="RigidBody2D" parent="FS" groups=["wheels"]]
+[node name="FW" type="RigidBody2D" parent="FS" unique_id=63991950 groups=["wheels"]]
 physics_material_override = SubResource("PhysicsMaterial_u70tx")
 
-[node name="FWSprite" type="Sprite2D" parent="FS/FW"]
+[node name="FWSprite" type="Sprite2D" parent="FS/FW" unique_id=1195032680]
 texture_filter = 1
 
-[node name="FWColl" type="CollisionShape2D" parent="FS/FW" groups=["wheels_coll"]]
+[node name="FWColl" type="CollisionShape2D" parent="FS/FW" unique_id=2028995442 groups=["wheels_coll"]]
 shape = SubResource("CircleShape2D_4y7mm")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=152546357]
 offset_left = 254.0
-offset_top = -274.0
+offset_top = -498.0
 offset_right = 294.0
-offset_bottom = -251.0
+offset_bottom = -475.0
 text = "text1"
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="." unique_id=1460563045]
 offset_left = -79.0
-offset_top = -226.0
+offset_top = -267.0
 offset_right = -39.0
-offset_bottom = -203.0
+offset_bottom = -244.0
 text = "text2"
 
-[node name="Vehicle_Effects" parent="." instance=ExtResource("12_cg6v5")]
+[node name="Vehicle_Effects" parent="." unique_id=31579174 instance=ExtResource("12_cg6v5")]
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=723779961 groups=["camera"]]
 position = Vector2(0, -143)
 position_smoothing_enabled = true
 position_smoothing_speed = 36.0

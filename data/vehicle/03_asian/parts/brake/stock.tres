@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BrakeStats" format=3 uid="uid://b7yvduredvsxv"]
+
+[ext_resource type="Script" uid="uid://ded3g5c2dvrsg" path="res://data/resource/vehicle/brake.gd" id="1_52s27"]
+
+[resource]
+script = ExtResource("1_52s27")
+metadata/_custom_type_script = "uid://ded3g5c2dvrsg"
