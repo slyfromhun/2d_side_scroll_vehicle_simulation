@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bvaj71kgr6kpo"]
+
+[ext_resource type="Script" uid="uid://bw454gtirrumu" path="res://data/vehicle/shared/script/vehicle_camera_shared.gd" id="1_27vvm"]
+[ext_resource type="Resource" uid="uid://0j8aidvimwqn" path="res://data/vehicle/shared/resource/camera.tres" id="2_7vdu3"]
+
+[node name="Camera2D" type="Camera2D" unique_id=311362449 groups=["camera"]]
+position_smoothing_enabled = true
+position_smoothing_speed = 36.0
+script = ExtResource("1_27vvm")
+camera = ExtResource("2_7vdu3")

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="HudFunctions" format=3 uid="uid://b6j151t1bgn0f"]
+
+[ext_resource type="Script" uid="uid://cj0kew8ldm2k1" path="res://data/resource/scene/hud_functions.gd" id="1_e4asu"]
+
+[resource]
+script = ExtResource("1_e4asu")
+metadata/_custom_type_script = "uid://cj0kew8ldm2k1"
