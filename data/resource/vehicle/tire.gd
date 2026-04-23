@@ -1,8 +1,10 @@
 class_name TireStats
 extends Resource
 
-## This determines the radius of the wheel in cm.
+## This determines the physical radius of the wheel in cm.
 @export_range(1.0, 99, 0.01, "suffix:cm") var radius := 30.5
+## This determines the visual radius of the wheel in cm.
+@export_range(1.0, 99, 0.01, "suffix:cm") var visual_radius := 33
 ## Rolling Resistance coefficient, the bigger the number, the higher the resistance gets when the vehicle moves.
 @export_range(0.008, 0.039, 0.0001, "suffix:Crr") var rolling_resistance := 0.013
 ## Mass of one wheel in Kg

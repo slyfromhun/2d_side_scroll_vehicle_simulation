@@ -9,6 +9,7 @@ extends Node
 @export var grindScenes_wheel1: Array[GPUParticles2D]
 @export var grindScenes_wheel2: Array[GPUParticles2D]
 @export var chassisScenes: Array[GPUParticles2D]
+@export var wheelSprites: Array[Sprite2D]
 
 var frictionScenes: Array
 var slipScenes: Array
@@ -30,6 +31,7 @@ func _process(_delta: float) -> void:
 		effect.slip(abs(chassis.wheels_angular_kph[i]), chassis.wheels_mps[i], slipScenes[i], chassis.wheels_angular_magnitude[i], chassis.slip_ratios[i])
 		effect.grind(abs(chassis.wheels_angular_kph[i]), chassis.wheels_mps[i], grindScenes[i], chassis.wheels_angular_magnitude[i], chassis.slip_ratios[i])
 		effect.dust(chassis.kph, chassisScenes)
+		effect.process_texture(wheelSprites[i], chassis.wheels_angular_mps[i], 10, chassis.tire.visual_radius)
 
 func initalize():
 	wheelCol = get_tree().get_nodes_in_group("wheels_coll")

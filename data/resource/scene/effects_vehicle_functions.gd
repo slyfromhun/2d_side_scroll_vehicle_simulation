@@ -78,3 +78,9 @@ func dust(speed_kph:float, chassisScenes:Array[GPUParticles2D]):
 		for scene in chassisScenes:
 				scene.amount_ratio = 0
 				scene.modulate = Color(255, 255, 255, 0)
+
+func process_texture(sprite:Sprite2D, angular_speed:float, threshold:float, visual_tire_radius:float) -> void:
+	if abs(angular_speed) > threshold:
+		sprite.texture.region.position.x = visual_tire_radius * 2
+	else:
+		sprite.texture.region.position.x = 0
