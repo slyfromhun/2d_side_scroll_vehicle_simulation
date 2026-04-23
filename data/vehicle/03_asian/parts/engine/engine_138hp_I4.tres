@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_f4f6e")
-peak_power_rpm = 6000.0
+peak_power_rpm = 5800.0
 peak_power = 103.0
 peak_torque_rpm = 4500.0
 peak_torque = 175.0
 red_line_rpm = 6100.0
-red_line_power = 0.84
+red_line_power = 0.9
 aux_line_rpm = 7850.0
 rpm_limit = 200.0
 idle_rpm = 1000.0
@@ -17,4 +17,5 @@ engine_brake_base = 35.0
 engine_brake_peak = 90.0
 engine_brake_peak_rpm = 6100.0
 auto_clutch_rpm = 2300.0
+upgrade = 2.0
 metadata/_custom_type_script = "uid://c3wbql47qdvqr"

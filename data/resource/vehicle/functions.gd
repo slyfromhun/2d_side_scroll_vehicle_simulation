@@ -197,7 +197,7 @@ func process_weight_transfer(acceleration_:float, cL:float, hL:float, bL:float, 
 			wr = 1.0
 		return Vector2(wr * inertia, wf * inertia)
 	else:
-		return Vector2(1, 1)
+		return Vector2i(1, 1)
 
 func input_gear_ratios(gear_i:int, gears:Array) -> int:
 	if _input_gear_ratios:

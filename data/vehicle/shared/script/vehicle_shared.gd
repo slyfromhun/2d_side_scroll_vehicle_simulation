@@ -1,6 +1,7 @@
 class_name Vehicle
 extends RigidBody2D
 
+@export var vehicle_name: String
 @export var curve: Curves
 @export var engine: EngineStats
 @export var gearbox: GearboxStats

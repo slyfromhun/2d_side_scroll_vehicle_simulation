@@ -26,17 +26,22 @@ rough = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8nkpo"]
 atlas = ExtResource("3_5bja2")
-region = Rect2(41, 141, 59, 59)
+region = Rect2(0, 142, 58, 58)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7p4hw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u70tx"]
 rough = true
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r5p2"]
+atlas = ExtResource("3_5bja2")
+region = Rect2(0, 142, 58, 58)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4y7mm"]
 
 [node name="02_european" type="RigidBody2D" unique_id=4418809 groups=["chassis"]]
 script = ExtResource("1_0eb0f")
+vehicle_name = "1968 Fiat 850 Special"
 curve = ExtResource("2_5bja2")
 engine = ExtResource("3_5r5p2")
 gearbox = ExtResource("4_uwl5b")
@@ -79,7 +84,8 @@ physics_material_override = SubResource("PhysicsMaterial_u70tx")
 
 [node name="FWSprite" type="Sprite2D" parent="FS/FW" unique_id=1905460052]
 texture_filter = 1
-texture = SubResource("AtlasTexture_8nkpo")
+position = Vector2(0, -1)
+texture = SubResource("AtlasTexture_5r5p2")
 
 [node name="FWColl" type="CollisionShape2D" parent="FS/FW" unique_id=505975215 groups=["wheels_coll"]]
 shape = SubResource("CircleShape2D_4y7mm")
@@ -98,7 +104,8 @@ offset_right = -39.0
 offset_bottom = -244.0
 text = "text2"
 
-[node name="Vehicle_Effects" parent="." unique_id=1859300807 instance=ExtResource("3_hrv0x")]
+[node name="Vehicle_Effects" parent="." unique_id=1859300807 node_paths=PackedStringArray("wheelSprites") instance=ExtResource("3_hrv0x")]
+wheelSprites = [NodePath("../RS/RW/RWSprite"), NodePath("../FS/FW/FWSprite")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2025721823 groups=["camera"]]
 position = Vector2(0, -143)

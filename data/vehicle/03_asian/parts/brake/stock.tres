@@ -4,4 +4,6 @@
 
 [resource]
 script = ExtResource("1_52s27")
+brake_front = 3343.0
+brake_rear = 1895.0
 metadata/_custom_type_script = "uid://ded3g5c2dvrsg"

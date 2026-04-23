@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_ycus8")
+_traction_control_ = 0.0
 _anti_braking_ = 0.0
 metadata/_custom_type_script = "uid://c2l8l1tysmmmc"

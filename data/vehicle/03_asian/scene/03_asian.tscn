@@ -24,19 +24,24 @@ region = Rect2(0, 0, 451, 130)
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fknvi"]
 rough = true
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_slxm5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_86dd1"]
 atlas = ExtResource("11_slxm5")
-region = Rect2(39, 139, 62, 61)
+region = Rect2(0, 138, 62, 62)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7p4hw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u70tx"]
 rough = true
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_slxm5"]
+atlas = ExtResource("11_slxm5")
+region = Rect2(0, 138, 62, 62)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4y7mm"]
 
 [node name="03_asian" type="RigidBody2D" unique_id=1891220871 groups=["chassis"]]
 script = ExtResource("1_t0etr")
+vehicle_name = "1987 Honda Prelude III"
 curve = ExtResource("2_umvrm")
 engine = ExtResource("3_gc823")
 gearbox = ExtResource("4_5d0t2")
@@ -64,7 +69,7 @@ physics_material_override = SubResource("PhysicsMaterial_fknvi")
 
 [node name="RWSprite" type="Sprite2D" parent="RS/RW" unique_id=858275291]
 texture_filter = 1
-texture = SubResource("AtlasTexture_slxm5")
+texture = SubResource("AtlasTexture_86dd1")
 
 [node name="RWColl" type="CollisionShape2D" parent="RS/RW" unique_id=1015716339 groups=["wheels_coll"]]
 shape = SubResource("CircleShape2D_7p4hw")
@@ -98,7 +103,8 @@ offset_right = -39.0
 offset_bottom = -244.0
 text = "text2"
 
-[node name="Vehicle_Effects" parent="." unique_id=105341968 instance=ExtResource("3_lqmna")]
+[node name="Vehicle_Effects" parent="." unique_id=105341968 node_paths=PackedStringArray("wheelSprites") instance=ExtResource("3_lqmna")]
+wheelSprites = [NodePath("../RS/RW/RWSprite"), NodePath("../FS/FW/FWSprite")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1863719303 groups=["camera"]]
 position = Vector2(0, -143)
