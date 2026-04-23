@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bsdj48h45yoft" path="res://data/art/gui/hud_tacho_rim.png" id="1_sjlaq"]
 [ext_resource type="Script" uid="uid://utkne7l76mxe" path="res://data/script/gui/hud.gd" id="1_t60j7"]
+[ext_resource type="Resource" uid="uid://b6j151t1bgn0f" path="res://data/scene/resource/hud.tres" id="2_dio3e"]
 [ext_resource type="Texture2D" uid="uid://bwfnecusabrr5" path="res://data/art/gui/hud_tacho_numbers.png" id="2_ihue7"]
 [ext_resource type="Texture2D" uid="uid://ilv087yscifi" path="res://data/art/gui/hud_vehicleicon_tire.png" id="2_ixqfd"]
 [ext_resource type="Texture2D" uid="uid://bldn1bhe3fdc0" path="res://data/art/gui/hud_tacho.png" id="4_t60j7"]
@@ -33,17 +34,21 @@ _data = {
 &"rpm_limiter": SubResource("Animation_t60j7")
 }
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=269925077 node_paths=PackedStringArray("tacho", "rpm_progress", "rpm_redline_progress", "rpm_limit_progress", "rpm_needle", "rpm_limit_anim", "odo_meter", "gear", "speed")]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=269925077 node_paths=PackedStringArray("tacho", "rpm_progress", "rpm_red_line_progress", "rpm_limit_progress", "rpm_needle", "rpm_limit_anim", "odo_meter", "gear", "speed", "curve_needle", "power_line", "torque_line")]
 script = ExtResource("1_t60j7")
+calculate = ExtResource("2_dio3e")
 tacho = NodePath("Tacho")
 rpm_progress = NodePath("Tacho/RPM_Gauge/RPM_Progress")
-rpm_redline_progress = NodePath("Tacho/RPM_Gauge/RPM_Redline_Progress")
+rpm_red_line_progress = NodePath("Tacho/RPM_Gauge/RPM_Red_Line_Progress")
 rpm_limit_progress = NodePath("Tacho/RPM_Gauge/RPM_Limit_Progress")
 rpm_needle = NodePath("Tacho/Needle")
 rpm_limit_anim = NodePath("Tacho/RPM_Limit_Anim")
 odo_meter = NodePath("Tacho/Numbers/Odo_Meter")
 gear = NodePath("Tacho/Numbers/Gear")
 speed = NodePath("Tacho/Numbers/Speed")
+curve_needle = NodePath("CurveNeedle")
+power_line = NodePath("Power")
+torque_line = NodePath("Torque")
 
 [node name="Tacho" type="Control" parent="." unique_id=84162507]
 layout_mode = 3
@@ -103,7 +108,7 @@ radial_initial_angle = 120.8
 radial_fill_degrees = 238.0
 texture_progress = ExtResource("4_t60j7")
 
-[node name="RPM_Redline_Progress" type="TextureProgressBar" parent="Tacho/RPM_Gauge" unique_id=1505659656]
+[node name="RPM_Red_Line_Progress" type="TextureProgressBar" parent="Tacho/RPM_Gauge" unique_id=1505659656]
 modulate = Color(1, 0.65, 0.65, 1)
 texture_repeat = 1
 layout_mode = 0
@@ -205,3 +210,9 @@ default_color = Color(0.41365, 0.755584, 0.983421, 1)
 position = Vector2(42, 413)
 width = 3.0
 default_color = Color(0.892458, 0.924981, 0.069358, 1)
+
+[node name="CurveNeedle" type="Sprite2D" parent="." unique_id=2092888906]
+modulate = Color(1, 0.27451, 0.27451, 1)
+position = Vector2(63.999996, 295)
+scale = Vector2(0.15, 14)
+texture = ExtResource("2_ixqfd")
