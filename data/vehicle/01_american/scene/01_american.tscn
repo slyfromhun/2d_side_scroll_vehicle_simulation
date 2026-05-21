@@ -88,22 +88,8 @@ texture = SubResource("AtlasTexture_u70tx")
 [node name="FWColl" type="CollisionShape2D" parent="FS/FW" unique_id=285828156 groups=["wheels_coll"]]
 shape = SubResource("CircleShape2D_4y7mm")
 
-[node name="Label" type="Label" parent="." unique_id=914271355]
-offset_left = 254.0
-offset_top = -498.0
-offset_right = 294.0
-offset_bottom = -475.0
-text = "text1"
-
-[node name="Label2" type="Label" parent="." unique_id=1451678041]
-offset_left = -79.0
-offset_top = -267.0
-offset_right = -39.0
-offset_bottom = -244.0
-text = "text2"
-
-[node name="Vehicle_Effects" parent="." unique_id=644238776 node_paths=PackedStringArray("wheelSprites") instance=ExtResource("10_u70tx")]
-wheelSprites = [NodePath("../RS/RW/RWSprite"), NodePath("../FS/FW/FWSprite")]
-
 [node name="Camera2D" parent="." unique_id=311362449 instance=ExtResource("13_rl5vr")]
 position = Vector2(0, -143)
+
+[node name="Vehicle_Effects" parent="." unique_id=1720576284 node_paths=PackedStringArray("wheelSprites") instance=ExtResource("10_u70tx")]
+wheelSprites = [NodePath("../RS/RW/RWSprite"), NodePath("../FS/FW/FWSprite")]

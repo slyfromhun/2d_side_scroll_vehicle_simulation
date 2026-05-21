@@ -19,6 +19,10 @@ run/main_scene="uid://bok3rg01hfhpg"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://dept7iyjaij16"
+
 [display]
 
 window/size/viewport_width=1280
@@ -50,6 +54,7 @@ folder_colors={
 [global_group]
 
 camera=""
+hud=""
 
 [input]
 
@@ -83,3 +88,4 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/default_filters/anisotropic_filtering_level=0
 textures/decals/filter=0
 textures/light_projectors/filter=0
+environment/defaults/default_clear_color=Color(0.6367887, 0.7327699, 1, 1)

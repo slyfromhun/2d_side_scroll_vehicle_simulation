@@ -5,8 +5,6 @@ extends Node2D
 @export var scrap: ScrapStats
 @export var scrapScene: PackedScene
 
-var ChassisRB: RigidBody2D
-
 var rand_trigger_distance: float
 var rand_trigger_distance_after: float
 var rand_count: int
@@ -19,7 +17,7 @@ func _ready() -> void:
 	initalize()
 
 func _process(_delta: float) -> void:
-	generate(ChassisRB, scrapScene, scrap.trigger_distance, scrap.trigger_distance_after, scrap.count, scrap.spacing)
+	generate(Global.ChassisRB, scrapScene, scrap.trigger_distance, scrap.trigger_distance_after, scrap.count, scrap.spacing)
 
 
 func generate(chassis:RigidBody2D, node:PackedScene, trigger_distance:Vector2, trigger_distance_after:Vector2, count:Vector2i, spacing:Vector2):
@@ -48,5 +46,4 @@ func generate(chassis:RigidBody2D, node:PackedScene, trigger_distance:Vector2, t
 
 
 func initalize():
-	ChassisRB = get_tree().get_first_node_in_group("chassis")
 	rand_trigger_distance = randf_range(scrap.trigger_distance[0], scrap.trigger_distance[1])

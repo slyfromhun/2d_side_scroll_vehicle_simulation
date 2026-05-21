@@ -56,20 +56,6 @@ texture_filter = 1
 [node name="FWColl" type="CollisionShape2D" parent="FS/FW" unique_id=2028995442 groups=["wheels_coll"]]
 shape = SubResource("CircleShape2D_4y7mm")
 
-[node name="Label" type="Label" parent="." unique_id=152546357]
-offset_left = 254.0
-offset_top = -498.0
-offset_right = 294.0
-offset_bottom = -475.0
-text = "text1"
-
-[node name="Label2" type="Label" parent="." unique_id=1460563045]
-offset_left = -79.0
-offset_top = -267.0
-offset_right = -39.0
-offset_bottom = -244.0
-text = "text2"
-
 [node name="Vehicle_Effects" parent="." unique_id=31579174 instance=ExtResource("12_cg6v5")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=723779961 groups=["camera"]]
