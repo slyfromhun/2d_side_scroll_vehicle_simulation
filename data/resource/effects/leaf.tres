@@ -1,0 +1,31 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://d3oxjq7m87v27"]
+
+[sub_resource type="Curve" id="Curve_gdfiu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 1), 0.0, -5.0, 0, 1, Vector2(1, 0), -5.0, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_re0ih"]
+curve = SubResource("Curve_gdfiu")
+
+[resource]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -100, 0)
+emission_shape_scale = Vector3(0, 1, 1)
+angle_min = -89.99999
+angle_max = 90.000015
+inherit_velocity_ratio = 0.35
+direction = Vector3(-1, 0, 0)
+spread = 30.0
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+angular_velocity_min = -60.000015
+angular_velocity_max = 29.999983
+orbit_velocity_min = -0.009999906
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = -100.00002
+radial_velocity_max = 149.99997
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 3.0
+color = Color(1, 0.8627451, 0.2627451, 1)
+alpha_curve = SubResource("CurveTexture_re0ih")

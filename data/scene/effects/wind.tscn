@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://icuyd66avr5w"]
+
+[ext_resource type="Script" uid="uid://vvewpwn6d64" path="res://data/script/world/world_effect.gd" id="1_kcse7"]
+[ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_ki428"]
+[ext_resource type="Material" uid="uid://rto1kvpnbqyq" path="res://data/resource/effects/wind.tres" id="2_42tac"]
+[ext_resource type="Resource" uid="uid://cwpclixp6l8sq" path="res://data/scene/resource/wind_gust.tres" id="2_u5gx0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y7tl"]
+atlas = ExtResource("1_ki428")
+region = Rect2(266, 27, 106, 8)
+
+[node name="Wind" type="GPUParticles2D" unique_id=263811510]
+texture_filter = 1
+amount = 7
+texture = SubResource("AtlasTexture_5y7tl")
+lifetime = 7.0
+fixed_fps = 60
+process_material = ExtResource("2_42tac")
+script = ExtResource("1_kcse7")
+property = ExtResource("2_u5gx0")

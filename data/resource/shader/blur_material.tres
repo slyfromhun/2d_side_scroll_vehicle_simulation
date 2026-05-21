@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bd0iv02chxfyy"]
+
+[ext_resource type="Shader" uid="uid://er540slwm8pt" path="res://data/script/shader/blur.gdshader" id="1_jwn14"]
+
+[resource]
+shader = ExtResource("1_jwn14")
+shader_parameter/dir = Vector2(0.01, 0)
+shader_parameter/quality = 0

@@ -1,0 +1,39 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://rto1kvpnbqyq"]
+
+[sub_resource type="Curve" id="Curve_0usbq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qh5hc"]
+curve = SubResource("Curve_0usbq")
+
+[sub_resource type="Curve" id="Curve_5y3g7"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ts5ar"]
+curve = SubResource("Curve_5y3g7")
+
+[sub_resource type="Curve" id="Curve_2ol6x"]
+_data = [Vector2(0, 1), 0.0, -0.3, 0, 1, Vector2(1, 0.7), -0.3, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1ldip"]
+curve = SubResource("Curve_2ol6x")
+
+[resource]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(100, 300, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+damping_max = 1.0
+damping_curve = SubResource("CurveTexture_ts5ar")
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_1ldip")
+color = Color(1, 1, 1, 0.2509804)
+alpha_curve = SubResource("CurveTexture_qh5hc")

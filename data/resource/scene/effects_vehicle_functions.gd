@@ -20,6 +20,15 @@ extends Resource
 @export var dust_color_power: Curve
 @export var speed_dust := [90, 666]
 
+func speed(speed_kph:float, effectScene:GPUParticles2D, speed_min:int, final_amount_ratio:int):	
+	if speed_kph > speed_min:
+		effectScene.amount_ratio = final_amount_ratio
+	else:
+		if final_amount_ratio == 1:
+			effectScene.amount_ratio = 0
+		else:
+			effectScene.amount_ratio = 1
+
 func friction(speed_kph:float, frictionScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _friction:
 		if int(wheel_magnitude) == 0: wheel_magnitude = 1
@@ -27,12 +36,13 @@ func friction(speed_kph:float, frictionScenes:Array[GPUParticles2D], wheel_magni
 			for scene in frictionScenes:
 				scene.process_material.direction.x = -wheel_magnitude
 				scene.amount_ratio = friction_emit_power.sample(abs(slip_ratio))
+				scene.emitting = true
 		else:
 			for scene in frictionScenes:
 				scene.amount_ratio = 0
 	else:
 		for scene in frictionScenes:
-				scene.amount_ratio = 0
+				scene.emitting = false
 
 func slip(speed_kph:float, speed_mps:float, slipScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _slip:
@@ -41,12 +51,13 @@ func slip(speed_kph:float, speed_mps:float, slipScenes:Array[GPUParticles2D], wh
 			for scene in slipScenes:
 				scene.process_material.direction.x = int(-wheel_magnitude)
 				scene.amount_ratio = slip_emit_power.sample(abs(slip_ratio))
+				scene.emitting = true
 		else:
 			for scene in slipScenes:
 				scene.amount_ratio = 0
 	else:
 		for scene in slipScenes:
-				scene.amount_ratio = 0
+				scene.emitting = false
 
 func grind(speed_kph:float, speed_mps:float, grindScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _grind:
@@ -56,12 +67,13 @@ func grind(speed_kph:float, speed_mps:float, grindScenes:Array[GPUParticles2D], 
 			for scene in grindScenes:
 				scene.process_material.direction.x = int(-wheel_magnitude)
 				scene.amount_ratio = grind_emit_power.sample(abs(slip_ratio))
+				scene.emitting = true
 		else:
 			for scene in grindScenes:
 				scene.amount_ratio = 0
 	else:
 		for scene in grindScenes:
-				scene.amount_ratio = 0
+				scene.emitting = false
 
 func dust(speed_kph:float, chassisScenes:Array[GPUParticles2D]):
 	if _dust:
@@ -71,16 +83,19 @@ func dust(speed_kph:float, chassisScenes:Array[GPUParticles2D]):
 			for scene in chassisScenes:
 				scene.amount_ratio = 1
 				scene.modulate = Color(255, 255, 255, dust_color_power.sample(speed_kph))
+				scene.emitting = true
 		else:
 			for scene in chassisScenes:
 				scene.amount_ratio = 0
 	else:
 		for scene in chassisScenes:
 				scene.amount_ratio = 0
-				scene.modulate = Color(255, 255, 255, 0)
+				#scene.modulate = Color(255, 255, 255, 0)
+				scene.emitting = false
 
 func process_texture(sprite:Sprite2D, angular_speed:float, threshold:float, visual_tire_radius:float) -> void:
-	if abs(angular_speed) > threshold:
-		sprite.texture.region.position.x = visual_tire_radius * 2
-	else:
-		sprite.texture.region.position.x = 0
+	if Engine.get_process_frames() % 15 == 0:	
+		if abs(angular_speed) > threshold:
+			sprite.texture.region.position.x = visual_tire_radius * 2
+		else:
+			sprite.texture.region.position.x = 0

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dn4u4eosi2lqb"]
+
+[ext_resource type="Texture2D" uid="uid://bsteaigbo3hin" path="res://data/art/effects/atlas.bmp" id="1_gdfiu"]
+[ext_resource type="Material" uid="uid://d3oxjq7m87v27" path="res://data/resource/effects/leaf.tres" id="2_re0ih"]
+[ext_resource type="Script" uid="uid://vvewpwn6d64" path="res://data/script/world/world_effect.gd" id="3_lrv4a"]
+[ext_resource type="Resource" uid="uid://djtq25vqn0ysp" path="res://data/scene/resource/leaf.tres" id="4_sgr3k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_re0ih"]
+atlas = ExtResource("1_gdfiu")
+region = Rect2(474, 384, 38, 38)
+
+[node name="Leaf" type="GPUParticles2D" unique_id=1115760417]
+texture_filter = 1
+amount = 10
+texture = SubResource("AtlasTexture_re0ih")
+lifetime = 5.0
+fixed_fps = 60
+interpolate = false
+process_material = ExtResource("2_re0ih")
+script = ExtResource("3_lrv4a")
+property = ExtResource("4_sgr3k")

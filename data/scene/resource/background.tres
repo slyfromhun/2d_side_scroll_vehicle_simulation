@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BackgroundFunctions" format=3 uid="uid://ch2en0wy4deng"]
+
+[ext_resource type="Script" uid="uid://biuonbsakx7ov" path="res://data/resource/scene/background_functions.gd" id="1_6ogcg"]
+
+[resource]
+script = ExtResource("1_6ogcg")
+metadata/_custom_type_script = "uid://biuonbsakx7ov"

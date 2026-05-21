@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WorldEffects" format=3 uid="uid://djtq25vqn0ysp"]
+
+[ext_resource type="Script" uid="uid://bcdn5meegvbva" path="res://data/resource/scene/effects_world_functions.gd" id="1_06fgg"]
+
+[resource]
+script = ExtResource("1_06fgg")
+position = Vector2i(640, -360)
+speed_min = 10
+metadata/_custom_type_script = "uid://bcdn5meegvbva"
