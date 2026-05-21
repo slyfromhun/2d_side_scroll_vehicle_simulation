@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsteaigbo3hin"
-path="res://.godot/imported/atlas.bmp-922d01305568bc4fcd918addfb3c09e8.ctex"
+uid="uid://d0y1tu3q7h8i7"
+path="res://.godot/imported/grass.bmp-46d8b0058d946154a259dcc361fba4db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/art/effects/atlas.bmp"
-dest_files=["res://.godot/imported/atlas.bmp-922d01305568bc4fcd918addfb3c09e8.ctex"]
+source_file="res://data/art/textures/grass.bmp"
+dest_files=["res://.godot/imported/grass.bmp-46d8b0058d946154a259dcc361fba4db.ctex"]
 
 [params]
 
