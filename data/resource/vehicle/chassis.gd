@@ -1,3 +1,4 @@
+## Properties of the Chassis
 class_name ChassisStats
 extends Resource
 

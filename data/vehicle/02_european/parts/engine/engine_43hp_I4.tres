@@ -17,5 +17,5 @@ zero_power_rpm = 600.0
 engine_brake_base = 50.0
 engine_brake_peak = 78.0
 engine_brake_peak_rpm = 6400.0
-auto_clutch_rpm = 2800.0
+auto_clutch_rpm = 1800.0
 metadata/_custom_type_script = "uid://c3wbql47qdvqr"

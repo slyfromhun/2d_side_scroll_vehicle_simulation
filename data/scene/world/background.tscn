@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bxqd3gvp78d5a" path="res://data/art/textures/cloud4.bmp" id="4_wth0w"]
 [ext_resource type="Material" uid="uid://bd0iv02chxfyy" path="res://data/resource/shader/blur_material.tres" id="6_le30p"]
 [ext_resource type="Texture2D" uid="uid://d0y1tu3q7h8i7" path="res://data/art/textures/grass.bmp" id="7_lx2wk"]
+[ext_resource type="Texture2D" uid="uid://bnmk3djevn1g4" path="res://data/art/textures/grass2.bmp" id="11_oivw0"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" unique_id=837083469]
 script = ExtResource("1_wth0w")
@@ -17,12 +18,14 @@ background = ExtResource("2_44g1w")
 blurShader = ExtResource("6_le30p")
 
 [node name="Clouds" type="ParallaxLayer" parent="." unique_id=597153707]
+texture_filter = 1
 
 [node name="Cloud_1" type="Parallax2D" parent="Clouds" unique_id=516502116]
 scroll_scale = Vector2(0.001, 0)
 scroll_offset = Vector2(-255, 422)
 repeat_size = Vector2(2225, 0)
 autoscroll = Vector2(-6, 0)
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds/Cloud_1" unique_id=834485934]
 modulate = Color(1, 1, 1, 0.78431374)
@@ -34,9 +37,11 @@ scroll_scale = Vector2(0.002, 0)
 scroll_offset = Vector2(0, 72)
 repeat_size = Vector2(1920, 0)
 autoscroll = Vector2(-4, 0)
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds/Cloud_2" unique_id=2142682826]
 modulate = Color(1, 1, 1, 0.78431374)
+z_index = -1
 texture_filter = 1
 position = Vector2(811, 343)
 texture = ExtResource("2_lx2wk")
@@ -46,9 +51,11 @@ scroll_scale = Vector2(0.003, 0)
 scroll_offset = Vector2(-2, 262)
 repeat_size = Vector2(1920, 0)
 autoscroll = Vector2(-3.2, 0)
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds/Cloud_3" unique_id=1777349904]
 modulate = Color(1, 1, 1, 0.78431374)
+z_index = -2
 texture_filter = 1
 texture = ExtResource("3_le30p")
 
@@ -57,9 +64,11 @@ scroll_scale = Vector2(0.004, 0)
 scroll_offset = Vector2(4, 376)
 repeat_size = Vector2(1920, 0)
 autoscroll = Vector2(-2.4, 0)
+repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds/Cloud_4" unique_id=483070635]
 modulate = Color(1, 1, 1, 0.78431374)
+z_index = -2
 texture_filter = 1
 texture = ExtResource("4_wth0w")
 
@@ -70,13 +79,16 @@ position = Vector2(960, 0)
 scroll_scale = Vector2(1, 0)
 scroll_offset = Vector2(0, 72)
 repeat_size = Vector2(1920, 0)
+repeat_times = 2
 
 [node name="main_road" type="Sprite2D" parent="Road/Main_Road" unique_id=1939232445]
+z_index = -3
 texture_filter = 1
 position = Vector2(0, -17)
 texture = ExtResource("1_nbjj1")
 
 [node name="main_road_blur" type="Sprite2D" parent="Road/Main_Road" unique_id=1710896580]
+z_index = -3
 texture_filter = 1
 material = ExtResource("6_le30p")
 position = Vector2(0, -17)
@@ -86,24 +98,37 @@ texture = ExtResource("1_nbjj1")
 scroll_scale = Vector2(1, 0)
 scroll_offset = Vector2(0, 197)
 repeat_size = Vector2(1920, 0)
+repeat_times = 2
 
 [node name="road_side" type="Sprite2D" parent="Road/Road_Side" unique_id=1220551917]
+z_index = -4
 texture_filter = 1
 position = Vector2(0, -17)
 texture = ExtResource("2_im0pl")
 
 [node name="road_side_blur" type="Sprite2D" parent="Road/Road_Side" unique_id=1866171628]
+z_index = -4
 texture_filter = 1
 material = ExtResource("6_le30p")
 position = Vector2(0, -17)
 texture = ExtResource("2_im0pl")
 
 [node name="Grass" type="Parallax2D" parent="Road" unique_id=1332803303]
-z_index = 101
 scroll_scale = Vector2(1.6, 0)
 scroll_offset = Vector2(0, 180)
 repeat_size = Vector2(1920, 0)
+repeat_times = 2
 
 [node name="grass" type="Sprite2D" parent="Road/Grass" unique_id=1608468782]
+z_index = -4
 material = ExtResource("6_le30p")
 texture = ExtResource("7_lx2wk")
+
+[node name="grass2" type="Sprite2D" parent="Road/Grass" unique_id=1420466484]
+z_index = -6
+texture_filter = 1
+material = ExtResource("6_le30p")
+position = Vector2(0, 998)
+texture = ExtResource("11_oivw0")
+flip_h = true
+flip_v = true

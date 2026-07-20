@@ -11,7 +11,6 @@
 [ext_resource type="Resource" uid="uid://dyjk7qgiyxnj2" path="res://data/vehicle/03_asian/parts/chassis.tres" id="6_mxvmg"]
 [ext_resource type="Resource" uid="uid://b7yvduredvsxv" path="res://data/vehicle/03_asian/parts/brake/stock.tres" id="7_86dd1"]
 [ext_resource type="Resource" uid="uid://bafoj112ap5fe" path="res://data/vehicle/03_asian/parts/tire/stock.tres" id="8_vxfvo"]
-[ext_resource type="Resource" uid="uid://b71atvcweuv7o" path="res://data/vehicle/shared/resource/drive.tres" id="9_fni15"]
 [ext_resource type="Resource" uid="uid://bvf4lnwhkl3o6" path="res://data/vehicle/shared/resource/functions_shared.tres" id="10_8jrw5"]
 [ext_resource type="Texture2D" uid="uid://cqw1vrfat1e5j" path="res://data/vehicle/03_asian/art/03_asian.bmp" id="11_slxm5"]
 
@@ -49,7 +48,6 @@ transmission = ExtResource("5_slxm5")
 chassis = ExtResource("6_mxvmg")
 brake = ExtResource("7_86dd1")
 tire = ExtResource("8_vxfvo")
-drive = ExtResource("9_fni15")
 calculate = ExtResource("10_8jrw5")
 
 [node name="ChassisColl" type="CollisionShape2D" parent="." unique_id=371541798 groups=["chassis_coll"]]
@@ -60,7 +58,7 @@ texture_filter = 1
 texture = SubResource("AtlasTexture_mxvmg")
 
 [node name="RS" type="PinJoint2D" parent="." unique_id=1030985873]
-position = Vector2(-127, 50)
+position = Vector2(-128, 44)
 node_a = NodePath("RW")
 node_b = NodePath("..")
 
@@ -75,7 +73,7 @@ texture = SubResource("AtlasTexture_86dd1")
 shape = SubResource("CircleShape2D_7p4hw")
 
 [node name="FS" type="PinJoint2D" parent="." unique_id=1674726502]
-position = Vector2(141, 50)
+position = Vector2(140, 44)
 node_a = NodePath("FW")
 node_b = NodePath("..")
 

@@ -1,3 +1,4 @@
+## Vehicle effects of the current Vehicle in the scene
 class_name VehicleEffects
 extends Resource
 
@@ -20,6 +21,7 @@ extends Resource
 @export var dust_color_power: Curve
 @export var speed_dust := [90, 666]
 
+## Particle emitting function based on speed traits
 func speed(speed_kph:float, effectScene:GPUParticles2D, speed_min:int, final_amount_ratio:int):	
 	if speed_kph > speed_min:
 		effectScene.amount_ratio = final_amount_ratio
@@ -29,6 +31,7 @@ func speed(speed_kph:float, effectScene:GPUParticles2D, speed_min:int, final_amo
 		else:
 			effectScene.amount_ratio = 1
 
+## Particle emitting function based on friction traits
 func friction(speed_kph:float, frictionScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _friction:
 		if int(wheel_magnitude) == 0: wheel_magnitude = 1
@@ -44,6 +47,7 @@ func friction(speed_kph:float, frictionScenes:Array[GPUParticles2D], wheel_magni
 		for scene in frictionScenes:
 				scene.emitting = false
 
+## Particle emitting function based on slip traits
 func slip(speed_kph:float, speed_mps:float, slipScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _slip:
 		#if int(wheel_magnitude) == 0: wheel_magnitude = 1
@@ -59,6 +63,7 @@ func slip(speed_kph:float, speed_mps:float, slipScenes:Array[GPUParticles2D], wh
 		for scene in slipScenes:
 				scene.emitting = false
 
+## Particle emitting function based on grind traits
 func grind(speed_kph:float, speed_mps:float, grindScenes:Array[GPUParticles2D], wheel_magnitude:float, slip_ratio:float):
 	if _grind:
 		if int(wheel_magnitude) == 0: wheel_magnitude = 1
@@ -75,6 +80,7 @@ func grind(speed_kph:float, speed_mps:float, grindScenes:Array[GPUParticles2D], 
 		for scene in grindScenes:
 				scene.emitting = false
 
+## Particle emitting function based on dust traits
 func dust(speed_kph:float, chassisScenes:Array[GPUParticles2D]):
 	if _dust:
 		dust_color_power.set_point_offset(0, speed_dust[0])
@@ -93,9 +99,9 @@ func dust(speed_kph:float, chassisScenes:Array[GPUParticles2D]):
 				#scene.modulate = Color(255, 255, 255, 0)
 				scene.emitting = false
 
-func process_texture(sprite:Sprite2D, angular_speed:float, threshold:float, visual_tire_radius:float) -> void:
-	if Engine.get_process_frames() % 15 == 0:	
-		if abs(angular_speed) > threshold:
-			sprite.texture.region.position.x = visual_tire_radius * 2
-		else:
-			sprite.texture.region.position.x = 0
+## Changes Wheel sprite based on the angular velocity of the Wheel
+func process_texture(sprite:Sprite2D, angular_speed:float, threshold:float, visual_tire_radius:float) -> void:	
+	if abs(angular_speed) > threshold:
+		sprite.texture.region.position.x = visual_tire_radius * 2
+	else:
+		sprite.texture.region.position.x = 0

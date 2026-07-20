@@ -16,5 +16,5 @@ idle_rpm = 1000.0
 engine_brake_base = 35.0
 engine_brake_peak = 90.0
 engine_brake_peak_rpm = 6100.0
-auto_clutch_rpm = 2300.0
+auto_clutch_rpm = 2000.0
 metadata/_custom_type_script = "uid://c3wbql47qdvqr"

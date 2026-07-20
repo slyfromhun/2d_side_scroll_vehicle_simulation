@@ -37,59 +37,208 @@ _data = {
 [node name="CanvasLayer" type="CanvasLayer" unique_id=269925077 node_paths=PackedStringArray("tacho", "rpm_progress", "rpm_red_line_progress", "rpm_limit_progress", "rpm_needle", "rpm_limit_anim", "odo_meter", "gear", "speed", "curve_needle", "power_line", "torque_line")]
 script = ExtResource("1_t60j7")
 calculate = ExtResource("2_dio3e")
-tacho = NodePath("Tacho")
-rpm_progress = NodePath("Tacho/RPM_Gauge/RPM_Progress")
-rpm_red_line_progress = NodePath("Tacho/RPM_Gauge/RPM_Red_Line_Progress")
-rpm_limit_progress = NodePath("Tacho/RPM_Gauge/RPM_Limit_Progress")
-rpm_needle = NodePath("Tacho/Needle")
-rpm_limit_anim = NodePath("Tacho/RPM_Limit_Anim")
-odo_meter = NodePath("Tacho/Numbers/Odo_Meter")
-gear = NodePath("Tacho/Numbers/Gear")
-speed = NodePath("Tacho/Numbers/Speed")
-curve_needle = NodePath("CurveNeedle")
-power_line = NodePath("Power")
-torque_line = NodePath("Torque")
+tacho = NodePath("LAnchor/Tacho")
+rpm_progress = NodePath("LAnchor/Tacho/RPM_Gauge/RPM_Progress")
+rpm_red_line_progress = NodePath("LAnchor/Tacho/RPM_Gauge/RPM_Red_Line_Progress")
+rpm_limit_progress = NodePath("LAnchor/Tacho/RPM_Gauge/RPM_Limit_Progress")
+rpm_needle = NodePath("LAnchor/Tacho/Needle")
+rpm_limit_anim = NodePath("LAnchor/Tacho/RPM_Limit_Anim")
+odo_meter = NodePath("LAnchor/Tacho/Numbers/Odo_Meter")
+gear = NodePath("LAnchor/Tacho/Numbers/Gear")
+speed = NodePath("LAnchor/Tacho/Numbers/Speed")
+curve_needle = NodePath("LAnchor/CurveNeedle")
+power_line = NodePath("LAnchor/Power")
+torque_line = NodePath("LAnchor/Torque")
+metadata/_edit_vertical_guides_ = [64.0, 1216.0]
 
-[node name="Tacho" type="Control" parent="." unique_id=84162507]
+[node name="RAnchor" type="Control" parent="." unique_id=725023504]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
+anchor_left = 0.95000005
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.95000005
 anchor_bottom = 0.5
+offset_left = -1216.0
+offset_top = -360.0
+offset_right = 64.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="Sprites" type="Control" parent="Tacho" unique_id=808807294]
+[node name="EffUp" type="TouchScreenButton" parent="RAnchor" unique_id=2140698880]
+modulate = Color(1, 1, 1, 0.39215687)
+texture_filter = 1
+position = Vector2(868, 243)
+scale = Vector2(2.6, 2.6)
+texture_normal = ExtResource("2_ixqfd")
+action = "scroll_up"
+
+[node name="EffDown" type="TouchScreenButton" parent="RAnchor" unique_id=1659844994]
+modulate = Color(1, 1, 1, 0.39215687)
+texture_filter = 1
+position = Vector2(868, 320)
+scale = Vector2(2.6, 2.6)
+texture_normal = ExtResource("2_ixqfd")
+action = "scroll_down"
+
+[node name="Gas" type="TouchScreenButton" parent="RAnchor" unique_id=790370293]
+modulate = Color(1, 1, 1, 0.39215687)
+texture_filter = 1
+position = Vector2(1105, 602)
+scale = Vector2(6.9375014, 3.8750005)
+texture_normal = ExtResource("2_ixqfd")
+passby_press = true
+action = "ui_right"
+
+[node name="Brake" type="TouchScreenButton" parent="RAnchor" unique_id=1567038789]
+modulate = Color(1, 1, 1, 0.39215687)
+texture_filter = 1
+position = Vector2(934, 602)
+scale = Vector2(8.562498, 3.875)
+texture_normal = ExtResource("2_ixqfd")
+passby_press = true
+action = "ui_left"
+
+[node name="Hand" type="TouchScreenButton" parent="RAnchor" unique_id=886932583]
+modulate = Color(1, 1, 1, 0.39215687)
+texture_filter = 1
+position = Vector2(757, 602)
+scale = Vector2(5.125002, 3.875)
+texture_normal = ExtResource("2_ixqfd")
+passby_press = true
+action = "space"
+
+[node name="Label" type="Label" parent="RAnchor" unique_id=536602271]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95000005
+anchor_top = 0.5
+anchor_right = 0.95000005
+anchor_bottom = 0.5
+offset_left = -237.0
+offset_top = -351.0
+offset_right = -197.0
+offset_bottom = -328.0
+size_flags_horizontal = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="RAnchor" unique_id=765131745]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95000005
+anchor_top = 0.5
+anchor_right = 0.95000005
+anchor_bottom = 0.5
+offset_left = -561.0
+offset_top = -221.0
+offset_right = -521.0
+offset_bottom = -198.0
+
+[node name="LAnchor" type="Control" parent="." unique_id=1483089485]
+layout_mode = 3
+anchor_left = 0.05
+anchor_top = 0.5
+anchor_right = 0.05
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -360.0
+offset_right = 1216.0
+offset_bottom = 360.0
+
+[node name="Up" type="TouchScreenButton" parent="LAnchor" unique_id=1921377696]
+modulate = Color(1, 1, 1, 0.39215687)
+texture_filter = 1
+position = Vector2(64, 470)
+scale = Vector2(5.5625, 3.875)
+texture_normal = ExtResource("2_ixqfd")
+action = "ui_up"
+
+[node name="Down" type="TouchScreenButton" parent="LAnchor" unique_id=1496939519]
+modulate = Color(1, 1, 1, 0.39215687)
+texture_filter = 1
+position = Vector2(65, 602)
+scale = Vector2(5.5625, 3.875)
+texture_normal = ExtResource("2_ixqfd")
+action = "ui_down"
+
+[node name="Power" type="Line2D" parent="LAnchor" unique_id=86324528]
+position = Vector2(64, 372)
+width = 3.0
+default_color = Color(0.996671, 0.61852443, 0, 1)
+
+[node name="Torque" type="Line2D" parent="LAnchor" unique_id=745275302]
+position = Vector2(64, 372)
+width = 3.0
+default_color = Color(0.892458, 0.924981, 0.069358, 1)
+
+[node name="CurveNeedle" type="Sprite2D" parent="LAnchor" unique_id=2092888906]
+modulate = Color(1, 0.27451, 0.27451, 1)
+position = Vector2(86, 254)
+scale = Vector2(0.15, 14)
+texture = ExtResource("2_ixqfd")
+
+[node name="Label3" type="Label" parent="LAnchor" unique_id=1491415482]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -360.0
+offset_right = 112.0
+offset_bottom = -337.0
+grow_vertical = 2
+
+[node name="Tacho" type="Control" parent="LAnchor" unique_id=84162507]
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.5
+anchor_right = 0.05
+anchor_bottom = 0.5
+offset_left = 325.0
+offset_top = 260.0
+offset_right = 325.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(287, -265)
+size_flags_horizontal = 4
+
+[node name="Sprites" type="Control" parent="LAnchor/Tacho" unique_id=808807294]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -426.0
-offset_top = 260.0
-offset_right = -426.0
-offset_bottom = 260.0
+offset_left = -24.0
+offset_right = -24.0
 grow_vertical = 0
 
-[node name="hud_tacho_rim" type="Sprite2D" parent="Tacho/Sprites" unique_id=325712688]
+[node name="hud_tacho_rim" type="Sprite2D" parent="LAnchor/Tacho/Sprites" unique_id=325712688]
 modulate = Color(0.705882, 0.705882, 0.705882, 1)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_sjlaq")
 
-[node name="hud_tacho_numbers" type="Sprite2D" parent="Tacho/Sprites" unique_id=284732043]
+[node name="hud_tacho_numbers" type="Sprite2D" parent="LAnchor/Tacho/Sprites" unique_id=284732043]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_ihue7")
 
-[node name="RPM_Gauge" type="Control" parent="Tacho" unique_id=147747586]
+[node name="RPM_Gauge" type="Control" parent="LAnchor/Tacho" unique_id=147747586]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 402.0
+offset_top = -260.0
+offset_right = 402.0
+offset_bottom = -260.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(-426, 260)
 
-[node name="RPM_Limit_Progress" type="TextureProgressBar" parent="Tacho/RPM_Gauge" unique_id=1348105855]
+[node name="RPM_Limit_Progress" type="TextureProgressBar" parent="LAnchor/Tacho/RPM_Gauge" unique_id=1348105855]
 modulate = Color(1, 0.27451, 0.27451, 1)
 z_index = 1
 texture_repeat = 1
@@ -108,7 +257,7 @@ radial_initial_angle = 120.8
 radial_fill_degrees = 238.0
 texture_progress = ExtResource("4_t60j7")
 
-[node name="RPM_Red_Line_Progress" type="TextureProgressBar" parent="Tacho/RPM_Gauge" unique_id=1505659656]
+[node name="RPM_Red_Line_Progress" type="TextureProgressBar" parent="LAnchor/Tacho/RPM_Gauge" unique_id=1505659656]
 modulate = Color(1, 0.65, 0.65, 1)
 texture_repeat = 1
 layout_mode = 0
@@ -126,7 +275,7 @@ radial_initial_angle = 120.8
 radial_fill_degrees = 238.0
 texture_progress = ExtResource("4_t60j7")
 
-[node name="RPM_Progress" type="TextureProgressBar" parent="Tacho/RPM_Gauge" unique_id=1859793036]
+[node name="RPM_Progress" type="TextureProgressBar" parent="LAnchor/Tacho/RPM_Gauge" unique_id=1859793036]
 layout_mode = 0
 offset_left = -552.5
 offset_top = 133.5
@@ -141,29 +290,32 @@ radial_initial_angle = 241.0
 radial_fill_degrees = 238.0
 texture_progress = ExtResource("1_sjlaq")
 
-[node name="Needle" type="Control" parent="Tacho" unique_id=2072893491]
+[node name="Needle" type="Control" parent="LAnchor/Tacho" unique_id=2072893491]
 anchors_preset = 0
-offset_left = -426.0
-offset_top = 260.0
-offset_right = -426.0
-offset_bottom = 260.0
+offset_left = -24.0
+offset_right = -24.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Tacho/Needle" unique_id=1134943852]
+[node name="Sprite2D" type="Sprite2D" parent="LAnchor/Tacho/Needle" unique_id=1134943852]
 modulate = Color(1, 0.27451, 0.27451, 1)
 position = Vector2(-96.7781, 53.7172)
 rotation = -2.0944
 scale = Vector2(0.5, 1.4312)
 texture = ExtResource("2_ixqfd")
 
-[node name="Numbers" type="Control" parent="Tacho" unique_id=1522694837]
+[node name="Numbers" type="Control" parent="LAnchor/Tacho" unique_id=1522694837]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 402.0
+offset_top = -260.0
+offset_right = 402.0
+offset_bottom = -260.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(-426, 260)
 
-[node name="Odo_Meter" type="RichTextLabel" parent="Tacho/Numbers" unique_id=2102344344]
+[node name="Odo_Meter" type="RichTextLabel" parent="LAnchor/Tacho/Numbers" unique_id=2102344344]
 layout_mode = 0
 offset_left = -534.0
 offset_top = 290.0
@@ -174,7 +326,7 @@ bbcode_enabled = true
 text = "000000[color=orange]0[/color]"
 horizontal_alignment = 1
 
-[node name="Gear" type="RichTextLabel" parent="Tacho/Numbers" unique_id=2041165185]
+[node name="Gear" type="RichTextLabel" parent="LAnchor/Tacho/Numbers" unique_id=2041165185]
 layout_mode = 1
 offset_left = -502.0
 offset_top = 178.0
@@ -185,7 +337,7 @@ text = "N"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Speed" type="RichTextLabel" parent="Tacho/Numbers" unique_id=1851394338]
+[node name="Speed" type="RichTextLabel" parent="LAnchor/Tacho/Numbers" unique_id=1851394338]
 layout_mode = 0
 offset_left = -416.0
 offset_top = 178.0
@@ -198,40 +350,5 @@ text = "555
 [i]km/h[/i]"
 vertical_alignment = 1
 
-[node name="RPM_Limit_Anim" type="AnimationPlayer" parent="Tacho" unique_id=717386116]
+[node name="RPM_Limit_Anim" type="AnimationPlayer" parent="LAnchor/Tacho" unique_id=717386116]
 libraries/ = SubResource("AnimationLibrary_0syjl")
-
-[node name="Power" type="Line2D" parent="." unique_id=86324528]
-position = Vector2(42, 413)
-width = 3.0
-default_color = Color(0.996671, 0.61852443, 0, 1)
-
-[node name="Torque" type="Line2D" parent="." unique_id=745275302]
-position = Vector2(42, 413)
-width = 3.0
-default_color = Color(0.892458, 0.924981, 0.069358, 1)
-
-[node name="CurveNeedle" type="Sprite2D" parent="." unique_id=2092888906]
-modulate = Color(1, 0.27451, 0.27451, 1)
-position = Vector2(63.999996, 295)
-scale = Vector2(0.15, 14)
-texture = ExtResource("2_ixqfd")
-
-[node name="Label" type="Label" parent="." unique_id=536602271]
-modulate = Color(0, 0, 0, 1)
-offset_left = 820.0
-offset_top = 9.0
-offset_right = 860.0
-offset_bottom = 32.0
-
-[node name="Label2" type="Label" parent="." unique_id=765131745]
-modulate = Color(0, 0, 0, 1)
-offset_left = 487.0
-offset_top = 240.0
-offset_right = 527.0
-offset_bottom = 263.0
-
-[node name="Label3" type="Label" parent="." unique_id=1491415482]
-modulate = Color(0, 0, 0, 1)
-offset_right = 40.0
-offset_bottom = 23.0

@@ -1,3 +1,4 @@
+## Procedural Generation
 class_name Generation
 extends Node2D
 
@@ -20,6 +21,7 @@ func _process(_delta: float) -> void:
 	generate(Global.ChassisRB, scrapScene, scrap.trigger_distance, scrap.trigger_distance_after, scrap.count, scrap.spacing)
 
 
+## Generates Common nodes
 func generate(chassis:RigidBody2D, node:PackedScene, trigger_distance:Vector2, trigger_distance_after:Vector2, count:Vector2i, spacing:Vector2):
 	trigger_distance_sum += chassis.distance * 0.01
 	if trigger_distance_sum > rand_trigger_distance:

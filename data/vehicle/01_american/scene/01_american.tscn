@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://dqmgi1t38pgs4" path="res://data/vehicle/01_american/parts/gearbox/std.tres" id="4_ubmwj"]
 [ext_resource type="Resource" uid="uid://du0x58jv15p3x" path="res://data/vehicle/01_american/parts/chassis.tres" id="5_melsr"]
 [ext_resource type="Resource" uid="uid://bvf4lnwhkl3o6" path="res://data/vehicle/shared/resource/functions_shared.tres" id="7_fknvi"]
-[ext_resource type="Resource" uid="uid://b71atvcweuv7o" path="res://data/vehicle/shared/resource/drive.tres" id="7_melsr"]
 [ext_resource type="Resource" uid="uid://cimp3lonfjtk6" path="res://data/vehicle/01_american/parts/brake/stock.tres" id="7_pssht"]
 [ext_resource type="PackedScene" uid="uid://2x51v6f5xt4l" path="res://data/vehicle/shared/scene/vehicle_effects.tscn" id="10_u70tx"]
 [ext_resource type="PackedScene" uid="uid://bvaj71kgr6kpo" path="res://data/scene/world/camera_2d.tscn" id="13_rl5vr"]
@@ -48,7 +47,6 @@ transmission = ExtResource("4_fknvi")
 chassis = ExtResource("5_melsr")
 brake = ExtResource("7_pssht")
 tire = ExtResource("3_u6hlw")
-drive = ExtResource("7_melsr")
 calculate = ExtResource("7_fknvi")
 
 [node name="ChassisColl" type="CollisionShape2D" parent="." unique_id=751036465 groups=["chassis_coll"]]

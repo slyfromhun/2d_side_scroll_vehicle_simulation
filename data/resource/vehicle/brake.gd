@@ -1,3 +1,4 @@
+## Properties of the Brake
 class_name BrakeStats
 extends Resource
 

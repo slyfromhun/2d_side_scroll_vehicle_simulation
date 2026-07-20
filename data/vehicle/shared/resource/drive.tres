@@ -1,11 +1,7 @@
-[gd_resource type="Resource" script_class="DrivePhysicsStats" load_steps=2 format=3 uid="uid://b71atvcweuv7o"]
+[gd_resource type="Resource" script_class="DrivePhysicsStats" format=3 uid="uid://b71atvcweuv7o"]
 
-[ext_resource type="Script" uid="uid://ds7qo3472405i" path="res://data/resource/drive.gd" id="1_4glyg"]
+[ext_resource type="Script" uid="uid://ds7qo3472405i" path="res://data/resource/vehicle/drive.gd" id="1_4glyg"]
 
 [resource]
 script = ExtResource("1_4glyg")
-GRAVITY = 9.80665
-AIR_DENSITY_DRAG = 4.819
-AIR_DENSITY = 1.225
-MAGIC_CROSS_RPM = 9549
 metadata/_custom_type_script = "uid://ds7qo3472405i"

@@ -30,39 +30,61 @@ worldEffectScenes = [NodePath("Leaf"), NodePath("Wind")]
 
 [node name="slip_01" parent="." unique_id=529970442 instance=ExtResource("3_6ond1")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="slip_02" parent="." unique_id=589758575 instance=ExtResource("4_a6j42")]
 amount_ratio = 0.0
 texture = SubResource("AtlasTexture_skhfm")
+interpolate = true
+fract_delta = true
 
 [node name="slip_01_2" parent="." unique_id=892326894 instance=ExtResource("3_6ond1")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="slip_02_2" parent="." unique_id=781779383 instance=ExtResource("4_a6j42")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="grind_01" parent="." unique_id=1287989769 instance=ExtResource("5_a6j42")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="grind_02" parent="." unique_id=1886525104 instance=ExtResource("6_eaoa6")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="grind_01_2" parent="." unique_id=2017386118 instance=ExtResource("5_a6j42")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="grind_02_2" parent="." unique_id=559989023 instance=ExtResource("6_eaoa6")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="friction_01" parent="." unique_id=764382909 instance=ExtResource("7_dn3q0")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="friction_01_2" parent="." unique_id=240548568 instance=ExtResource("7_dn3q0")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="Air_trail" parent="." unique_id=828257401 instance=ExtResource("8_qrrp0")]
 amount_ratio = 0.0
+interpolate = true
+fract_delta = true
 
 [node name="Leaf" parent="." unique_id=1115760417 instance=ExtResource("10_fbcvv")]
-top_level = false
+interpolate = true
 
 [node name="Wind" parent="." unique_id=263811510 instance=ExtResource("11_eg2it")]

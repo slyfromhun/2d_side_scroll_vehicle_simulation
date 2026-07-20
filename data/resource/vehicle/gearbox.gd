@@ -1,3 +1,4 @@
+## Properties of the Gearbox
 class_name GearboxStats
 extends Resource
 

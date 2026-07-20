@@ -4,3 +4,5 @@ extends Resource
 @export var GRAVITY := 9.80665
 @export var AIR_DENSITY := 1.225
 @export var MAGIC_CROSS_RPM := 9549
+
+# unused

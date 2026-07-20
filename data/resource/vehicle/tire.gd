@@ -1,3 +1,4 @@
+## Properties of the Tire
 class_name TireStats
 extends Resource
 

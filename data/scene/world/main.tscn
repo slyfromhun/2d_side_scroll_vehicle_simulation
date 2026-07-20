@@ -21,9 +21,6 @@ position = Vector2(639, 586)
 
 [node name="Generation" parent="World" unique_id=1257045686 instance=ExtResource("3_l1sic")]
 
-[node name="01_american" parent="World" unique_id=1303558009 instance=ExtResource("5_l1sic")]
-position = Vector2(-5, -84)
-
 [node name="Road" parent="World" unique_id=894684408 instance=ExtResource("2_yj2un")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="World" unique_id=960752802]
@@ -32,3 +29,7 @@ position = Vector2(-504, 13)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/StaticBody2D" unique_id=663524648]
 position = Vector2(44, -49)
 shape = SubResource("RectangleShape2D_ja0om")
+disabled = true
+
+[node name="01_american" parent="World" unique_id=1303558009 instance=ExtResource("5_l1sic")]
+position = Vector2(-19, -147)

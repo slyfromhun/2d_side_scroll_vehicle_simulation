@@ -1,14 +1,7 @@
-[gd_resource type="Resource" script_class="ChassisStats" load_steps=2 format=3 uid="uid://du0x58jv15p3x"]
+[gd_resource type="Resource" script_class="ChassisStats" format=3 uid="uid://du0x58jv15p3x"]
 
-[ext_resource type="Script" uid="uid://bgcjrkpsvy0ux" path="res://data/resource/chassis.gd" id="1_sqf2s"]
+[ext_resource type="Script" uid="uid://bgcjrkpsvy0ux" path="res://data/resource/vehicle/chassis.gd" id="1_sqf2s"]
 
 [resource]
 script = ExtResource("1_sqf2s")
-mass = 1080.0
-drag_coefficiency = 0.48
-lon_aero_torque = 1.0
-frontal_area = 2.14
-lift = -0.03
-lenght = 463.0
-height = 118.0
 metadata/_custom_type_script = "uid://bgcjrkpsvy0ux"

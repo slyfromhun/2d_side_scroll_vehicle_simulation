@@ -1,3 +1,4 @@
+## Properties of the background in the current scene
 class_name Background
 extends ParallaxBackground
 

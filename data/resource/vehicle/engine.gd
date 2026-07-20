@@ -1,3 +1,4 @@
+## Properties of the Engine
 class_name EngineStats
 extends Resource
 
@@ -35,3 +36,5 @@ extends Resource
 @export_range(0.0, 10000.0, 1.0, "suffix:RPM") var auto_clutch_rpm := 1600.0
 ## Power and Torque curve multiplier.
 @export_range(0.1, 100.0, 0.01, "suffix:x") var upgrade := 1.0
+## Drive Torque multiplier.
+@export_range(0.1, 100.0, 0.01, "suffix:x") var efficiency := 1.0

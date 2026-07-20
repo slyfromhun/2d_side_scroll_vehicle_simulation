@@ -12,7 +12,6 @@
 [ext_resource type="Resource" uid="uid://dag0otxp1vkpi" path="res://data/vehicle/02_european/parts/chassis.tres" id="6_fap1u"]
 [ext_resource type="Resource" uid="uid://cpygsc4r02drl" path="res://data/vehicle/02_european/parts/brake/stock.tres" id="7_k5jfk"]
 [ext_resource type="Resource" uid="uid://bb7xhxqmq48bs" path="res://data/vehicle/02_european/parts/tire/stock.tres" id="8_mrrpo"]
-[ext_resource type="Resource" uid="uid://b71atvcweuv7o" path="res://data/vehicle/shared/resource/drive.tres" id="9_c860c"]
 [ext_resource type="Resource" uid="uid://bvf4lnwhkl3o6" path="res://data/vehicle/shared/resource/functions_shared.tres" id="10_7nr7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_th5l8"]
@@ -49,7 +48,6 @@ transmission = ExtResource("5_3j6t2")
 chassis = ExtResource("6_fap1u")
 brake = ExtResource("7_k5jfk")
 tire = ExtResource("8_mrrpo")
-drive = ExtResource("9_c860c")
 calculate = ExtResource("10_7nr7p")
 
 [node name="ChassisColl" type="CollisionShape2D" parent="." unique_id=279207994 groups=["chassis_coll"]]
