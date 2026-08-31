@@ -25,6 +25,12 @@ var WheelsColl : Array[Node]
 var CameraChassis : Camera
 ## Hud in the current scene
 var Hud : CanvasLayer
+## TouchScreenButtons in HUD
+var Buttons : Array[Node]
+## process_frames
+var process_frames : int
+## main Tacho
+var Tacho : Control
 
 func _ready() -> void:
 	ChassisRB = get_tree().get_first_node_in_group("chassis")
@@ -33,3 +39,9 @@ func _ready() -> void:
 	WheelsColl = get_tree().get_nodes_in_group("wheels_coll")
 	CameraChassis = get_tree().get_first_node_in_group("camera")
 	Hud = get_tree().get_first_node_in_group("hud")
+	Buttons = get_tree().get_nodes_in_group("touch")
+	Tacho = get_tree().get_first_node_in_group("tacho")
+
+
+func _process(_delta: float) -> void:
+	process_frames = Engine.get_process_frames()

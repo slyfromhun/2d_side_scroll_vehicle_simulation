@@ -77,7 +77,7 @@ func _process(_delta:float) -> void:
 	pass
 
 func _physics_process(delta:float) -> void:
-	if Engine.get_physics_frames() % Global.Priority.REALTIME == 0:
+	if Global.process_frames % Global.Priority.REALTIME == 0:
 		# Chassis
 		kph = calculate.kph(Global.ChassisRB)
 		mps = calculate.mps(Global.ChassisRB)

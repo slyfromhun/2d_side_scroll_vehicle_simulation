@@ -29,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	if Engine.get_process_frames() % Global.Priority.HIGH == 0:	
+	if Global.process_frames % Global.Priority.HIGH == 0:	
 		for i in Global.WheelsRB.size():
 			effect.friction(abs(Global.ChassisRB.wheels_angular_kph[i]), frictionScenes[i], Global.ChassisRB.wheels_angular_magnitude[i], Global.ChassisRB.slip_ratios[i])
 			effect.slip(abs(Global.ChassisRB.wheels_angular_kph[i]), Global.ChassisRB.wheels_mps[i], slipScenes[i], Global.ChassisRB.wheels_angular_magnitude[i], Global.ChassisRB.slip_ratios[i])

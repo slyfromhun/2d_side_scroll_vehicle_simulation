@@ -56,6 +56,8 @@ folder_colors={
 
 camera=""
 hud=""
+touch=""
+tacho=""
 
 [input]
 

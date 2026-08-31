@@ -34,7 +34,7 @@ _data = {
 &"rpm_limiter": SubResource("Animation_t60j7")
 }
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=269925077 node_paths=PackedStringArray("tacho", "rpm_progress", "rpm_red_line_progress", "rpm_limit_progress", "rpm_needle", "rpm_limit_anim", "odo_meter", "gear", "speed", "curve_needle", "power_line", "torque_line")]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=269925077 node_paths=PackedStringArray("tacho", "rpm_progress", "rpm_red_line_progress", "rpm_limit_progress", "rpm_needle", "rpm_limit_anim", "odo_meter", "gear", "speed", "curve_needle", "slip_needle", "power_line", "torque_line", "slip_line")]
 script = ExtResource("1_t60j7")
 calculate = ExtResource("2_dio3e")
 tacho = NodePath("LAnchor/Tacho")
@@ -47,8 +47,10 @@ odo_meter = NodePath("LAnchor/Tacho/Numbers/Odo_Meter")
 gear = NodePath("LAnchor/Tacho/Numbers/Gear")
 speed = NodePath("LAnchor/Tacho/Numbers/Speed")
 curve_needle = NodePath("LAnchor/CurveNeedle")
+slip_needle = NodePath("LAnchor/SlipNeedle")
 power_line = NodePath("LAnchor/Power")
 torque_line = NodePath("LAnchor/Torque")
+slip_line = NodePath("LAnchor/Slip")
 metadata/_edit_vertical_guides_ = [64.0, 1216.0]
 
 [node name="RAnchor" type="Control" parent="." unique_id=725023504]
@@ -66,7 +68,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="EffUp" type="TouchScreenButton" parent="RAnchor" unique_id=2140698880]
+[node name="EffUp" type="TouchScreenButton" parent="RAnchor" unique_id=2140698880 groups=["touch"]]
 modulate = Color(1, 1, 1, 0.39215687)
 texture_filter = 1
 position = Vector2(868, 243)
@@ -74,7 +76,7 @@ scale = Vector2(2.6, 2.6)
 texture_normal = ExtResource("2_ixqfd")
 action = "scroll_up"
 
-[node name="EffDown" type="TouchScreenButton" parent="RAnchor" unique_id=1659844994]
+[node name="EffDown" type="TouchScreenButton" parent="RAnchor" unique_id=1659844994 groups=["touch"]]
 modulate = Color(1, 1, 1, 0.39215687)
 texture_filter = 1
 position = Vector2(868, 320)
@@ -82,7 +84,7 @@ scale = Vector2(2.6, 2.6)
 texture_normal = ExtResource("2_ixqfd")
 action = "scroll_down"
 
-[node name="Gas" type="TouchScreenButton" parent="RAnchor" unique_id=790370293]
+[node name="Gas" type="TouchScreenButton" parent="RAnchor" unique_id=790370293 groups=["touch"]]
 modulate = Color(1, 1, 1, 0.39215687)
 texture_filter = 1
 position = Vector2(1105, 602)
@@ -91,7 +93,7 @@ texture_normal = ExtResource("2_ixqfd")
 passby_press = true
 action = "ui_right"
 
-[node name="Brake" type="TouchScreenButton" parent="RAnchor" unique_id=1567038789]
+[node name="Brake" type="TouchScreenButton" parent="RAnchor" unique_id=1567038789 groups=["touch"]]
 modulate = Color(1, 1, 1, 0.39215687)
 texture_filter = 1
 position = Vector2(934, 602)
@@ -100,7 +102,7 @@ texture_normal = ExtResource("2_ixqfd")
 passby_press = true
 action = "ui_left"
 
-[node name="Hand" type="TouchScreenButton" parent="RAnchor" unique_id=886932583]
+[node name="Hand" type="TouchScreenButton" parent="RAnchor" unique_id=886932583 groups=["touch"]]
 modulate = Color(1, 1, 1, 0.39215687)
 texture_filter = 1
 position = Vector2(757, 602)
@@ -148,7 +150,7 @@ offset_top = -360.0
 offset_right = 1216.0
 offset_bottom = 360.0
 
-[node name="Up" type="TouchScreenButton" parent="LAnchor" unique_id=1921377696]
+[node name="Up" type="TouchScreenButton" parent="LAnchor" unique_id=1921377696 groups=["touch"]]
 modulate = Color(1, 1, 1, 0.39215687)
 texture_filter = 1
 position = Vector2(64, 470)
@@ -156,13 +158,22 @@ scale = Vector2(5.5625, 3.875)
 texture_normal = ExtResource("2_ixqfd")
 action = "ui_up"
 
-[node name="Down" type="TouchScreenButton" parent="LAnchor" unique_id=1496939519]
+[node name="Down" type="TouchScreenButton" parent="LAnchor" unique_id=1496939519 groups=["touch"]]
 modulate = Color(1, 1, 1, 0.39215687)
 texture_filter = 1
 position = Vector2(65, 602)
 scale = Vector2(5.5625, 3.875)
 texture_normal = ExtResource("2_ixqfd")
 action = "ui_down"
+
+[node name="Visible" type="TouchScreenButton" parent="LAnchor" unique_id=841034658]
+modulate = Color(1, 1, 1, 0.39215687)
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(64, 0)
+scale = Vector2(4.4999995, 0.9166666)
+texture_normal = ExtResource("2_ixqfd")
+action = "switch1"
 
 [node name="Power" type="Line2D" parent="LAnchor" unique_id=86324528]
 position = Vector2(64, 372)
@@ -174,10 +185,20 @@ position = Vector2(64, 372)
 width = 3.0
 default_color = Color(0.892458, 0.924981, 0.069358, 1)
 
+[node name="Slip" type="Line2D" parent="LAnchor" unique_id=930396613]
+position = Vector2(611, 222.88)
+width = 3.0
+
 [node name="CurveNeedle" type="Sprite2D" parent="LAnchor" unique_id=2092888906]
 modulate = Color(1, 0.27451, 0.27451, 1)
-position = Vector2(86, 254)
+position = Vector2(86, 214.00002)
 scale = Vector2(0.15, 14)
+texture = ExtResource("2_ixqfd")
+
+[node name="SlipNeedle" type="Sprite2D" parent="LAnchor" unique_id=617538313]
+modulate = Color(1, 0.27451, 0.27451, 1)
+position = Vector2(611, 222.88)
+scale = Vector2(0.15, 8.74)
 texture = ExtResource("2_ixqfd")
 
 [node name="Label3" type="Label" parent="LAnchor" unique_id=1491415482]
@@ -186,13 +207,14 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 64.0
+offset_left = 68.0
 offset_top = -360.0
-offset_right = 112.0
+offset_right = 132.0
 offset_bottom = -337.0
 grow_vertical = 2
+text = "fps: 60.0"
 
-[node name="Tacho" type="Control" parent="LAnchor" unique_id=84162507]
+[node name="Tacho" type="Control" parent="LAnchor" unique_id=84162507 groups=["tacho"]]
 layout_mode = 1
 anchor_left = 0.05
 anchor_top = 0.5

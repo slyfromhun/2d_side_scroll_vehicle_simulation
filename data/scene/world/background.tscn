@@ -21,7 +21,7 @@ blurShader = ExtResource("6_le30p")
 texture_filter = 1
 
 [node name="Cloud_1" type="Parallax2D" parent="Clouds" unique_id=516502116]
-scroll_scale = Vector2(0.001, 0)
+scroll_scale = Vector2(0.001, 1)
 scroll_offset = Vector2(-255, 422)
 repeat_size = Vector2(2225, 0)
 autoscroll = Vector2(-6, 0)
@@ -33,7 +33,7 @@ texture_filter = 1
 texture = ExtResource("1_4gd6b")
 
 [node name="Cloud_2" type="Parallax2D" parent="Clouds" unique_id=1799894648]
-scroll_scale = Vector2(0.002, 0)
+scroll_scale = Vector2(0.002, 1)
 scroll_offset = Vector2(0, 72)
 repeat_size = Vector2(1920, 0)
 autoscroll = Vector2(-4, 0)
@@ -47,7 +47,7 @@ position = Vector2(811, 343)
 texture = ExtResource("2_lx2wk")
 
 [node name="Cloud_3" type="Parallax2D" parent="Clouds" unique_id=226785079]
-scroll_scale = Vector2(0.003, 0)
+scroll_scale = Vector2(0.003, 1)
 scroll_offset = Vector2(-2, 262)
 repeat_size = Vector2(1920, 0)
 autoscroll = Vector2(-3.2, 0)
@@ -60,7 +60,7 @@ texture_filter = 1
 texture = ExtResource("3_le30p")
 
 [node name="Cloud_4" type="Parallax2D" parent="Clouds" unique_id=397456097]
-scroll_scale = Vector2(0.004, 0)
+scroll_scale = Vector2(0.004, 1)
 scroll_offset = Vector2(4, 376)
 repeat_size = Vector2(1920, 0)
 autoscroll = Vector2(-2.4, 0)
@@ -76,8 +76,7 @@ texture = ExtResource("4_wth0w")
 position = Vector2(960, 0)
 
 [node name="Main_Road" type="Parallax2D" parent="Road" unique_id=37006741]
-scroll_scale = Vector2(1, 0)
-scroll_offset = Vector2(0, 72)
+scroll_offset = Vector2(-1900, 84)
 repeat_size = Vector2(1920, 0)
 repeat_times = 2
 
@@ -95,8 +94,7 @@ position = Vector2(0, -17)
 texture = ExtResource("1_nbjj1")
 
 [node name="Road_Side" type="Parallax2D" parent="Road" unique_id=2007347064]
-scroll_scale = Vector2(1, 0)
-scroll_offset = Vector2(0, 197)
+scroll_offset = Vector2(-1919, 209)
 repeat_size = Vector2(1920, 0)
 repeat_times = 2
 
@@ -114,8 +112,9 @@ position = Vector2(0, -17)
 texture = ExtResource("2_im0pl")
 
 [node name="Grass" type="Parallax2D" parent="Road" unique_id=1332803303]
-scroll_scale = Vector2(1.6, 0)
-scroll_offset = Vector2(0, 180)
+z_index = 1
+scroll_scale = Vector2(1.6, 1)
+scroll_offset = Vector2(0, 192)
 repeat_size = Vector2(1920, 0)
 repeat_times = 2
 

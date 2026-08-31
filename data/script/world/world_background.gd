@@ -12,5 +12,5 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	if Engine.get_process_frames() % Global.Priority.VERYLOW == 0:
+	if Global.process_frames % Global.Priority.VERYLOW == 0:
 		background.blur(blurShader, Global.ChassisRB.kph, blurQuality)

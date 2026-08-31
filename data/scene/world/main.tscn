@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://beb01at7jqln0" path="res://data/scene/world/road.tscn" id="2_yj2un"]
 [ext_resource type="PackedScene" uid="uid://cl384w2nshs5j" path="res://data/scene/world/generation.tscn" id="3_l1sic"]
 [ext_resource type="PackedScene" uid="uid://dnml2w5vdy1ap" path="res://data/scene/world/hud.tscn" id="4_ja0om"]
-[ext_resource type="PackedScene" uid="uid://cl7kx0f2x6fke" path="res://data/vehicle/01_american/scene/01_american.tscn" id="5_l1sic"]
+[ext_resource type="PackedScene" uid="uid://cl7kx0f2x6fke" path="res://data/vehicle/01_american/scene/01_american.tscn" id="6_l1sic"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ja0om"]
 size = Vector2(194, 88)
@@ -31,5 +31,5 @@ position = Vector2(44, -49)
 shape = SubResource("RectangleShape2D_ja0om")
 disabled = true
 
-[node name="01_american" parent="World" unique_id=1303558009 instance=ExtResource("5_l1sic")]
-position = Vector2(-19, -147)
+[node name="01_american" parent="World" unique_id=1303558009 instance=ExtResource("6_l1sic")]
+position = Vector2(-4, -79)

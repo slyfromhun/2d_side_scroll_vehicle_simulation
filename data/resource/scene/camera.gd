@@ -11,7 +11,7 @@ extends Resource
 @export var zoom_max := 0.016
 @export_group("Offset")
 @export var _offset := true
-@export var offset_max := 4.0
+@export var offset_max := 6.0
 @export_group("Follow")
 @export var _follow := true
 @export var camera_follow := 36.0

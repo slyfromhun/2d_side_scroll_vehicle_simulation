@@ -4,6 +4,7 @@ extends Resource
 
 @export var _rpmLimiter := true
 @export var _dyno := true
+@export var _slip := true
 @export var _odoHud := true
 @export var _gearHud := true
 @export var _speedHud :=true
@@ -28,6 +29,13 @@ func dyno(max_rpm:float, power_line:Line2D, torque_line:Line2D, power_curve:Curv
 			power_line.add_point(Vector2(i * 0.05, -power_curve.sample(i) * Global.HORSEPOWER * upgrade), 0)
 			torque_line.add_point(Vector2(i * 0.05, -torque_curve.sample(i) * upgrade), 0)
 
+func slip(slip_line:Line2D, slip_ratio_curve:Curve, friction:float) -> void:
+	if _slip:
+		slip_line.clear_points()
+		for i in range(-314, 314):
+			var y = float(i) / 100.0
+			slip_line.add_point(Vector2(i, -slip_ratio_curve.sample(y) * friction * 100) * 0.5, 0)
+
 ## Draws the overall travelled distance
 func odoHud(label:RichTextLabel, distance_travelled:float) -> void:
 	if _odoHud:
@@ -49,7 +57,11 @@ func speedHud(label:RichTextLabel, kph:float) -> void:
 
 func hideHud(event:InputEvent):
 	if event.is_action_pressed("switch1"):
-		if Global.Hud.visible == true:
-			Global.Hud.visible = false
-		elif Global.Hud.visible == false:
-			Global.Hud.visible = true
+		if Global.Buttons[0].visible == true:
+			for button in Global.Buttons:
+				button.visible = false
+			Global.Tacho.position.x -= 100
+		elif Global.Buttons[0].visible == false:
+			for button in Global.Buttons:
+				button.visible = true
+			Global.Tacho.position.x += 100
